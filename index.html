@@ -209,16 +209,28 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <p class="card-sub">February 28 &ndash; March 2, 2026</p>
 <div class="act-num">01</div>
 </div>
-<div class="card" id="card2">
+<div class="card" id="card2" style="padding:40px 16px 56px">
 <p class="label">The Strike Map</p>
-<h3 class="card-title">Operation Epic Fury: 8 Targets</h3>
-<div class="map-container" id="map-strikes"></div>
-<div class="stat-row" style="margin-top:12px">
-<div class="stat"><div class="val mono" style="font-size:24px;color:var(--red)">8</div><div class="lbl">Simultaneous Targets</div></div>
-<div class="stat"><div class="val mono" style="font-size:24px;color:var(--amber)">~70%</div><div class="lbl">Enrichment Capacity Hit</div></div>
-<div class="stat"><div class="val mono" style="font-size:24px;color:var(--red)">&lt;4 hrs</div><div class="lbl">Operation Duration</div></div>
+<h3 class="card-title" style="font-size:24px;margin-bottom:10px">Operation Epic Fury: 8 Targets</h3>
+<div style="display:flex;gap:12px;width:100%;max-width:640px;align-items:flex-start">
+<div class="map-container" id="map-strikes" style="flex:1;min-width:0;height:50vh"></div>
+<div style="width:155px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;font:400 10px/1.3 Inter;color:var(--text)">
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">1</span><span><b>Tehran</b> — Regime C2 decapitated</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">2</span><span><b>Natanz</b> — 70% centrifuge capacity buried</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">3</span><span><b>Isfahan</b> — UF6 conversion eliminated</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">4</span><span><b>Parchin</b> — Weaponization R&D erased</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">5</span><span><b>Bushehr</b> — Radiation plume risk; civilian panic</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">6</span><span><b>Tabriz</b> — Hezbollah resupply corridor cut</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">7</span><span><b>Shiraz</b> — IRGC southern command neutralized</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">8</span><span><b>B. Abbas</b> — Hormuz naval denial capability hit</span></div>
 </div>
-<p class="card-sub" style="margin-top:8px">The breadth signals regime change intent, not limited deterrence &mdash; which shapes Iran's calculus toward maximum retaliation.</p>
+</div>
+<div class="stat-row" style="margin-top:10px">
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">&lt;4 hrs</div><div class="lbl">Full Operation</div></div>
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--amber)">~70%</div><div class="lbl">Nuclear Capacity Gone</div></div>
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">3</div><div class="lbl">Pillars Hit</div></div>
+</div>
+<p class="card-sub" style="margin-top:6px;font-size:12px">Nuclear + Military + Leadership = regime change signal, not limited deterrence. This shapes Iran&rsquo;s calculus toward maximum retaliation.</p>
 </div>
 <div class="card" id="card3" style="padding:40px 16px 56px">
 <p class="label">Retaliation Map</p>
@@ -847,19 +859,11 @@ return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28
 function initMapStrikes(){
 var m=mkMap('map-strikes',[33,52],5);
 var targets=[
-  {c:[38.08,46.29],n:'Tabriz',t:'Resupply cut',ax:-16,ay:6},
-  {c:[35.69,51.39],n:'Tehran',t:'Command severed',ax:-16,ay:6},
-  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased',ax:100,ay:6},
-  {c:[33.72,51.72],n:'Natanz',t:'Centrifuges buried',ax:-16,ay:6},
-  {c:[32.65,51.68],n:'Isfahan',t:'Enrichment destroyed',ax:120,ay:6},
-  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk',ax:90,ay:6},
-  {c:[29.59,52.58],n:'Shiraz',t:'IRGC gone',ax:-16,ay:6},
-  {c:[27.18,56.27],n:'Bandar Abbas',t:'Hormuz hit',ax:120,ay:-10}
+  [35.69,51.39,'1'],[33.72,51.72,'2'],[32.65,51.68,'3'],[35.52,51.77,'4'],
+  [28.97,50.84,'5'],[38.08,46.29,'6'],[29.59,52.58,'7'],[27.18,56.27,'8']
 ];
 targets.forEach(function(t){
-L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
-var ax=t.ax!==undefined?t.ax:-16, ay=t.ay!==undefined?t.ay:6;
-L.marker(t.c,{icon:L.divIcon({className:'map-label map-label-red',html:'<b>'+t.n+'</b><br><span style="font-size:8px;opacity:0.7">'+t.t+'</span>',iconSize:[0,0],iconAnchor:[ax,ay]})}).addTo(m);
+L.marker([t[0],t[1]],{icon:L.divIcon({className:'',html:'<div style="background:#ff3b3b;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 11px JetBrains Mono;color:#fff;box-shadow:0 0 12px rgba(255,59,59,.5)">'+t[2]+'</div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
 });
 }
 
