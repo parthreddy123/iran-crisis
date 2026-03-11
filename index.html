@@ -829,16 +829,17 @@ var m=mkMap('map-strikes',[32.5,53],6);
 var targets=[
   {c:[38.08,46.29],n:'Tabriz',t:'Resupply cut'},
   {c:[35.69,51.39],n:'Tehran',t:'Command severed'},
-  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased'},
+  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased',ax:16,ay:-30},
   {c:[33.72,51.72],n:'Natanz',t:'Centrifuges buried'},
   {c:[32.65,51.68],n:'Isfahan',t:'Enrichment destroyed'},
-  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk'},
+  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk',ax:80,ay:6},
   {c:[29.59,52.58],n:'Shiraz',t:'IRGC gone'},
   {c:[27.18,56.27],n:'Bandar Abbas',t:'Hormuz hit'}
 ];
 targets.forEach(function(t){
 L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
-L.marker(t.c,{icon:L.divIcon({className:'map-label map-label-red',html:'<b>'+t.n+'</b><br><span style="font-size:8px;opacity:0.7">'+t.t+'</span>',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+var ax=t.ax!==undefined?t.ax:-16, ay=t.ay!==undefined?t.ay:6;
+L.marker(t.c,{icon:L.divIcon({className:'map-label map-label-red',html:'<b>'+t.n+'</b><br><span style="font-size:8px;opacity:0.7">'+t.t+'</span>',iconSize:[0,0],iconAnchor:[ax,ay]})}).addTo(m);
 });
 }
 
