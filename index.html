@@ -288,7 +288,8 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="block" style="background:rgba(59,130,246,.15);border:1px solid var(--blue)"><div class="bname">Separatists</div><div class="bpct" style="color:var(--blue)">10%</div></div>
 <div class="crack-line"></div>
 </div>
-<p class="card-sub">Six factions. No clear successor. The IRGC holds the guns, but the clerics hold the legitimacy.</p>
+<p class="card-sub" style="font-size:11px;opacity:.7;margin-bottom:4px">% = estimated share of institutional power (military, economic, political control)</p>
+<p class="card-sub">Six factions. No clear successor. The IRGC holds the guns, but the clerics hold the legitimacy. That deadlock is what makes the next 90 days so dangerous.</p>
 </div>
 <div class="card" id="card8">
 <p class="label">Scenario Analysis</p><h3 class="card-title">Four Futures for Iran</h3>
@@ -319,13 +320,13 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <p class="card-sub" style="margin-bottom:8px;font-size:11px">Net supply removed from global market (production lost + stranded exports)</p>
 <div class="bar-group">
 <div class="bar-item"><div class="bar-label"><span>2026 Iran/Hormuz</span><span class="mono" style="color:var(--red)">~6.5M bbl/d</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--red)"></div></div></div>
-<div class="bar-item"><div class="bar-label"><span>2019 Abqaiq</span><span class="mono">5.7M</span></div><div class="bar-track"><div class="bar-fill" style="width:88%;background:#555"></div></div></div>
-<div class="bar-item"><div class="bar-label"><span>1990 Gulf War</span><span class="mono">4.3M</span></div><div class="bar-track"><div class="bar-fill" style="width:66%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>2019 Abqaiq attack</span><span class="mono">5.7M</span></div><div class="bar-track"><div class="bar-fill" style="width:88%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>1990 Iraq invades Kuwait</span><span class="mono">4.3M</span></div><div class="bar-track"><div class="bar-fill" style="width:66%;background:#555"></div></div></div>
 <div class="bar-item"><div class="bar-label"><span>1979 Iran Revolution</span><span class="mono">3.4M</span></div><div class="bar-track"><div class="bar-fill" style="width:52%;background:#555"></div></div></div>
-<div class="bar-item"><div class="bar-label"><span>1973 Arab Embargo</span><span class="mono">2.6M</span></div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#555"></div></div></div>
-<div class="bar-item"><div class="bar-label"><span>2011 Libya</span><span class="mono">1.5M</span></div><div class="bar-track"><div class="bar-fill" style="width:23%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>1973 Arab oil embargo</span><span class="mono">2.6M</span></div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>2011 Libya civil war</span><span class="mono">1.6M</span></div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#555"></div></div></div>
 </div>
-<p class="card-sub" style="margin-top:8px">Abqaiq was mostly restored within <strong>2 weeks</strong>. This disruption has lasted <strong>11 days</strong> with no restoration timeline. Duration, not peak volume, determines how much damage gets done.</p>
+<p class="card-sub" style="margin-top:8px">Abqaiq: restored in <strong>2 weeks</strong>. Kuwait 1990: <strong>8 months</strong>. Iran Revolution: <strong>never fully restored</strong>. This crisis at day 11 with no end date &mdash; duration is what breaks markets.</p>
 </div>
 <div class="card" id="card13">
 <p class="label">The Bypass Fallacy</p><h3 class="card-title">Pipeline Bypass Routes</h3>
@@ -394,21 +395,24 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="map-container" id="map-range"></div>
 <p class="card-sub" style="margin-top:12px">Fujairah is less than 200km from Iran &mdash; well within drone and missile range. The Habshan-Fujairah pipeline was built as a Hormuz bypass, but the terminal is too close to Iran to be safe. Only Yanbu (2,100km away) is truly out of reach.</p>
 </div>
-<div class="card" id="card16">
-<p class="label">Collateral Damage</p><h3 class="card-title">Iraq: Both Export Routes Compromised</h3>
-<div class="gauge-wrap"><svg class="gauge-svg" viewBox="0 0 260 150">
-<path d="M30,140 A100,100 0 0,1 230,140" fill="none" stroke="#222" stroke-width="18" stroke-linecap="round"/>
-<path d="M30,140 A100,100 0 0,1 100,47" fill="none" stroke="rgba(255,59,59,.3)" stroke-width="18" stroke-linecap="round"/>
-<line x1="130" y1="140" x2="75" y2="60" stroke="var(--red)" stroke-width="3" stroke-linecap="round">
-<animateTransform attributeName="transform" type="rotate" from="60 130 140" to="-25 130 140" dur="1.5s" fill="freeze"/></line>
-<circle cx="130" cy="140" r="6" fill="var(--red)"/>
-<text x="25" y="148" fill="var(--muted)" font-size="9" font-family="JetBrains Mono">0</text>
-<text x="120" y="32" fill="var(--muted)" font-size="9" font-family="JetBrains Mono">2.5M</text>
-<text x="225" y="148" fill="var(--muted)" font-size="9" font-family="JetBrains Mono">5M</text>
-</svg></div>
-<div class="hero-num" style="color:var(--red);text-align:center">-60%</div>
-<p class="label" style="text-align:center;margin-top:4px">Production: 4.3M &rarr; 1.7M bbl/day</p>
-<p class="card-sub" style="margin-top:12px">Basra export terminal hit by Iranian-backed militia strikes. The northern Kirkuk-Ceyhan pipeline has been offline since 2023. Both export routes are now blocked &mdash; Iraq's 4.3M bbl/day has nowhere to go. That's 2.6M bbl/day of extra supply loss on top of the Hormuz shutdown.</p>
+<div class="card" id="card16" style="padding:40px 16px 56px">
+<p class="label">Collateral Damage</p><h3 class="card-title" style="font-size:22px">Iraq: Both Export Routes Dead</h3>
+<div class="map-container" id="map-iraq" style="width:100%;max-width:520px;height:40vh"></div>
+<div style="display:flex;gap:16px;margin-top:12px;width:100%;max-width:520px">
+<div style="flex:1;padding:10px;border-radius:8px;background:rgba(255,59,59,.1);border:1px solid rgba(255,59,59,.3)">
+<div style="font:700 11px/1 JetBrains Mono;color:var(--red)">SOUTH: Basra terminal</div>
+<div style="font:400 10px/1.4 Inter;color:var(--muted);margin-top:4px">3.3M bbl/day capacity. Hit by Iranian-backed militia strikes. Offline.</div>
+</div>
+<div style="flex:1;padding:10px;border-radius:8px;background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.3)">
+<div style="font:700 11px/1 JetBrains Mono;color:var(--amber)">NORTH: Kirkuk-Ceyhan</div>
+<div style="font:400 10px/1.4 Inter;color:var(--muted);margin-top:4px">0.5M bbl/day capacity. Offline since Mar 2023. Turkey dispute unresolved.</div>
+</div>
+</div>
+<div class="stat-row" style="margin-top:10px">
+<div class="stat"><div class="val mono" style="font-size:28px;color:var(--red)">0</div><div class="lbl">Export routes open</div></div>
+<div class="stat"><div class="val mono" style="font-size:28px;color:var(--red)">2.6M</div><div class="lbl">bbl/day stranded</div></div>
+</div>
+<p class="card-sub" style="margin-top:6px;font-size:11px">Iraq produces 4.3M bbl/day but now has no way to export. This adds 2.6M bbl/day of losses on top of the Hormuz shutdown.</p>
 </div>
 <div class="card" id="card17">
 <p class="label">Forward Scenarios</p><h3 class="card-title">Three Price Paths</h3>
@@ -822,6 +826,7 @@ case'card6':initChart6();break;
 case'card9':initChart9();break;
 case'card11':initChart11();break;
 case'card13':initMapPipelines();break;
+case'card16':initMapIraq();break;
 case'card15':initMapRange();break;
 case'card17':initChart17();break;
 case'card19':animateRings();break;
@@ -923,6 +928,31 @@ L.circleMarker([25.94,49.67],{radius:5,color:'#ffb020',fillColor:'#ffb020',fillO
 L.marker([25.94,49.67],{icon:L.divIcon({className:'map-label map-label-amber',html:'Abqaiq',iconSize:[0,0],iconAnchor:[-16,20]})}).addTo(m);
 }
 
+function initMapIraq(){
+var m=mkMap('map-iraq',[34,44],5);
+/* Iraq outline area */
+L.polygon([[37.4,38.8],[37.1,42.4],[36.8,44.8],[35.2,46],[33.7,45.8],[32.5,47.2],[30.4,48.0],[29.4,47.7],[30.0,47.0],[30.5,45.5],[32.0,39.0],[33.8,38.8],[37.4,38.8]],{color:'rgba(255,59,59,.3)',fillColor:'rgba(255,59,59,.05)',weight:1}).addTo(m);
+/* Basra export terminal — south */
+L.circleMarker([29.8,48.5],{radius:10,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([29.8,48.5],{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:900 22px Inter;text-shadow:0 0 10px rgba(255,59,59,.7)">&times;</div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
+L.marker([29.8,48.5],{icon:L.divIcon({className:'map-label map-label-red',html:'Basra — 3.3M bbl/day',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+/* Southern pipeline to Basra */
+L.polyline([[35.5,44.4],[33.5,44.5],[31.5,47.0],[29.8,48.5]],{color:'#ff3b3b',weight:3,opacity:0.6}).addTo(m);
+/* Kirkuk-Ceyhan pipeline — north */
+var kirkukCeyhan=[[35.5,44.4],[36.5,43.5],[37.0,42.0],[37.0,36.5]];
+L.polyline(kirkukCeyhan,{color:'#ffb020',weight:3,opacity:0.5,dashArray:'8,6'}).addTo(m);
+L.circleMarker([35.5,44.4],{radius:7,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([35.5,44.4],{icon:L.divIcon({className:'map-label map-label-amber',html:'Kirkuk',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+L.circleMarker([37.0,36.5],{radius:7,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.3,weight:2}).addTo(m);
+L.marker([37.0,36.5],{icon:L.divIcon({className:'',html:'<div style="color:#ffb020;font:900 18px Inter">&times;</div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(m);
+L.marker([37.0,36.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'Ceyhan (Turkey) — offline since 2023',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+/* Baghdad marker */
+L.circleMarker([33.3,44.4],{radius:4,color:'#888',fillColor:'#888',fillOpacity:0.4,weight:1}).addTo(m);
+L.marker([33.3,44.4],{icon:L.divIcon({className:'map-label',html:'Baghdad',iconSize:[0,0],iconAnchor:[-12,6]})}).addTo(m);
+/* Iran label */
+L.marker([33,48],{icon:L.divIcon({className:'map-label map-label-red',html:'IRAN',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
+}
+
 function initMapRange(){
 var m=mkMap('map-range',[28,50],4);
 var origin=[27.18,56.27];
@@ -1010,7 +1040,12 @@ labels:['Oct 25','Nov','Dec','Jan 26','Feb','Mar'],
 datasets:[
 {label:'Rial/USD (000s)',data:[420,440,510,530,580,720],borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.1)',fill:true,tension:.3,yAxisID:'y'},
 {label:'Protest Incidents',data:[120,180,350,280,420,680],borderColor:'#ffb020',borderDash:[5,3],backgroundColor:'transparent',tension:.3,yAxisID:'y1'}
-]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}}},
+]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}},
+annotation:{annotations:{
+mahsa:{type:'line',xMin:2,xMax:2,borderColor:'rgba(255,176,32,.5)',borderWidth:1,borderDash:[4,3],label:{display:true,content:'Exceeds Mahsa Amini peak',color:'#ffb020',font:{size:9,family:'Inter'},position:'start',backgroundColor:'rgba(0,0,0,.7)',padding:3}},
+sanctions:{type:'line',xMin:1,xMax:1,borderColor:'rgba(136,136,136,.4)',borderWidth:1,borderDash:[4,3],label:{display:true,content:'New EU sanctions',color:'#888',font:{size:8,family:'Inter'},position:'end',backgroundColor:'rgba(0,0,0,.7)',padding:3}},
+strikes:{type:'line',xMin:5,xMax:5,borderColor:'rgba(255,59,59,.7)',borderWidth:2,label:{display:true,content:'STRIKES',color:'#ff3b3b',font:{size:10,weight:'bold',family:'Inter'},position:'center',backgroundColor:'rgba(0,0,0,.8)',padding:4}}
+}}},
 scales:{...cDef.scales,y:{...cDef.scales.y,position:'left',title:{display:true,text:'Rial/USD (000s)',color:'#888',font:{family:'Inter',size:10}}},y1:{position:'right',grid:{display:false},ticks:{color:'#ffb020',font:{family:'JetBrains Mono',size:10}},title:{display:true,text:'Protest Incidents',color:'#ffb020',font:{family:'Inter',size:10}}}}}});
 }
 
