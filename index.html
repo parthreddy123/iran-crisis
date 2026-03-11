@@ -824,20 +824,22 @@ return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28
 }
 
 function initMapStrikes(){
-var m=mkMap('map-strikes',[32.4,53.7],5);
+var m=mkMap('map-strikes',[32.4,53],5);
 var targets=[
-  {c:[35.69,51.39],n:'Tehran',t:'Leadership decapitation',ic:'&#9760;',ll:[36.4,52.8]},
-  {c:[32.65,51.68],n:'Isfahan',t:'Nuclear facility',ic:'&#9762;',ll:[31.5,52.8]},
-  {c:[33.72,51.72],n:'Natanz',t:'Enrichment plant',ic:'&#9762;',ll:[34.5,53.5]},
-  {c:[28.97,50.84],n:'Bushehr',t:'Nuclear reactor',ic:'&#9762;',ll:[28.0,49.0]},
-  {c:[29.59,52.58],n:'Shiraz',t:'Military base',ic:'&#127967;',ll:[28.5,53.5]},
-  {c:[27.18,56.27],n:'Bandar Abbas',t:'Naval base',ic:'&#9875;',ll:[26.0,57.0]},
-  {c:[38.08,46.29],n:'Tabriz',t:'Missile sites',ic:'&#127915;',ll:[39.0,47.5]},
-  {c:[35.52,51.77],n:'Parchin',t:'Weapons research',ic:'&#128163;',ll:[35.0,54.0]}
+  {c:[35.69,51.39],n:'TEHRAN',t:'Command & control severed',ll:[37.5,48.0],a:[160,36]},
+  {c:[32.65,51.68],n:'ISFAHAN',t:'Enrichment capacity destroyed',ll:[31.0,48.0],a:[170,28]},
+  {c:[33.72,51.72],n:'NATANZ',t:'Centrifuge halls buried',ll:[34.8,48.0],a:[160,28]},
+  {c:[28.97,50.84],n:'BUSHEHR',t:'Radiation contamination risk',ll:[27.5,48.0],a:[170,28]},
+  {c:[29.59,52.58],n:'SHIRAZ',t:'IRGC southern command gone',ll:[29.0,55.5],a:[170,-6]},
+  {c:[27.18,56.27],n:'BANDAR ABBAS',t:'Hormuz blockade capability hit',ll:[26.0,58.0],a:[190,-6]},
+  {c:[38.08,46.29],n:'TABRIZ',t:'Hezbollah resupply line cut',ll:[39.5,48.0],a:[170,28]},
+  {c:[35.52,51.77],n:'PARCHIN',t:'Weaponization program erased',ll:[36.5,55.5],a:[180,-6]}
 ];
 targets.forEach(function(t){
 L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
-L.marker(t.ll,{icon:L.divIcon({className:'map-label map-label-red',html:'<span style="font-size:13px;margin-right:5px">'+t.ic+'</span><span style="font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.7">'+t.n+'</span><br><span style="font-size:11px;font-weight:700">'+t.t+'</span>',iconSize:[160,36],iconAnchor:[-6,-6]})}).addTo(m);
+/* Thin connector line from marker to label */
+L.polyline([t.c,t.ll],{color:'rgba(255,59,59,0.35)',weight:1,dashArray:'3,4'}).addTo(m);
+L.marker(t.ll,{icon:L.divIcon({className:'map-label map-label-red',html:'<span style="font-size:9px;font-weight:600;letter-spacing:1px;opacity:0.6">'+t.n+'</span><br><span style="font-size:11px;font-weight:700">'+t.t+'</span>',iconSize:[t.a[0],36],iconAnchor:[t.a[1],-6]})}).addTo(m);
 });
 }
 
