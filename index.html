@@ -827,14 +827,14 @@ return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28
 function initMapStrikes(){
 var m=mkMap('map-strikes',[33,52],4);
 var targets=[
-  {c:[35.69,51.39],n:'TEHRAN',t:'Command & control severed',ll:[37.5,48.0],a:[160,36]},
-  {c:[32.65,51.68],n:'ISFAHAN',t:'Enrichment capacity destroyed',ll:[31.0,48.0],a:[170,28]},
-  {c:[33.72,51.72],n:'NATANZ',t:'Centrifuge halls buried',ll:[34.8,48.0],a:[160,28]},
-  {c:[28.97,50.84],n:'BUSHEHR',t:'Radiation contamination risk',ll:[27.5,48.0],a:[170,28]},
-  {c:[29.59,52.58],n:'SHIRAZ',t:'IRGC southern command gone',ll:[29.0,55.5],a:[170,-6]},
-  {c:[27.18,56.27],n:'BANDAR ABBAS',t:'Hormuz blockade capability hit',ll:[25.5,55.0],a:[190,-6]},
-  {c:[38.08,46.29],n:'TABRIZ',t:'Hezbollah resupply line cut',ll:[39.5,48.0],a:[170,28]},
-  {c:[35.52,51.77],n:'PARCHIN',t:'Weaponization program erased',ll:[36.5,55.5],a:[180,-6]}
+  {c:[35.69,51.39],n:'TEHRAN',t:'Command & control severed',ll:[38.5,55],a:[170,-6]},
+  {c:[32.65,51.68],n:'ISFAHAN',t:'Enrichment capacity destroyed',ll:[31,56],a:[170,-6]},
+  {c:[33.72,51.72],n:'NATANZ',t:'Centrifuge halls buried',ll:[34.5,46],a:[160,170]},
+  {c:[28.97,50.84],n:'BUSHEHR',t:'Radiation contamination risk',ll:[27.5,47],a:[170,170]},
+  {c:[29.59,52.58],n:'SHIRAZ',t:'IRGC southern command gone',ll:[28.5,56],a:[170,-6]},
+  {c:[27.18,56.27],n:'BANDAR ABBAS',t:'Hormuz blockade capability hit',ll:[25.5,53],a:[190,195]},
+  {c:[38.08,46.29],n:'TABRIZ',t:'Hezbollah resupply line cut',ll:[40,44],a:[170,-6]},
+  {c:[35.52,51.77],n:'PARCHIN',t:'Weaponization program erased',ll:[36.5,57],a:[180,-6]}
 ];
 targets.forEach(function(t){
 L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
