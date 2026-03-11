@@ -827,20 +827,20 @@ return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28
 function initMapStrikes(){
 var m=mkMap('map-strikes',[33,52],4);
 var targets=[
-  {c:[35.69,51.39],n:'TEHRAN',t:'Command & control severed',ll:[38.5,55],a:[170,-6]},
-  {c:[32.65,51.68],n:'ISFAHAN',t:'Enrichment capacity destroyed',ll:[31,56],a:[170,-6]},
-  {c:[33.72,51.72],n:'NATANZ',t:'Centrifuge halls buried',ll:[34.5,46],a:[160,170]},
-  {c:[28.97,50.84],n:'BUSHEHR',t:'Radiation contamination risk',ll:[27.5,47],a:[170,170]},
-  {c:[29.59,52.58],n:'SHIRAZ',t:'IRGC southern command gone',ll:[28.5,56],a:[170,-6]},
-  {c:[27.18,56.27],n:'BANDAR ABBAS',t:'Hormuz blockade capability hit',ll:[25.5,53],a:[190,195]},
-  {c:[38.08,46.29],n:'TABRIZ',t:'Hezbollah resupply line cut',ll:[40,44],a:[170,-6]},
-  {c:[35.52,51.77],n:'PARCHIN',t:'Weaponization program erased',ll:[36.5,57],a:[180,-6]}
+  {c:[35.69,51.39],n:'TEHRAN',t:'Regime command severed',ll:[38,56.5]},
+  {c:[32.65,51.68],n:'ISFAHAN',t:'Enrichment destroyed',ll:[32,57]},
+  {c:[33.72,51.72],n:'NATANZ',t:'Centrifuges buried',ll:[35,57]},
+  {c:[28.97,50.84],n:'BUSHEHR',t:'Radiation risk',ll:[28,47]},
+  {c:[29.59,52.58],n:'SHIRAZ',t:'IRGC command gone',ll:[29,57]},
+  {c:[27.18,56.27],n:'BANDAR ABBAS',t:'Hormuz capability hit',ll:[26,57]},
+  {c:[38.08,46.29],n:'TABRIZ',t:'Resupply line cut',ll:[40,44]},
+  {c:[35.52,51.77],n:'PARCHIN',t:'Weapons program erased',ll:[36,47]}
 ];
 targets.forEach(function(t){
 L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
 /* Thin connector line from marker to label */
 L.polyline([t.c,t.ll],{color:'rgba(255,59,59,0.35)',weight:1,dashArray:'3,4'}).addTo(m);
-L.marker(t.ll,{icon:L.divIcon({className:'map-label map-label-red',html:'<span style="font-size:8px;font-weight:600;letter-spacing:0.8px;opacity:0.5">'+t.n+'</span><br><span style="font-size:9.5px;font-weight:600">'+t.t+'</span>',iconSize:[t.a[0],32],iconAnchor:[t.a[1],-4]})}).addTo(m);
+L.marker(t.ll,{icon:L.divIcon({className:'map-label map-label-red',html:'<span style="font-size:8px;font-weight:600;letter-spacing:0.8px;opacity:0.5">'+t.n+'</span><br><span style="font-size:9.5px;font-weight:600">'+t.t+'</span>',iconSize:[0,0],iconAnchor:[0,0]})}).addTo(m);
 });
 }
 
