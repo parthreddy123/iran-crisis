@@ -825,21 +825,20 @@ return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28
 }
 
 function initMapStrikes(){
-var m=mkMap('map-strikes',[33,52],4);
+var m=mkMap('map-strikes',[32.5,53],6);
 var targets=[
-  {c:[38.08,46.29],n:'Tabriz',t:'Resupply cut',         ll:[40.5,43]},
-  {c:[35.69,51.39],n:'Tehran',t:'Command severed',       ll:[38,43]},
-  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased',       ll:[35.5,43]},
-  {c:[33.72,51.72],n:'Natanz',t:'Centrifuges buried',    ll:[33,43]},
-  {c:[32.65,51.68],n:'Isfahan',t:'Enrichment destroyed',  ll:[30.5,43]},
-  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk',       ll:[28,43]},
-  {c:[29.59,52.58],n:'Shiraz',t:'IRGC gone',             ll:[25.5,55]},
-  {c:[27.18,56.27],n:'B. Abbas',t:'Hormuz hit',          ll:[25.5,59]}
+  {c:[38.08,46.29],n:'Tabriz',t:'Resupply cut'},
+  {c:[35.69,51.39],n:'Tehran',t:'Command severed'},
+  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased'},
+  {c:[33.72,51.72],n:'Natanz',t:'Centrifuges buried'},
+  {c:[32.65,51.68],n:'Isfahan',t:'Enrichment destroyed'},
+  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk'},
+  {c:[29.59,52.58],n:'Shiraz',t:'IRGC gone'},
+  {c:[27.18,56.27],n:'Bandar Abbas',t:'Hormuz hit'}
 ];
 targets.forEach(function(t){
 L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
-L.polyline([t.c,t.ll],{color:'rgba(255,59,59,0.3)',weight:1,dashArray:'3,4'}).addTo(m);
-L.marker(t.ll,{icon:L.divIcon({className:'map-label map-label-red',html:t.n+' &mdash; '+t.t,iconSize:[0,0],iconAnchor:[0,0]})}).addTo(m);
+L.marker(t.c,{icon:L.divIcon({className:'map-label map-label-red',html:'<b>'+t.n+'</b><br><span style="font-size:8px;opacity:0.7">'+t.t+'</span>',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
 });
 }
 
