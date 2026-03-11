@@ -225,12 +225,7 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">8</span><span><b>B. Abbas</b> — Hormuz naval denial capability hit</span></div>
 </div>
 </div>
-<div class="stat-row" style="margin-top:10px">
-<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">&lt;4 hrs</div><div class="lbl">Full Operation</div></div>
-<div class="stat"><div class="val mono" style="font-size:22px;color:var(--amber)">~70%</div><div class="lbl">Nuclear Capacity Gone</div></div>
-<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">3</div><div class="lbl">Nuclear + Military + C2</div></div>
-</div>
-<p class="card-sub" style="margin-top:6px;font-size:12px">Nuclear, military, and leadership all hit at once &mdash; that signals regime change, not just deterrence. Iran has every reason to retaliate at maximum force.</p>
+<p class="card-sub" style="margin-top:8px;font-size:12px">Nuclear + Military + Leadership all at once. That&rsquo;s not deterrence &mdash; that&rsquo;s regime change. Iran has every reason to hit back with everything.</p>
 </div>
 <div class="card" id="card3" style="padding:40px 16px 56px">
 <p class="label">Retaliation Map</p>
@@ -417,7 +412,11 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="card" id="card17">
 <p class="label">Forward Scenarios</p><h3 class="card-title">Three Price Paths</h3>
 <div class="w100"><canvas id="chart17" class="chart"></canvas></div>
-<p class="card-sub" style="margin-top:12px">Base case (55%): Brent stays in the $100-120 range through Q3 2026. India pays $40-50 more per barrel than it did two weeks ago.</p>
+<div style="width:100%;max-width:560px;margin-top:12px;display:flex;flex-direction:column;gap:6px;font:400 11px/1.4 Inter">
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#34d399;flex-shrink:0"></span><span><b>Swift resolution (20%)</b> — Ceasefire by April, Brent back to $85 by Q3. India's import bill: +$8B for the year.</span></div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#ffb020;flex-shrink:0"></span><span><b>Prolonged standoff (55%)</b> — Brent $100-120 through 2026. India's import bill: +$30-40B. RBI holds rates. Rupee at 90+.</span></div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#ff3b3b;flex-shrink:0"></span><span><b>Full escalation (25%)</b> — US drawn in, Brent $130+. India's import bill: +$60B. Emergency fuel rationing possible.</span></div>
+</div>
 </div>
 <div class="card act-card" id="card18">
 <p class="act-title">Act 4</p><h2 class="card-title" style="font-size:36px">The Cascade</h2>
@@ -781,44 +780,38 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="card" id="cardLive" style="justify-content:flex-start;padding-top:70px;padding-bottom:60px">
 <p class="label" style="color:var(--red)">&#9679; LIVE DATA</p>
 <h3 class="card-title">Live Market Pulse</h3>
-<p class="card-sub" style="margin-bottom:12px">Real-time prices. Tap any chart to expand.</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:520px">
-<!-- Brent Crude -->
-<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
-<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-{"symbol":"NYMEX:BZ1!","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-</script></div></div>
-<!-- Saudi Aramco -->
-<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
-<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-{"symbol":"TADAWUL:2222","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-</script></div></div>
-<!-- USD/INR -->
-<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
-<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-{"symbol":"FX_IDC:USDINR","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-</script></div></div>
-<!-- Gold -->
-<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
-<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-{"symbol":"TVC:GOLD","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-</script></div></div>
-<!-- WTI -->
-<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
-<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-{"symbol":"NYMEX:CL1!","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-</script></div></div>
-<!-- Nifty 50 -->
-<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
-<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-{"symbol":"NSE:NIFTY","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-</script></div></div>
+<p class="card-sub" style="margin-bottom:16px">Real-time prices via TradingView</p>
+<div style="width:100%;max-width:520px;height:500px;border-radius:12px;overflow:hidden;border:1px solid #333">
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+<div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+{
+  "colorTheme": "dark",
+  "dateRange": "1M",
+  "showChart": true,
+  "locale": "en",
+  "largeChartUrl": "",
+  "isTransparent": true,
+  "showSymbolLogo": true,
+  "showFloatingTooltip": false,
+  "width": "100%",
+  "height": "100%",
+  "tabs": [
+    {
+      "title": "Crisis Watch",
+      "symbols": [
+        {"s": "NYMEX:BZ1!", "d": "Brent Crude"},
+        {"s": "NYMEX:CL1!", "d": "WTI Crude"},
+        {"s": "TVC:GOLD", "d": "Gold"},
+        {"s": "FX_IDC:USDINR", "d": "USD/INR"},
+        {"s": "TADAWUL:2222", "d": "Saudi Aramco"},
+        {"s": "NSE:NIFTY", "d": "Nifty 50"}
+      ]
+    }
+  ]
+}
+</script>
+</div>
 </div>
 </div>
 
@@ -947,25 +940,34 @@ L.marker(t.c,{icon:L.divIcon({className:'',html:'<div style="background:#ff3b3b;
 }
 
 function initMapHormuz(){
-var m=mkMap('map-hormuz',[25.8,56.5],6);
-var dangerZone=[[27.2,55.6],[27.2,57.2],[25.6,57.2],[25.6,55.6]];
-L.polygon(dangerZone,{color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.1,weight:1.5,dashArray:'6,4'}).addTo(m);
-/* Hormuz label — top of map, centered above danger zone */
-L.marker([28.0,56.3],{icon:L.divIcon({className:'map-label map-label-red',html:'STRAIT OF HORMUZ &mdash; 33 mi &bull; 20M bbl/day',iconSize:[0,0],iconAnchor:[160,28]})}).addTo(m);
+var m=mkMap('map-hormuz',[26.4,56.4],8);
+/* Shipping lanes */
+L.polyline([[27.1,56.0],[26.5,56.3],[26.0,56.8],[25.5,57.2]],{color:'#3b82f6',weight:3,opacity:0.3}).addTo(m);
+L.polyline([[27.0,56.5],[26.4,56.7],[25.8,57.0],[25.3,57.5]],{color:'#3b82f6',weight:3,opacity:0.3}).addTo(m);
+L.marker([25.6,57.3],{icon:L.divIcon({className:'map-label map-label-blue',html:'Shipping lanes',iconSize:[0,0],iconAnchor:[-8,6]})}).addTo(m);
 /* Iran side */
 L.circleMarker([27.18,56.27],{radius:8,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([27.18,56.27],{icon:L.divIcon({className:'map-label map-label-red',html:'Bandar Abbas',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+L.marker([27.18,56.27],{icon:L.divIcon({className:'map-label map-label-red',html:'Bandar Abbas — IRGC Navy HQ',iconSize:[0,0],iconAnchor:[-16,-14]})}).addTo(m);
+/* Mine field */
+L.polygon([[26.6,56.0],[26.6,56.9],[26.2,56.9],[26.2,56.0]],{color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.12,weight:1,dashArray:'4,3'}).addTo(m);
+L.marker([26.1,56.3],{icon:L.divIcon({className:'map-label map-label-red',html:'MINE FIELD',iconSize:[0,0],iconAnchor:[-4,20]})}).addTo(m);
+/* Tanker hits — each labeled */
+var hits=[
+  {c:[26.5,56.3],n:'VLCC Seavigour — missile hit, on fire'},
+  {c:[26.25,56.55],n:'LNG carrier — mine strike, listing'},
+  {c:[26.65,56.15],n:'Tanker Marlin — drone hit, crew evacuated'},
+  {c:[26.25,56.75],n:'Container ship — collateral mine hit'},
+  {c:[26.45,56.5],n:'Tanker Pacific — IRGC speedboat attack'}
+];
+hits.forEach(function(h,i){
+L.marker(h.c,{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:900 22px Inter;text-shadow:0 0 12px rgba(255,59,59,.8)">&times;</div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
+L.marker(h.c,{icon:L.divIcon({className:'map-label map-label-red',html:h.n,iconSize:[0,0],iconAnchor:[-(i%2===0?16:120),(i%2===0?-16:20)]})}).addTo(m);
+});
 /* UAE side */
 L.circleMarker([25.12,56.33],{radius:6,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([25.12,56.33],{icon:L.divIcon({className:'map-label map-label-amber',html:'Fujairah',iconSize:[0,0],iconAnchor:[80,6]})}).addTo(m);
-/* Muscat */
-L.circleMarker([23.59,58.54],{radius:4,color:'#888',fillColor:'#888',fillOpacity:0.4,weight:1}).addTo(m);
-L.marker([23.59,58.54],{icon:L.divIcon({className:'map-label',html:'Muscat',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
-/* Tanker hit X markers */
-var tankerHits=[[26.4,56.3],[26.15,56.55],[26.65,56.15],[26.25,56.75],[26.5,56.45]];
-tankerHits.forEach(function(h){
-L.marker(h,{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:900 20px Inter;text-shadow:0 0 12px rgba(255,59,59,.8)">&times;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(m);
-});
+L.marker([25.12,56.33],{icon:L.divIcon({className:'map-label map-label-amber',html:'Fujairah — pipeline bypass terminal',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+/* Strait width annotation */
+L.marker([26.4,56.05],{icon:L.divIcon({className:'',html:'<div style="font:600 9px Inter;color:#fff;background:rgba(0,0,0,.6);padding:2px 5px;border-radius:3px;white-space:nowrap">← 33 miles →</div>',iconSize:[0,0],iconAnchor:[40,6]})}).addTo(m);
 }
 
 function initMapPipelines(){
@@ -1090,8 +1092,8 @@ document.querySelectorAll('#dominoes .domino').forEach((d,i)=>{setTimeout(()=>d.
 }
 
 const cDef={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:true,backgroundColor:'#1a1a1a',titleColor:'#e5e5e5',bodyColor:'#ccc',borderColor:'#333',borderWidth:1,titleFont:{family:'Inter',size:12,weight:600},bodyFont:{family:'JetBrains Mono',size:11},padding:10,cornerRadius:6,displayColors:true,boxPadding:4}},
-scales:{x:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'Inter',size:10}}},
-y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:10}}}}};
+scales:{x:{grid:{color:'rgba(255,255,255,0.12)'},ticks:{color:'#888',font:{family:'Inter',size:10}}},
+y:{grid:{color:'rgba(255,255,255,0.12)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:10}}}}};
 
 function initChart6(){
 new Chart(document.getElementById('chart6'),{type:'line',data:{
@@ -1172,21 +1174,21 @@ function initChart41(){
 new Chart(document.getElementById('chart41'),{type:'line',data:{
 labels:['Mar','Apr','May','Jun','Jul','Aug'],
 datasets:[{data:[112,100,92,88,86,85],borderColor:'#34d399',backgroundColor:'rgba(52,211,153,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]
-},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:70,max:120,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
+},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.12)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:70,max:120,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
 }
 
 function initChart42(){
 new Chart(document.getElementById('chart42'),{type:'line',data:{
 labels:['Mar','Apr','May','Jun','Jul','Aug'],
 datasets:[{data:[112,108,115,105,118,110],borderColor:'#ffb020',backgroundColor:'rgba(255,176,32,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]
-},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:90,max:130,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
+},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.12)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:90,max:130,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
 }
 
 function initChart43(){
 new Chart(document.getElementById('chart43'),{type:'line',data:{
 labels:['Mar','Apr','May','Jun','Jul','Aug'],
 datasets:[{data:[112,120,128,135,142,150],borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]
-},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:100,max:160,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
+},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.12)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:100,max:160,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
 }
 
 updateProgress();

@@ -1,0 +1,5 @@
+node_modules/
+qa-screenshots/
+package-lock.json
+.vercel/
+.env
