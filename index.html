@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>The Iran Crisis — Strategic Intelligence Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card-bg:#111;--red:#ff3b3b;--amber:#ffb020;--green:#34d399;--blue:#3b82f6;--text:#e5e5e5;--muted:#888;--dim:#333}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;padding-bottom:56px}
+.card{min-height:100vh;min-height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 24px 56px;position:relative;overflow:hidden}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;transition:width .3s}
+.card-counter{position:fixed;top:8px;right:12px;font:500 11px/1 'JetBrains Mono';color:var(--muted);z-index:1000;background:rgba(10,10,10,0.7);padding:4px 8px;border-radius:4px;backdrop-filter:blur(4px)}
+.hero-num{font:800 72px/1 'JetBrains Mono';letter-spacing:-2px}
+.hero-num.sm{font-size:48px}
+.mono{font-family:'JetBrains Mono',monospace}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:600}
+.act-title{font:900 14px/1 'Inter';text-transform:uppercase;letter-spacing:4px;color:var(--red);margin-bottom:12px}
+.card-title{font:800 28px/1.1 'Inter';margin-bottom:16px;max-width:600px;text-align:center}
+.card-sub{font:400 14px/1.5 'Inter';color:var(--muted);max-width:500px;text-align:center}
+.stat-row{display:flex;gap:32px;margin:24px 0;flex-wrap:wrap;justify-content:center}
+.stat{text-align:center}
+.stat .val{font:700 42px/1 'JetBrains Mono';letter-spacing:-1px}
+.stat .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:4px}
+.w100{width:100%;max-width:600px}
+canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
+.act-card{background:var(--bg)}
+.act-card .act-num{font:800 120px/1 'JetBrains Mono';color:#1a1a1a;position:absolute;right:20px;bottom:20px}
+.timeline{position:relative;padding-left:28px;width:100%;max-width:500px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--dim)}
+.tl-item{position:relative;margin-bottom:20px;opacity:0;animation:fadeSlide .5s ease forwards}
+.tl-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:pulse 2s infinite}
+.tl-item .tl-time{font:600 12px/1 'JetBrains Mono';color:var(--red);margin-bottom:2px}
+.tl-item .tl-text{font:400 13px/1.4 'Inter';color:var(--text)}
+@keyframes fadeSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 4px var(--red)}50%{box-shadow:0 0 12px var(--red)}}
+.radial{position:relative;width:320px;height:320px;margin:16px auto}
+.radial .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(255,59,59,.15);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font:700 11px/1 'Inter';color:var(--red);box-shadow:0 0 30px rgba(255,59,59,.3);z-index:2}
+.radial .target{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(255,59,59,.08);border:1px solid var(--dim);display:flex;align-items:center;justify-content:center;font:600 9px/1 'Inter';color:var(--text);transition:all .6s}
+.radial .target.hit{border-color:var(--red);box-shadow:0 0 12px rgba(255,59,59,.4);background:rgba(255,59,59,.15)}
+.radial svg.lines{position:absolute;inset:0;width:100%;height:100%}
+.missile-line{stroke:var(--red);stroke-width:1.5;stroke-dasharray:6 4;stroke-dashoffset:100;fill:none}
+.missile-line.animated{animation:dashMove 1.5s linear forwards}
+@keyframes dashMove{to{stroke-dashoffset:0}}
+.treemap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;width:100%;max-width:500px;margin:12px auto}
+.treemap .block{padding:16px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;min-height:80px}
+.treemap .block .bname{font:600 11px/1.2 'Inter';margin-bottom:4px}
+.treemap .block .bpct{font:700 24px/1 'JetBrains Mono'}
+.crack-line{position:absolute;width:100%;height:2px;top:50%;left:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:100%;max-width:500px;margin:12px auto}
+.matrix .cell{padding:16px;min-height:110px}
+.matrix .cell h4{font:700 14px/1.2 'Inter';margin-bottom:6px}
+.matrix .cell p{font:400 11px/1.3 'Inter';color:rgba(255,255,255,.7)}
+.matrix .cell .price{font:700 16px/1 'JetBrains Mono';margin-top:6px}
+.bar-group{width:100%;max-width:520px;margin:8px auto}
+.bar-item{margin-bottom:10px}
+.bar-item .bar-label{display:flex;justify-content:space-between;font:500 12px/1 'Inter';margin-bottom:3px}
+.bar-item .bar-track{height:28px;background:var(--dim);border-radius:3px;overflow:hidden;position:relative}
+.bar-item .bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:8px;font:600 11px/1 'JetBrains Mono';color:#fff;transition:width 1s ease}
+.waterfall{display:flex;align-items:flex-end;gap:6px;height:220px;width:100%;max-width:460px;margin:16px auto;justify-content:center}
+.wf-bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:22%}
+.wf-bar .wf-val{font:700 14px/1 'JetBrains Mono';margin-bottom:4px}
+.wf-bar .wf-block{width:100%;border-radius:3px;transition:height 1s ease}
+.wf-bar .wf-lbl{font:500 10px/1.2 'Inter';color:var(--muted);margin-top:6px;text-align:center}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:0;width:100%;max-width:400px;margin:16px auto}
+.funnel-stage{display:flex;align-items:center;justify-content:center;padding:18px;font:600 13px/1.2 'Inter';color:#fff}
+.gauge-wrap{position:relative;width:260px;height:150px;margin:16px auto}
+.gauge-svg{width:100%;height:100%}
+.rings-container{position:relative;width:320px;height:320px;margin:12px auto}
+.ring{position:absolute;border-radius:50%;border:2px solid;opacity:0;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:flex-start;justify-content:center;padding-top:6px}
+.ring span{font:600 8px/1 'Inter';text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+.ring.visible{animation:ringExpand .6s ease forwards}
+@keyframes ringExpand{from{opacity:0;transform:translate(-50%,-50%) scale(.3)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.big-compare{width:100%;max-width:500px;margin:8px auto}
+.compare-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--dim)}
+.compare-row .cr-label{font:500 12px/1 'Inter';color:var(--muted);width:100px}
+.compare-row .cr-before{font:600 18px/1 'JetBrains Mono';color:var(--muted)}
+.compare-row .cr-arrow{color:var(--red);font-size:20px;margin:0 8px}
+.compare-row .cr-after{font:700 22px/1 'JetBrains Mono';color:var(--red)}
+.compare-row .cr-delta{font:700 14px/1 'JetBrains Mono';color:var(--red);margin-left:8px}
+.dot-grid{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;width:100%;max-width:360px;margin:12px auto}
+.dot{width:100%;aspect-ratio:1;border-radius:50%;background:var(--text);transition:background .3s,opacity .3s}
+.dot.off{background:var(--red);opacity:.3}
+.dominoes{display:flex;gap:8px;width:100%;max-width:520px;margin:16px auto;align-items:flex-end;overflow-x:auto}
+.domino{flex:1;min-width:80px;padding:14px 8px;background:#1a1a1a;border:1px solid var(--dim);border-radius:6px;text-align:center;transform-origin:bottom center;opacity:0}
+.domino.fallen{animation:dominoFall .5s ease forwards}
+.domino .d-pct{font:700 20px/1 'JetBrains Mono';margin-bottom:4px}
+.domino .d-name{font:500 10px/1.2 'Inter';color:var(--muted)}
+@keyframes dominoFall{from{opacity:0;transform:rotateX(90deg)}to{opacity:1;transform:rotateX(0)}}
+.circles-compare{display:flex;align-items:center;justify-content:center;gap:40px;margin:24px auto}
+.stack-blocks{display:flex;gap:24px;align-items:flex-end;justify-content:center;margin:20px auto}
+.stack{display:flex;flex-direction:column;gap:2px;align-items:center}
+.sblock{width:64px;height:20px;border-radius:2px}
+.flow-container{width:100%;max-width:520px;margin:12px auto}
+.flow-row{display:flex;align-items:center;margin-bottom:8px}
+.flow-source{width:80px;text-align:right;font:600 12px/1 'Inter';padding-right:12px}
+.flow-arrow{flex:1;height:4px;position:relative;border-radius:2px;margin-right:8px}
+.flow-arrow::after{content:'\25B6';position:absolute;right:-10px;top:-6px;font-size:12px}
+.flow-dest{font:500 11px/1 'Inter'}
+.flow-pct{font:700 14px/1 'JetBrains Mono';margin-left:6px}
+.divbar-container{width:100%;max-width:520px;margin:8px auto}
+.divbar{display:flex;align-items:center;margin-bottom:6px;height:28px}
+.divbar .db-label{width:90px;font:500 11px/1 'Inter';text-align:right;padding-right:8px;flex-shrink:0}
+.divbar .db-bar{height:100%;border-radius:2px;display:flex;align-items:center;padding:0 6px;font:600 10px/1 'JetBrains Mono';color:#fff;min-width:24px;transition:width 1s}
+.divbar .db-center{width:2px;background:var(--muted);height:100%;flex-shrink:0}
+.squeeze-box{position:relative;width:100%;max-width:480px;height:200px;margin:20px auto;overflow:hidden}
+.sq-wall{position:absolute;top:0;height:100%;width:40%;display:flex;align-items:center;justify-content:center;font:700 13px/1.3 'Inter';padding:16px;text-align:center}
+.sq-wall.left{left:0;background:linear-gradient(90deg,rgba(255,59,59,.3),transparent);border-right:2px solid var(--red)}
+.sq-wall.right{right:0;background:linear-gradient(-90deg,rgba(100,100,100,.3),transparent);border-left:2px solid var(--muted)}
+.sq-victims{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center}
+.sq-victims span{display:block;font:600 13px/1.5 'Inter';color:var(--red)}
+.sq-float{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:rgba(52,211,153,.15);border:1px solid var(--green);border-radius:20px;padding:6px 16px;font:600 11px/1 'Inter';color:var(--green)}
+.spread-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:480px;margin:12px auto}
+.spread-card{padding:16px;border-radius:8px;border:1px solid var(--dim);background:#1a1a1a}
+.spread-card .sc-name{font:500 11px/1 'Inter';color:var(--muted);margin-bottom:8px}
+.spread-card .sc-val{font:700 28px/1 'JetBrains Mono'}
+.spread-card .sc-dir{font:600 12px/1 'Inter';margin-top:4px}
+.checklist{width:100%;max-width:500px;margin:12px auto}
+.check-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #1a1a1a}
+.check-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.check-text{font:400 13px/1.4 'Inter'}
+.check-text strong{font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;max-width:480px;margin:12px auto}
+.kpi{padding:14px;background:#1a1a1a;border-radius:6px;border-left:3px solid var(--dim)}
+.kpi .kpi-label{font:500 10px/1 'Inter';text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.kpi .kpi-val{font:700 28px/1 'JetBrains Mono'}
+.kpi .kpi-delta{font:600 11px/1 'JetBrains Mono';margin-top:4px}
+.date-cards{width:100%;max-width:500px;margin:12px auto}
+.date-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #1a1a1a}
+.dc-date{font:700 12px/1 'JetBrains Mono';color:var(--amber);width:80px;flex-shrink:0}
+.dc-text{font:400 13px/1.4 'Inter'}
+.dc-text strong{font-weight:600}
+.scenario-card{border-radius:12px;padding:24px;width:100%;max-width:520px;margin:12px auto}
+.scenario-card .sc-prob{font:800 64px/1 'JetBrains Mono';margin-bottom:8px}
+.scenario-card .sc-title{font:700 20px/1.1 'Inter';margin-bottom:12px}
+.scenario-card .sc-stats{display:flex;gap:16px;margin:16px 0;flex-wrap:wrap}
+.scenario-card .sc-stat{padding:8px 12px;background:rgba(0,0,0,.3);border-radius:6px}
+.scenario-card .sc-stat .ss-val{font:700 16px/1 'JetBrains Mono'}
+.scenario-card .sc-stat .ss-lbl{font:400 10px/1 'Inter';color:rgba(255,255,255,.6);margin-top:2px}
+.sources{width:100%;max-width:500px;margin:12px auto}
+.sources a{display:block;color:var(--blue);font:400 12px/1.8 'Inter';text-decoration:none}
+.sources a:hover{text-decoration:underline}
+.range-svg{width:100%;max-width:360px;height:300px;margin:12px auto;display:block}
+.cable-svg{width:100%;max-width:400px;height:220px;margin:12px auto;display:block}
+.card:not(.in-view) .tl-item{animation:none;opacity:0}
+.card:not(.in-view) .ring{animation:none;opacity:0}
+.card:not(.in-view) .domino{animation:none;opacity:0}
+.map-container{width:100%;max-width:520px;height:55vh;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.15);position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.4)}
+.map-container .leaflet-control-attribution{display:none}
+.map-container .leaflet-control-zoom{display:none}
+.pulse-marker{width:12px;height:12px;background:#ff3b3b;border-radius:50%;box-shadow:0 0 10px #ff3b3b;animation:mapPulse 2s infinite}
+@keyframes mapPulse{0%{box-shadow:0 0 0 0 rgba(255,59,59,.7)}70%{box-shadow:0 0 0 15px rgba(255,59,59,0)}100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}}
+.map-label,.map-label-red,.map-label-green,.map-label-amber,.map-label-blue{
+  background:rgba(15,15,25,0.93)!important;border:none!important;
+  font:700 12px/1.4 'Inter',sans-serif!important;color:#fff!important;
+  white-space:nowrap;text-shadow:none;
+  padding:6px 10px 6px 9px!important;border-radius:5px!important;
+  width:auto!important;height:auto!important;
+  pointer-events:none;
+  box-shadow:0 3px 12px rgba(0,0,0,0.35);
+  letter-spacing:0.2px;
+}
+.map-label span{font-weight:500!important;opacity:0.85;font-size:10px!important}
+.map-label-red{color:#fff!important;border-left:4px solid #ff3b3b!important;background:rgba(100,15,15,0.93)!important}
+.map-label-green{color:#fff!important;border-left:4px solid #34d399!important;background:rgba(10,60,35,0.93)!important}
+.map-label-amber{color:#fff!important;border-left:4px solid #ffb020!important;background:rgba(70,45,5,0.93)!important}
+.map-label-blue{color:#fff!important;border-left:4px solid #3b82f6!important;background:rgba(15,25,70,0.93)!important}
+.leaflet-div-icon{background:none!important;border:none!important}
+.leaflet-popup-content-wrapper{background:#1a1a1a;color:#e5e5e5;border-radius:6px;border:1px solid #333;font-family:'Inter',sans-serif;font-size:12px;box-shadow:0 4px 16px rgba(0,0,0,0.6)}
+.leaflet-popup-tip{background:#1a1a1a;border:1px solid #333;border-top:none;border-left:none}
+.leaflet-popup-close-button{color:#888!important;font-size:16px!important}
+@media(max-width:400px){.hero-num{font-size:56px}.stat .val{font-size:32px}.card-title{font-size:22px}.map-container{height:45vh}.rings-container{width:260px;height:260px}.ring span{font-size:7px!important}.kpi .kpi-val{font-size:22px}.spread-cards{grid-template-columns:1fr}.dominoes{flex-wrap:wrap}.domino{min-width:60px}}
+@media(max-width:375px){.card{padding:50px 16px 36px}.stat-row{gap:16px}.card-title{font-size:20px}.hero-num{font-size:48px}.hero-num.sm{font-size:36px}.matrix{grid-template-columns:1fr}.treemap{grid-template-columns:1fr 1fr}.map-container{height:40vh}}
+.card-title{overflow-wrap:break-word;word-wrap:break-word}
+.swipe-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);animation:swipeHint 2s ease-in-out infinite;opacity:0.5;font:500 11px/1 'Inter';color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.swipe-hint::after{content:'';display:block;width:20px;height:20px;margin:8px auto 0;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);animation:swipeArrow 2s ease-in-out infinite}
+@keyframes swipeHint{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.3}50%{transform:translateX(-50%) translateY(-8px);opacity:0.7}}
+@keyframes swipeArrow{0%,100%{opacity:0.3}50%{opacity:0.7}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="card-counter" id="counter">1 / 51</div>
+
+<div class="card" id="card0" style="background:radial-gradient(ellipse at 50% 60%,#1a0000,#0a0a0a)">
+<p class="label" style="margin-bottom:16px">Strategic Intelligence Briefing</p>
+<h1 style="font:900 44px/1 'Inter';text-align:center;background:linear-gradient(135deg,var(--red),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px">The Iran Crisis</h1>
+<div class="stat-row">
+<div class="stat"><div class="val mono" style="color:var(--red)">11</div><div class="lbl">Days of War</div></div>
+<div class="stat"><div class="val mono" style="color:var(--amber)">$119</div><div class="lbl">Peak Brent</div></div>
+<div class="stat"><div class="val mono" style="color:var(--red)">65%</div><div class="lbl">Hormuz Flow Cut</div></div>
+</div>
+<p class="card-sub" style="margin-top:16px">India imports 88% of its crude oil &mdash; the world's 3rd largest importer.<br>This is what the largest sustained supply disruption since the 1979 Iranian Revolution means for 1.4 billion people.</p>
+<p class="label" style="margin-top:32px;font-size:10px">Last updated March 11, 2026 &middot; Swipe up or tap to navigate</p>
+<div class="swipe-hint">Swipe up</div>
+</div>
+<div class="card act-card" id="card1">
+<p class="act-title">Act 1</p>
+<h2 class="card-title" style="font-size:36px">What Happened</h2>
+<p class="card-sub">February 28 &ndash; March 2, 2026</p>
+<div class="act-num">01</div>
+</div>
+<div class="card" id="card2">
+<p class="label">The Strike Map</p>
+<h3 class="card-title">Operation Epic Fury: 8 Targets</h3>
+<div class="map-container" id="map-strikes"></div>
+<p class="card-sub" style="margin-top:12px">Simultaneous strikes on nuclear, military, and leadership targets across Iran. The breadth signals regime change intent, not limited deterrence &mdash; which shapes Iran's calculus toward maximum retaliation.</p>
+</div>
+<div class="card" id="card3">
+<p class="label">Retaliation Map</p>
+<h3 class="card-title">Iran Hits Back: 9 Nations</h3>
+<div class="map-container" id="map-retaliation"></div>
+<div class="stat-row" style="margin-top:12px">
+<div class="stat"><div class="val mono" style="font-size:28px;color:var(--red)">8</div><div class="lbl">Countries Hit</div></div>
+<div class="stat"><div class="val mono" style="font-size:28px;color:var(--red)">5</div><div class="lbl">Tankers Struck</div></div>
+<div class="stat"><div class="val mono" style="font-size:28px;color:var(--amber)">150+</div><div class="lbl">Ships Stranded</div></div>
+</div>
+</div>
+<div class="card" id="card4">
+<p class="label">The Chokepoint</p>
+<h3 class="card-title">The Strait Closes</h3>
+<div class="map-container" id="map-hormuz"></div>
+<div class="hero-num" style="color:var(--red);margin:8px 0">20M &rarr; ~7M</div>
+<p class="label" style="margin-bottom:8px">barrels per day through the strait &mdash; transit volume, not production</p>
+<div class="stat-row">
+<div class="stat"><div class="val mono" style="font-size:24px">33%</div><div class="lbl">Seaborne Crude</div></div>
+<div class="stat"><div class="val mono" style="font-size:24px">19%</div><div class="lbl">Global LNG</div></div>
+<div class="stat"><div class="val mono" style="font-size:24px">14%</div><div class="lbl">Refined Products</div></div>
+</div>
+</div>
+<div class="card act-card" id="card5">
+<p class="act-title">Act 2</p><h2 class="card-title" style="font-size:36px">Inside Iran</h2>
+<p class="card-sub">A regime under compound stress</p><div class="act-num">02</div>
+</div>
+<div class="card" id="card6">
+<p class="label">Macro Collapse</p><h3 class="card-title">Pre-War Fragility</h3>
+<div class="w100"><canvas id="chart6" class="chart"></canvas></div>
+<p class="card-sub" style="margin-top:12px">The rial depreciated 40% in 3 months. Protest incidents exceeded the 2022 Mahsa Amini peak &mdash; indicating the regime was under structural stress before the first strike landed.</p>
+</div>
+<div class="card" id="card7">
+<p class="label">After Khamenei</p><h3 class="card-title">The Power Vacuum</h3>
+<div class="treemap" style="position:relative">
+<div class="block" style="background:rgba(255,59,59,.25);border:1px solid var(--red)"><div class="bname">IRGC Hardliners</div><div class="bpct" style="color:var(--red)">25%</div></div>
+<div class="block" style="background:rgba(255,176,32,.2);border:1px solid var(--amber)"><div class="bname">Clerical Council</div><div class="bpct" style="color:var(--amber)">18%</div></div>
+<div class="block" style="background:rgba(136,136,136,.2);border:1px solid var(--muted)"><div class="bname">Unaligned Military</div><div class="bpct" style="color:var(--muted)">20%</div></div>
+<div class="block" style="background:rgba(180,40,40,.2);border:1px solid #b42828"><div class="bname">IRGC Moderates</div><div class="bpct" style="color:#e05555">15%</div></div>
+<div class="block" style="background:rgba(52,211,153,.15);border:1px solid var(--green)"><div class="bname">Reformists</div><div class="bpct" style="color:var(--green)">12%</div></div>
+<div class="block" style="background:rgba(59,130,246,.15);border:1px solid var(--blue)"><div class="bname">Separatists</div><div class="bpct" style="color:var(--blue)">10%</div></div>
+<div class="crack-line"></div>
+</div>
+<p class="card-sub">Six factions. No clear successor. The IRGC holds the guns, but the clerics hold the legitimacy.</p>
+</div>
+<div class="card" id="card8">
+<p class="label">Scenario Analysis</p><h3 class="card-title">Four Futures for Iran</h3>
+<div class="matrix">
+<div class="cell" style="background:rgba(255,59,59,.15);border:1px solid rgba(255,59,59,.3)"><h4 style="color:var(--red)">IRGC Takeover</h4><p>Military junta, maximum hostility. Guerrilla campaign in Iraq.</p><div class="price" style="color:var(--red)">Oil $130+</div></div>
+<div class="cell" style="background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber)">Managed Transition</h4><p>Clerical council holds. Gradual negotiation. Slow de-escalation.</p><div class="price" style="color:var(--amber)">Oil $95-110</div></div>
+<div class="cell" style="background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber)">Fragmentation</h4><p>Regional breakaway. Kurdish/Baloch autonomy. Multi-year instability.</p><div class="price" style="color:var(--amber)">Oil $100-120</div></div>
+<div class="cell" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3)"><h4 style="color:var(--green)">Reformist Window</h4><p>Opposition seizes moment. International engagement. Sanctions relief.</p><div class="price" style="color:var(--green)">Oil $75-85</div></div>
+</div>
+<p class="card-sub" style="margin-top:8px;font-size:11px">Axes: Centralized &harr; Fragmented (horizontal) &middot; Hardline &harr; Moderate (vertical)</p>
+</div>
+<div class="card" id="card9">
+<p class="label">Cumulative Damage</p><h3 class="card-title">Every Month Costs the World</h3>
+<div class="w100"><canvas id="chart9" class="chart"></canvas></div>
+<p class="card-sub" style="margin-top:12px">Cumulative global economic cost at 12 months: an estimated $2.8 trillion across energy, shipping, aviation, trade, and insurance. The compounding effect accelerates &mdash; the second six months costs nearly 3x the first six months.</p>
+</div>
+<div class="card act-card" id="card10">
+<p class="act-title">Act 3</p><h2 class="card-title" style="font-size:36px">The Oil Shock</h2>
+<p class="card-sub">Supply disruption of unprecedented duration</p><div class="act-num">03</div>
+</div>
+<div class="card" id="card11">
+<p class="label">Crude Oil &mdash; Brent (ICE)</p><h3 class="card-title" style="color:var(--red)">$67 &rarr; $119 peak &rarr; $112 current</h3>
+<div class="w100"><canvas id="chart11" class="chart"></canvas></div>
+<p class="card-sub" style="margin-top:12px">+67% in 11 trading days &mdash; the fastest sustained crude appreciation since the 1990 Gulf War spike. Unlike 1990, no rapid supply restoration is in sight.</p>
+</div>
+<div class="card" id="card12">
+<p class="label">Historical Context</p><h3 class="card-title">Largest Sustained Supply Loss</h3>
+<p class="card-sub" style="margin-bottom:8px;font-size:11px">Net supply removed from global market (production lost + stranded exports)</p>
+<div class="bar-group">
+<div class="bar-item"><div class="bar-label"><span>2026 Iran/Hormuz</span><span class="mono" style="color:var(--red)">~6.5M bbl/d</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--red)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>2019 Abqaiq</span><span class="mono">5.7M</span></div><div class="bar-track"><div class="bar-fill" style="width:88%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>1990 Gulf War</span><span class="mono">4.3M</span></div><div class="bar-track"><div class="bar-fill" style="width:66%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>1979 Iran Revolution</span><span class="mono">3.4M</span></div><div class="bar-track"><div class="bar-fill" style="width:52%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>1973 Arab Embargo</span><span class="mono">2.6M</span></div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#555"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>2011 Libya</span><span class="mono">1.5M</span></div><div class="bar-track"><div class="bar-fill" style="width:23%;background:#555"></div></div></div>
+</div>
+<p class="card-sub" style="margin-top:8px">Abqaiq was restored within <strong>48 hours</strong>. This disruption has sustained for <strong>11 days</strong> with no restoration timeline. Duration, not peak volume, determines economic damage.</p>
+</div>
+<div class="card" id="card13">
+<p class="label">The Bypass Fallacy</p><h3 class="card-title">Pipeline Bypass Routes</h3>
+<div class="map-container" id="map-pipelines"></div>
+<p class="card-sub" style="margin-top:12px">Combined pipeline capacity is 7M bbl/day on paper, but terminal bottlenecks at Yanbu limit actual bypass to ~3.5M. The remaining 16.5M bbl/day has no alternative route.</p>
+</div>
+<div class="card" id="card14">
+<p class="label">Terminal Constraints</p><h3 class="card-title">Yanbu: The Bottleneck</h3>
+<p class="card-sub" style="margin-bottom:8px">The pipe is fat. The tap is thin.</p>
+<div style="width:100%;max-width:440px;margin:0 auto">
+<!-- Funnel SVG -->
+<svg viewBox="0 0 400 320" style="width:100%">
+  <!-- Funnel shape -->
+  <defs>
+    <linearGradient id="funnelGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="funnelGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffb020" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffb020" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="funnelGrad3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff3b3b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff3b3b" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <!-- Stage 1: Pipeline Capacity (full width) -->
+  <polygon points="20,10 380,10 340,95 60,95" fill="url(#funnelGrad1)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="200" y="42" text-anchor="middle" fill="#3b82f6" font-family="JetBrains Mono" font-size="18" font-weight="700">7.0M bbl/day</text>
+  <text x="200" y="62" text-anchor="middle" fill="#8ab4ff" font-family="Inter" font-size="11">Pipeline Capacity</text>
+  <text x="200" y="78" text-anchor="middle" fill="#5580bb" font-family="Inter" font-size="9">East-West crude + converted NGL lines</text>
+
+  <!-- Arrow -->
+  <polygon points="190,98 210,98 200,108" fill="#555"/>
+
+  <!-- Stage 2: Terminal Loading (narrower) -->
+  <polygon points="60,115 340,115 280,195 120,195" fill="url(#funnelGrad2)" stroke="#ffb020" stroke-width="1.5"/>
+  <text x="200" y="147" text-anchor="middle" fill="#ffb020" font-family="JetBrains Mono" font-size="18" font-weight="700">4.5-5.0M</text>
+  <text x="200" y="167" text-anchor="middle" fill="#ddaa44" font-family="Inter" font-size="11">Terminal Loading Capacity</text>
+  <text x="200" y="183" text-anchor="middle" fill="#aa8833" font-family="Inter" font-size="9">Berth limits &bull; VLCC queuing &bull; Storage</text>
+
+  <!-- Arrow -->
+  <polygon points="190,198 210,198 200,208" fill="#555"/>
+
+  <!-- Stage 3: Actual Export (narrow) -->
+  <polygon points="120,215 280,215 240,290 160,290" fill="url(#funnelGrad3)" stroke="#ff3b3b" stroke-width="1.5"/>
+  <text x="200" y="245" text-anchor="middle" fill="#ff3b3b" font-family="JetBrains Mono" font-size="20" font-weight="800">~3.5M</text>
+  <text x="200" y="265" text-anchor="middle" fill="#ff6666" font-family="Inter" font-size="11">Actual Export</text>
+  <text x="200" y="280" text-anchor="middle" fill="#cc4444" font-family="Inter" font-size="9">What actually reaches tankers</text>
+
+  <!-- Loss annotations on sides -->
+  <line x1="35" y1="55" x2="35" y2="155" stroke="#ff3b3b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="10" y="110" fill="#ff3b3b" font-family="JetBrains Mono" font-size="10" transform="rotate(-90,10,110)">-2M lost</text>
+
+  <line x1="365" y1="155" x2="365" y2="255" stroke="#ff3b3b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="390" y="210" fill="#ff3b3b" font-family="JetBrains Mono" font-size="10" transform="rotate(-90,390,210)">-1.5M lost</text>
+
+  <!-- Bottom label -->
+  <text x="200" y="312" text-anchor="middle" fill="#666" font-family="Inter" font-size="10">50% of pipeline capacity never reaches a ship</text>
+</svg>
+</div>
+</div>
+<div class="card" id="card15">
+<p class="label">Iran's Reach</p><h3 class="card-title">Fujairah: The Bypass That Wasn't</h3>
+<div class="map-container" id="map-range"></div>
+<p class="card-sub" style="margin-top:12px">Fujairah sits inside Iran's short-range drone envelope (&lt;200km). The Habshan-Fujairah pipeline was designed as a Hormuz bypass &mdash; but the terminal's proximity to Iran negates that advantage. Only Yanbu, at 2,100km, is credibly out of range.</p>
+</div>
+<div class="card" id="card16">
+<p class="label">Collateral Damage</p><h3 class="card-title">Iraq: Both Export Routes Compromised</h3>
+<div class="gauge-wrap"><svg class="gauge-svg" viewBox="0 0 260 150">
+<path d="M30,140 A100,100 0 0,1 230,140" fill="none" stroke="#222" stroke-width="18" stroke-linecap="round"/>
+<path d="M30,140 A100,100 0 0,1 100,47" fill="none" stroke="rgba(255,59,59,.3)" stroke-width="18" stroke-linecap="round"/>
+<line x1="130" y1="140" x2="75" y2="60" stroke="var(--red)" stroke-width="3" stroke-linecap="round">
+<animateTransform attributeName="transform" type="rotate" from="60 130 140" to="-25 130 140" dur="1.5s" fill="freeze"/></line>
+<circle cx="130" cy="140" r="6" fill="var(--red)"/>
+<text x="25" y="148" fill="var(--muted)" font-size="9" font-family="JetBrains Mono">0</text>
+<text x="120" y="32" fill="var(--muted)" font-size="9" font-family="JetBrains Mono">2.5M</text>
+<text x="225" y="148" fill="var(--muted)" font-size="9" font-family="JetBrains Mono">5M</text>
+</svg></div>
+<div class="hero-num" style="color:var(--red);text-align:center">-60%</div>
+<p class="label" style="text-align:center;margin-top:4px">Production: 4.3M &rarr; 1.7M bbl/day</p>
+<p class="card-sub" style="margin-top:12px">Basra export terminal damaged by Iranian-backed militia strikes. The Kirkuk-Ceyhan northern pipeline was already offline since 2023. With both export routes compromised, Iraq's entire 4.3M bbl/day production has no viable outlet. This compounds the Hormuz disruption by an additional 2.6M bbl/day of effective loss.</p>
+</div>
+<div class="card" id="card17">
+<p class="label">Forward Scenarios</p><h3 class="card-title">Three Price Paths</h3>
+<div class="w100"><canvas id="chart17" class="chart"></canvas></div>
+<p class="card-sub" style="margin-top:12px">The base case (55% probability) keeps Brent in the $100-120 corridor through Q3 2026.</p>
+</div>
+<div class="card act-card" id="card18">
+<p class="act-title">Act 4</p><h2 class="card-title" style="font-size:36px">The Cascade</h2>
+<p class="card-sub">Second- and third-order transmission effects</p><div class="act-num">04</div>
+</div>
+<div class="card" id="card19">
+<p class="label">Systemic Transmission</p><h3 class="card-title">One Strait, Seven Industries</h3>
+<div class="rings-container">
+<div class="ring" style="width:40px;height:40px;border-color:var(--red);background:rgba(255,59,59,.2)"><span style="color:var(--red);margin-top:10px;font-size:7px">HORMUZ</span></div>
+<div class="ring" style="width:90px;height:90px;border-color:var(--red);animation-delay:.2s"><span style="color:var(--red)">Oil &amp; Gas</span></div>
+<div class="ring" style="width:130px;height:130px;border-color:#cc3333;animation-delay:.4s"><span style="color:#cc3333">Shipping</span></div>
+<div class="ring" style="width:170px;height:170px;border-color:var(--amber);animation-delay:.6s"><span style="color:var(--amber)">Aviation</span></div>
+<div class="ring" style="width:210px;height:210px;border-color:var(--amber);animation-delay:.8s"><span style="color:var(--amber)">Insurance</span></div>
+<div class="ring" style="width:250px;height:250px;border-color:#cc8800;animation-delay:1s"><span style="color:#cc8800">Food &amp; Fertilizer</span></div>
+<div class="ring" style="width:285px;height:285px;border-color:var(--blue);animation-delay:1.2s"><span style="color:var(--blue)">Data &amp; Telecom</span></div>
+<div class="ring" style="width:315px;height:315px;border-color:#2563eb;animation-delay:1.4s"><span style="color:#2563eb">Global Trade</span></div>
+</div>
+</div>
+<div class="card" id="card20">
+<p class="label">Maritime Shock</p><h3 class="card-title">Shipping: +94% in One Day</h3>
+<div class="big-compare">
+<div class="compare-row"><div class="cr-label">VLCC Day Rate</div><div class="cr-before">$218K</div><div class="cr-arrow">&rarr;</div><div class="cr-after">$424K</div><div class="cr-delta">+94%</div></div>
+<div class="compare-row"><div class="cr-label">War Risk Cover</div><div class="cr-before" style="font-size:14px">Covered</div><div class="cr-arrow">&rarr;</div><div class="cr-after" style="color:var(--red)">CANCELLED</div><div class="cr-delta">&times;</div></div>
+<div class="compare-row"><div class="cr-label">Container Cost</div><div class="cr-before">$1,200</div><div class="cr-arrow">&rarr;</div><div class="cr-after">$3,500</div><div class="cr-delta">+192%</div></div>
+</div>
+<p class="card-sub" style="margin-top:16px">Mechanism: Lloyd's suspended Gulf war-risk policies on Day 1. Without insurance, shipowners cannot obtain financing or port clearance. The insurance withdrawal is as effective as a physical blockade &mdash; ships can technically transit, but no rational operator will.</p>
+</div>
+<div class="card" id="card21">
+<p class="label">Airspace Closure</p><h3 class="card-title">1,900 Daily Flights Cancelled</h3>
+<div class="dot-grid" id="dotgrid"><div class="dot" style="transition-delay:0ms"></div><div class="dot" style="transition-delay:15ms"></div><div class="dot" style="transition-delay:30ms"></div><div class="dot" style="transition-delay:45ms"></div><div class="dot" style="transition-delay:60ms"></div><div class="dot" style="transition-delay:75ms"></div><div class="dot" style="transition-delay:90ms"></div><div class="dot" style="transition-delay:105ms"></div><div class="dot" style="transition-delay:120ms"></div><div class="dot" style="transition-delay:135ms"></div><div class="dot" style="transition-delay:150ms"></div><div class="dot" style="transition-delay:165ms"></div><div class="dot" style="transition-delay:180ms"></div><div class="dot" style="transition-delay:195ms"></div><div class="dot" style="transition-delay:210ms"></div><div class="dot" style="transition-delay:225ms"></div><div class="dot" style="transition-delay:240ms"></div><div class="dot" style="transition-delay:255ms"></div><div class="dot" style="transition-delay:270ms"></div><div class="dot" style="transition-delay:285ms"></div><div class="dot" style="transition-delay:300ms"></div><div class="dot" style="transition-delay:315ms"></div><div class="dot" style="transition-delay:330ms"></div><div class="dot" style="transition-delay:345ms"></div><div class="dot" style="transition-delay:360ms"></div><div class="dot" style="transition-delay:375ms"></div><div class="dot" style="transition-delay:390ms"></div><div class="dot" style="transition-delay:405ms"></div><div class="dot" style="transition-delay:420ms"></div><div class="dot" style="transition-delay:435ms"></div><div class="dot" style="transition-delay:450ms"></div><div class="dot" style="transition-delay:465ms"></div><div class="dot" style="transition-delay:480ms"></div><div class="dot" style="transition-delay:495ms"></div><div class="dot" style="transition-delay:510ms"></div><div class="dot" style="transition-delay:525ms"></div><div class="dot" style="transition-delay:540ms"></div><div class="dot" style="transition-delay:555ms"></div><div class="dot" style="transition-delay:570ms"></div><div class="dot" style="transition-delay:585ms"></div><div class="dot" style="transition-delay:600ms"></div><div class="dot" style="transition-delay:615ms"></div><div class="dot" style="transition-delay:630ms"></div><div class="dot" style="transition-delay:645ms"></div><div class="dot" style="transition-delay:660ms"></div><div class="dot" style="transition-delay:675ms"></div><div class="dot" style="transition-delay:690ms"></div><div class="dot" style="transition-delay:705ms"></div><div class="dot" style="transition-delay:720ms"></div><div class="dot" style="transition-delay:735ms"></div><div class="dot" style="transition-delay:750ms"></div><div class="dot" style="transition-delay:765ms"></div><div class="dot" style="transition-delay:780ms"></div><div class="dot" style="transition-delay:795ms"></div><div class="dot" style="transition-delay:810ms"></div><div class="dot" style="transition-delay:825ms"></div><div class="dot" style="transition-delay:840ms"></div><div class="dot" style="transition-delay:855ms"></div><div class="dot" style="transition-delay:870ms"></div><div class="dot" style="transition-delay:885ms"></div><div class="dot" style="transition-delay:900ms"></div><div class="dot" style="transition-delay:915ms"></div><div class="dot" style="transition-delay:930ms"></div><div class="dot" style="transition-delay:945ms"></div><div class="dot" style="transition-delay:960ms"></div><div class="dot" style="transition-delay:975ms"></div><div class="dot" style="transition-delay:990ms"></div><div class="dot" style="transition-delay:1005ms"></div><div class="dot" style="transition-delay:1020ms"></div><div class="dot" style="transition-delay:1035ms"></div><div class="dot" style="transition-delay:1050ms"></div><div class="dot" style="transition-delay:1065ms"></div><div class="dot" style="transition-delay:1080ms"></div><div class="dot" style="transition-delay:1095ms"></div><div class="dot" style="transition-delay:1110ms"></div><div class="dot" style="transition-delay:1125ms"></div><div class="dot" style="transition-delay:1140ms"></div><div class="dot" style="transition-delay:1155ms"></div><div class="dot" style="transition-delay:1170ms"></div><div class="dot" style="transition-delay:1185ms"></div><div class="dot" style="transition-delay:1200ms"></div><div class="dot" style="transition-delay:1215ms"></div><div class="dot" style="transition-delay:1230ms"></div><div class="dot" style="transition-delay:1245ms"></div><div class="dot" style="transition-delay:1260ms"></div><div class="dot" style="transition-delay:1275ms"></div><div class="dot" style="transition-delay:1290ms"></div><div class="dot" style="transition-delay:1305ms"></div><div class="dot" style="transition-delay:1320ms"></div><div class="dot" style="transition-delay:1335ms"></div><div class="dot" style="transition-delay:1350ms"></div><div class="dot" style="transition-delay:1365ms"></div><div class="dot" style="transition-delay:1380ms"></div><div class="dot" style="transition-delay:1395ms"></div><div class="dot" style="transition-delay:1410ms"></div><div class="dot" style="transition-delay:1425ms"></div><div class="dot" style="transition-delay:1440ms"></div><div class="dot" style="transition-delay:1455ms"></div><div class="dot" style="transition-delay:1470ms"></div><div class="dot" style="transition-delay:1485ms"></div><div class="dot" style="transition-delay:1500ms"></div><div class="dot" style="transition-delay:1515ms"></div><div class="dot" style="transition-delay:1530ms"></div><div class="dot" style="transition-delay:1545ms"></div><div class="dot" style="transition-delay:1560ms"></div><div class="dot" style="transition-delay:1575ms"></div><div class="dot" style="transition-delay:1590ms"></div><div class="dot" style="transition-delay:1605ms"></div><div class="dot" style="transition-delay:1620ms"></div><div class="dot" style="transition-delay:1635ms"></div><div class="dot" style="transition-delay:1650ms"></div><div class="dot" style="transition-delay:1665ms"></div><div class="dot" style="transition-delay:1680ms"></div><div class="dot" style="transition-delay:1695ms"></div><div class="dot" style="transition-delay:1710ms"></div><div class="dot" style="transition-delay:1725ms"></div><div class="dot" style="transition-delay:1740ms"></div><div class="dot" style="transition-delay:1755ms"></div><div class="dot" style="transition-delay:1770ms"></div><div class="dot" style="transition-delay:1785ms"></div><div class="dot" style="transition-delay:1800ms"></div><div class="dot" style="transition-delay:1815ms"></div><div class="dot" style="transition-delay:1830ms"></div><div class="dot" style="transition-delay:1845ms"></div><div class="dot" style="transition-delay:1860ms"></div><div class="dot" style="transition-delay:1875ms"></div><div class="dot" style="transition-delay:1890ms"></div><div class="dot" style="transition-delay:1905ms"></div><div class="dot" style="transition-delay:1920ms"></div><div class="dot" style="transition-delay:1935ms"></div><div class="dot" style="transition-delay:1950ms"></div><div class="dot" style="transition-delay:1965ms"></div><div class="dot" style="transition-delay:1980ms"></div><div class="dot" style="transition-delay:1995ms"></div><div class="dot" style="transition-delay:2010ms"></div><div class="dot" style="transition-delay:2025ms"></div><div class="dot" style="transition-delay:2040ms"></div><div class="dot" style="transition-delay:2055ms"></div><div class="dot" style="transition-delay:2070ms"></div><div class="dot" style="transition-delay:2085ms"></div><div class="dot" style="transition-delay:2100ms"></div><div class="dot" style="transition-delay:2115ms"></div><div class="dot" style="transition-delay:2130ms"></div><div class="dot" style="transition-delay:2145ms"></div><div class="dot" style="transition-delay:2160ms"></div><div class="dot" style="transition-delay:2175ms"></div><div class="dot" style="transition-delay:2190ms"></div><div class="dot" style="transition-delay:2205ms"></div><div class="dot" style="transition-delay:2220ms"></div><div class="dot" style="transition-delay:2235ms"></div><div class="dot" style="transition-delay:2250ms"></div><div class="dot" style="transition-delay:2265ms"></div><div class="dot" style="transition-delay:2280ms"></div><div class="dot" style="transition-delay:2295ms"></div><div class="dot" style="transition-delay:2310ms"></div><div class="dot" style="transition-delay:2325ms"></div><div class="dot" style="transition-delay:2340ms"></div><div class="dot" style="transition-delay:2355ms"></div><div class="dot" style="transition-delay:2370ms"></div><div class="dot" style="transition-delay:2385ms"></div><div class="dot" style="transition-delay:2400ms"></div><div class="dot" style="transition-delay:2415ms"></div><div class="dot" style="transition-delay:2430ms"></div><div class="dot" style="transition-delay:2445ms"></div><div class="dot" style="transition-delay:2460ms"></div><div class="dot" style="transition-delay:2475ms"></div><div class="dot" style="transition-delay:2490ms"></div><div class="dot" style="transition-delay:2505ms"></div><div class="dot" style="transition-delay:2520ms"></div><div class="dot" style="transition-delay:2535ms"></div><div class="dot" style="transition-delay:2550ms"></div><div class="dot" style="transition-delay:2565ms"></div><div class="dot" style="transition-delay:2580ms"></div><div class="dot" style="transition-delay:2595ms"></div><div class="dot" style="transition-delay:2610ms"></div><div class="dot" style="transition-delay:2625ms"></div><div class="dot" style="transition-delay:2640ms"></div><div class="dot" style="transition-delay:2655ms"></div><div class="dot" style="transition-delay:2670ms"></div><div class="dot" style="transition-delay:2685ms"></div><div class="dot" style="transition-delay:2700ms"></div><div class="dot" style="transition-delay:2715ms"></div><div class="dot" style="transition-delay:2730ms"></div><div class="dot" style="transition-delay:2745ms"></div><div class="dot" style="transition-delay:2760ms"></div><div class="dot" style="transition-delay:2775ms"></div><div class="dot" style="transition-delay:2790ms"></div><div class="dot" style="transition-delay:2805ms"></div><div class="dot" style="transition-delay:2820ms"></div><div class="dot" style="transition-delay:2835ms"></div><div class="dot" style="transition-delay:2850ms"></div><div class="dot" style="transition-delay:2865ms"></div><div class="dot" style="transition-delay:2880ms"></div><div class="dot" style="transition-delay:2895ms"></div><div class="dot" style="transition-delay:2910ms"></div><div class="dot" style="transition-delay:2925ms"></div><div class="dot" style="transition-delay:2940ms"></div><div class="dot" style="transition-delay:2955ms"></div><div class="dot" style="transition-delay:2970ms"></div><div class="dot" style="transition-delay:2985ms"></div></div>
+<div class="stat-row" style="margin-top:16px">
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">Qatar</div><div class="lbl">Closed</div></div>
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">UAE</div><div class="lbl">Closed</div></div>
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--red)">Bahrain</div><div class="lbl">Closed</div></div>
+<div class="stat"><div class="val mono" style="font-size:22px;color:var(--amber)">Kuwait</div><div class="lbl">Restricted</div></div>
+</div>
+</div>
+<div class="card" id="card22">
+<p class="label">Digital Infrastructure</p><h3 class="card-title">Submarine Cable Exposure</h3>
+<div class="map-container" id="map-cables"></div>
+<p class="card-sub" style="margin-top:12px">15+ submarine cables transit the Gulf, carrying financial settlement data, cloud infrastructure traffic, and communications for the entire Middle East. Physical disruption to even one major cable could cascade through SWIFT transactions and commodity trading platforms.</p>
+</div>
+<div class="card" id="card23">
+<p class="label">Transmission Mechanism</p><h3 class="card-title">Energy &rarr; Food: 4-8 Weeks</h3>
+<div class="dominoes" id="dominoes">
+<div class="domino"><div class="d-pct" style="color:var(--red)">+61%</div><div class="d-name">Energy</div></div>
+<div class="domino" style="min-height:100px"><div class="d-pct" style="color:var(--red)">+35%</div><div class="d-name">Fertilizer</div></div>
+<div class="domino" style="min-height:110px"><div class="d-pct" style="color:var(--amber)">+22%</div><div class="d-name">Crop Inputs</div></div>
+<div class="domino" style="min-height:120px"><div class="d-pct" style="color:var(--amber)">+15%</div><div class="d-name">Food Prices</div></div>
+<div class="domino" style="min-height:130px"><div class="d-pct" style="color:var(--amber)">+8%</div><div class="d-name">Consumer CPI</div></div>
+</div>
+<p class="card-sub" style="margin-top:16px">Each stage amplifies with a 4-8 week lag. Diesel drives trucking costs, which drive farm-gate-to-retail food margins. By June, urban grocery bills rise an estimated 12-15%. By August, headline CPI above 7% likely forces RBI into a 50-75 bps rate hike cycle &mdash; tightening credit precisely when growth is slowing.</p>
+</div>
+<div class="card act-card" id="card24" style="background:radial-gradient(ellipse at 50% 50%,#1a0a0a,#0a0a0a)">
+<p class="act-title">Act 5</p><h2 class="card-title" style="font-size:36px">India's Exposure</h2>
+<p class="card-sub" style="font-size:16px;color:var(--red)">88% import-dependent. 40% via the Strait.</p><div class="act-num">05</div>
+</div>
+<div class="card" id="card25">
+<p class="label">Import Dependence</p><h3 class="card-title">India's Crude Routes</h3>
+<div class="map-container" id="map-india"></div>
+<p class="card-sub" style="margin-top:12px">India imports 88% of its oil. 40% transits the Strait of Hormuz. The main route goes right through the danger zone.</p>
+</div>
+<div class="card" id="card26">
+<p class="label">Import Bill Shock</p><h3 class="card-title">Every $10 = $14 Billion</h3>
+<div class="stack-blocks">
+<div class="stack"><div style="font:600 11px/1 Inter;color:var(--muted);margin-bottom:8px">Pre-war<br>~$67</div>
+<div class="sblock" style="background:var(--blue)"></div><div class="sblock" style="background:var(--blue)"></div><div class="sblock" style="background:var(--blue)"></div></div>
+<div class="stack"><div style="font:600 11px/1 Inter;color:var(--amber);margin-bottom:8px">Current<br>~$110</div>
+<div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div>
+<div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--amber)"></div><div class="sblock" style="background:var(--amber)"></div>
+<div class="sblock" style="background:var(--amber)"></div></div>
+<div class="stack"><div style="font:600 11px/1 Inter;color:var(--red);margin-bottom:8px">Worst case<br>$135+</div>
+<div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div>
+<div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div>
+<div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div><div class="sblock" style="background:var(--red)"></div>
+<div class="sblock" style="background:var(--red)"></div></div>
+</div>
+<div class="hero-num sm" style="color:var(--red);text-align:center;margin-top:20px">+$56-64B</div>
+<p class="label" style="text-align:center">Additional annual import cost at $110-115 sustained</p>
+<p class="card-sub" style="margin-top:12px">For context: $56-64B exceeds India's entire annual education budget ($52B). Each $10/bbl increase widens the current account deficit by ~0.4% of GDP, putting direct pressure on the rupee and sovereign credit metrics.</p>
+</div>
+<div class="card" id="card27">
+<p class="label">Currency Impact</p><h3 class="card-title">The Rupee: Record Low</h3>
+<div class="w100"><canvas id="chart27" class="chart"></canvas></div>
+<p class="card-sub" style="margin-top:12px">RBI burned $8B in reserves in the first week. The rupee hit 89.2 &mdash; the weakest ever against the dollar.</p>
+</div>
+<div class="card" id="card28">
+<p class="label">Domestic Transmission</p><h3 class="card-title">Crude &rarr; Everything</h3>
+<div class="flow-container">
+<div class="flow-row"><div class="flow-source" style="color:var(--red)">Diesel</div><div class="flow-arrow" style="background:var(--red);height:8px"></div><div class="flow-dest">Trucking &middot; Agriculture &middot; Industry</div><div class="flow-pct" style="color:var(--red)">+42%</div></div>
+<div class="flow-row"><div class="flow-source" style="color:var(--amber)">ATF</div><div class="flow-arrow" style="background:var(--amber);height:6px"></div><div class="flow-dest">Aviation &middot; Tourism</div><div class="flow-pct" style="color:var(--amber)">+50%</div></div>
+<div class="flow-row"><div class="flow-source" style="color:var(--amber)">LPG</div><div class="flow-arrow" style="background:var(--amber);height:5px"></div><div class="flow-dest">Cooking &middot; Rural India</div><div class="flow-pct" style="color:var(--amber)">+35%</div></div>
+<div class="flow-row"><div class="flow-source" style="color:var(--amber)">Petrol</div><div class="flow-arrow" style="background:var(--amber);height:5px"></div><div class="flow-dest">Consumer transport</div><div class="flow-pct" style="color:var(--amber)">+28%</div></div>
+</div>
+<p class="card-sub" style="margin-top:12px">Diesel is the backbone &mdash; 42% of India's refinery output. When diesel spikes, food prices follow within 4 weeks via trucking costs.</p>
+</div>
+<div class="card" id="card29" style="background:linear-gradient(180deg,#0a0a0a,#0a1210)">
+<p class="label">Government Response</p><h3 class="card-title">India's Emergency Playbook</h3>
+<div class="checklist">
+<div class="check-item"><span class="check-icon">&#9989;</span><div class="check-text"><strong>Strategic reserve release</strong> &mdash; 5M barrels authorized from Mangalore/Vizag caverns</div></div>
+<div class="check-item"><span class="check-icon">&#9989;</span><div class="check-text"><strong>Russian crude acceleration</strong> &mdash; IOCL/RIL increasing Urals/ESPO liftings by 400K bbl/d</div></div>
+<div class="check-item"><span class="check-icon">&#128260;</span><div class="check-text"><strong>Fuel price freeze</strong> &mdash; OMCs ordered to hold retail prices (absorbing losses)</div></div>
+<div class="check-item"><span class="check-icon">&#128260;</span><div class="check-text"><strong>Excise duty cut</strong> &mdash; Rs 5-8/litre cut under consideration, awaiting Cabinet approval</div></div>
+<div class="check-item"><span class="check-icon">&#128260;</span><div class="check-text"><strong>US waiver on Russian oil</strong> &mdash; Diplomatic talks active, no commitment yet</div></div>
+<div class="check-item"><span class="check-icon">&#10067;</span><div class="check-text"><strong>IEA coordinated release</strong> &mdash; Proposed but requires member consensus</div></div>
+<div class="check-item"><span class="check-icon">&#10067;</span><div class="check-text"><strong>Demand rationing</strong> &mdash; Last resort. Industrial allocation system drafted but not activated</div></div>
+</div>
+</div>
+<div class="card act-card" id="card30">
+<p class="act-title">Act 6</p><h2 class="card-title" style="font-size:36px">Winners &amp; Losers</h2>
+<p class="card-sub">Structural asymmetries determine who captures value</p><div class="act-num">06</div>
+</div>
+<div class="card" id="card31">
+<p class="label">Market Impact</p><h3 class="card-title">Diverging Fortunes</h3>
+<p class="card-sub" style="margin-bottom:12px;font-size:11px">Mechanism: high oil costs compress margins for price-regulated companies (OMCs, airlines) while benefiting producers, complex refiners with pricing power, and safe-haven assets.</p>
+<div class="divbar-container">
+<div style="display:flex;margin-bottom:8px"><div style="width:90px"></div><div style="flex:1;display:flex;justify-content:space-between;font:500 9px/1 Inter;color:var(--muted)"><span>&larr; Losers</span><span>Winners &rarr;</span></div></div>
+<div class="divbar"><div class="db-label">SpiceJet</div><div class="db-bar" style="width:100px;background:var(--red);flex-direction:row-reverse;margin-right:0">-20%</div><div class="db-center"></div><div style="width:100px"></div></div>
+<div class="divbar"><div class="db-label">Gulf RE</div><div class="db-bar" style="width:90px;background:var(--red);flex-direction:row-reverse;margin-right:0">-18%</div><div class="db-center"></div><div style="width:90px"></div></div>
+<div class="divbar"><div class="db-label">HPCL</div><div class="db-bar" style="width:75px;background:var(--red);flex-direction:row-reverse;margin-right:0">-15%</div><div class="db-center"></div><div style="width:75px"></div></div>
+<div class="divbar"><div class="db-label">BPCL</div><div class="db-bar" style="width:70px;background:var(--red);flex-direction:row-reverse;margin-right:0">-14%</div><div class="db-center"></div><div style="width:70px"></div></div>
+<div class="divbar"><div class="db-label">IOC</div><div class="db-bar" style="width:60px;background:var(--red);flex-direction:row-reverse;margin-right:0">-12%</div><div class="db-center"></div><div style="width:60px"></div></div>
+<div style="height:8px"></div>
+<div class="divbar"><div class="db-label">RIL</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:30px;background:var(--green)">+5%</div></div>
+<div class="divbar"><div class="db-label">Tata Power</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:36px;background:var(--green)">+6%</div></div>
+<div class="divbar"><div class="db-label">Gold</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:48px;background:var(--amber)">+8%</div></div>
+<div class="divbar"><div class="db-label">HAL / BEL</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:72px;background:var(--green)">+12%</div></div>
+</div>
+</div>
+<div class="card" id="card32">
+<p class="label">Crack Spreads</p><h3 class="card-title">Diesel is King: $20 &rarr; $42</h3>
+<div class="bar-group">
+<div class="bar-item"><div class="bar-label"><span>Diesel</span><span class="mono" style="color:var(--red)">$42/bbl</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--red)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>ATF / Jet</span><span class="mono">$38</span></div><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--amber)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>Petrol</span><span class="mono">$28</span></div><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--amber)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>Naphtha</span><span class="mono">$18</span></div><div class="bar-track"><div class="bar-fill" style="width:43%;background:#666"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>LPG</span><span class="mono">$15</span></div><div class="bar-track"><div class="bar-fill" style="width:36%;background:#666"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>Fuel Oil</span><span class="mono">$10</span></div><div class="bar-track"><div class="bar-fill" style="width:24%;background:#666"></div></div></div>
+</div>
+<div style="margin-top:12px;padding:10px 14px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);border-radius:6px;max-width:520px;margin-left:auto;margin-right:auto">
+<span style="font:600 12px/1.3 Inter;color:var(--green)">Mechanism: RIL's Jamnagar refinery yields 40-50% diesel &mdash; the highest-margin product. Combined with access to discounted Russian crude ($25/bbl below Brent) and no government price caps, RIL captures both the input discount and the output premium simultaneously.</span>
+</div>
+</div>
+<div class="card" id="card33">
+<p class="label">Margin Destruction</p><h3 class="card-title">The OMC Margin Squeeze</h3>
+<div class="squeeze-box">
+<div class="sq-wall left" style="color:var(--red)">Input Cost<br><span class="mono" style="font-size:20px">$110+</span><br>and rising</div>
+<div class="sq-wall right" style="color:var(--muted)">Retail Price<br><span class="mono" style="font-size:20px">FIXED</span><br>by government</div>
+<div class="sq-victims"><span>IOC</span><span>HPCL</span><span>BPCL</span><span style="font-size:11px;color:var(--muted);margin-top:4px">Rs 10-15/L loss per litre</span></div>
+<div class="sq-float">RIL: No price caps &uarr;</div>
+</div>
+<p class="card-sub" style="margin-top:12px">Mechanism: government-owned refiners face regulated retail prices but unregulated input costs. At $110 crude, the under-recovery is Rs 10-15 per litre. Combined daily loss: Rs 800-1,000 crore ($95-120M). RIL, as a private refiner, sells at market rates &mdash; widening the competitive gap with every dollar of crude appreciation.</p>
+</div>
+<div class="card" id="card34">
+<p class="label">Structural Shift</p><h3 class="card-title">Capital Rotation: Fossil Vol &rarr; Clean Stability</h3>
+<div class="w100"><canvas id="chart34" class="chart"></canvas></div>
+<p class="card-sub" style="margin-top:12px">Renewables dipped 3% on Day 1 (liquidity-driven), then rallied 11% over the following week as institutional capital rotated. Pattern matches 2022 Russia-Ukraine response. The mechanism: each oil shock raises the risk-adjusted cost of fossil dependence, making clean energy's stable cost structure relatively more attractive to capital allocators.</p>
+</div>
+<div class="card act-card" id="card35">
+<p class="act-title">Act 7</p><h2 class="card-title" style="font-size:36px">Smart Money</h2>
+<p class="card-sub">Pre-positioned operators are capturing outsized value</p><div class="act-num">07</div>
+</div>
+<div class="card" id="card36">
+<p class="label">Reliance Industries (NSE: RELIANCE)</p><h3 class="card-title">6 Million Barrels in 72 Hours</h3>
+<div class="timeline" style="max-width:460px">
+<div class="tl-item" style="animation-delay:0s"><div class="tl-time" style="color:var(--green)">DAY 1 &mdash; FEB 28</div><div class="tl-text">Pre-positioned VLCC (est. 2M bbl capacity) diverted from West Africa to Jamnagar. Russian Urals spot cargo secured at $82/bbl &mdash; a $30 discount to Brent at the time.</div></div>
+<div class="tl-item" style="animation-delay:.3s"><div class="tl-time" style="color:var(--green)">DAY 2 &mdash; MAR 1</div><div class="tl-text">Activated strategic crude inventory (est. 3.2M bbl in-tank at Jamnagar). Diesel crack futures locked at $38/bbl on ICE &mdash; these are now worth $42+.</div></div>
+<div class="tl-item" style="animation-delay:.6s"><div class="tl-time" style="color:var(--green)">DAY 3 &mdash; MAR 2</div><div class="tl-text">Two ESPO cargoes from Kozmino contracted. Total procurement: 6M+ barrels in 72 hours.</div></div>
+<div class="tl-item" style="animation-delay:.9s"><div class="tl-time" style="color:var(--blue)">DAY 4-7</div><div class="tl-text">Jamnagar running at 95%+ utilization. Maximizing diesel cut (50%). Exporting refined products at peak spreads.</div></div>
+<div class="tl-item" style="animation-delay:1.2s"><div class="tl-time" style="color:var(--blue)">ONGOING</div><div class="tl-text">Negotiating 6-month term contracts with Rosneft at est. $20-25/bbl discount to Brent (vs pre-war $12-15 discount). Shifting Jamnagar product slate to maximize diesel output at the expense of lower-margin naphtha.</div></div>
+</div>
+</div>
+<div class="card" id="card37">
+<p class="label">Opportunity Map</p><h3 class="card-title">The Arbitrage Map</h3>
+<div class="spread-cards">
+<div class="spread-card" style="border-color:var(--amber)"><div class="sc-name">Russian Urals vs Brent</div><div class="sc-val" style="color:var(--amber)">-$25</div><div class="sc-dir" style="color:var(--amber)">&darr; Discount widening</div></div>
+<div class="spread-card" style="border-color:var(--green)"><div class="sc-name">Asian vs Europe Diesel</div><div class="sc-val" style="color:var(--green)">+$8</div><div class="sc-dir" style="color:var(--green)">&uarr; Premium expanding</div></div>
+<div class="spread-card" style="border-color:var(--green)"><div class="sc-name">VLCC East vs West</div><div class="sc-val" style="color:var(--green)">+$180K</div><div class="sc-dir" style="color:var(--green)">&uarr; Per day premium</div></div>
+<div class="spread-card" style="border-color:var(--amber)"><div class="sc-name">Gold Spot</div><div class="sc-val" style="color:var(--amber)">$3,120</div><div class="sc-dir" style="color:var(--amber)">&uarr; Safe haven bid</div></div>
+</div>
+<p class="card-sub" style="margin-top:12px">The Urals discount is India's lifeline. Every barrel of Russian crude saves $25 vs market &mdash; if you can ship it.</p>
+</div>
+
+<!-- NEW: Saudi Aramco's pivot -->
+<div class="card" id="card37b">
+<p class="label">The Other Smart Player</p><h3 class="card-title">Aramco: Red Sea Pivot in 48 Hours</h3>
+<div class="timeline" style="max-width:460px">
+<div class="tl-item" style="animation-delay:0s"><div class="tl-time" style="color:var(--amber)">HOUR 6</div><div class="tl-text">Hormuz attacked. Aramco activates East-West Pipeline emergency protocol. Begins redirecting crude from Ras Tanura (Gulf) to Yanbu (Red Sea).</div></div>
+<div class="tl-item" style="animation-delay:.3s"><div class="tl-time" style="color:var(--amber)">DAY 2</div><div class="tl-text">Pipeline flow ramping toward 3.5M bbl/day. NGL lines being converted to run crude batches. Yanbu loading berths shift to 24/7 operations.</div></div>
+<div class="tl-item" style="animation-delay:.6s"><div class="tl-time" style="color:var(--green)">DAY 4</div><div class="tl-text">Red Sea crude shipments approach record levels. European customers redirected to Yanbu. Asian customers offered Cape of Good Hope routing with Aramco absorbing freight differential.</div></div>
+<div class="tl-item" style="animation-delay:.9s"><div class="tl-time" style="color:var(--green)">DAY 7</div><div class="tl-text">Pipeline throughput stabilizes near operational maximum. Aramco begins offering term discounts to lock in post-war market share at the expense of Iranian and Iraqi barrels.</div></div>
+<div class="tl-item" style="animation-delay:1.2s"><div class="tl-time" style="color:var(--blue)">THE PLAY</div><div class="tl-text"><strong>Aramco is converting a crisis into permanent market share.</strong> Mechanism: every barrel Iran and Iraq cannot export is a customer relationship Aramco captures on discounted terms &mdash; relationships that persist after the Strait reopens. The East-West Pipeline, built as insurance, is becoming a structural competitive advantage.</div></div>
+</div>
+<p class="card-sub" style="margin-top:8px">The contrast is instructive: companies with pre-positioned contingency plans executed within hours. Governments without them are still deliberating on Day 11.</p>
+</div>
+
+<div class="card" id="card38">
+<p class="label">Vulnerability</p><h3 class="card-title">Strategic Reserves: India's Gap</h3>
+<div class="bar-group">
+<div class="bar-item"><div class="bar-label"><span>Japan</span><span class="mono" style="color:var(--blue)">130 days</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--blue)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>United States</span><span class="mono">95 days</span></div><div class="bar-track"><div class="bar-fill" style="width:73%;background:var(--blue)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>South Korea</span><span class="mono">90 days</span></div><div class="bar-track"><div class="bar-fill" style="width:69%;background:var(--blue)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span>China</span><span class="mono">80 days</span></div><div class="bar-track"><div class="bar-fill" style="width:62%;background:var(--blue)"></div></div></div>
+<div class="bar-item"><div class="bar-label"><span style="color:var(--red);font-weight:700">India</span><span class="mono" style="color:var(--red);font-weight:700">9.5 days</span></div><div class="bar-track"><div class="bar-fill" style="width:7.3%;background:var(--red)"></div></div></div>
+</div>
+<p class="card-sub" style="margin-top:12px">Japan has 14x India's reserve cover. At current consumption (5.5M bbl/day), India's 52M barrel strategic reserve provides fewer than 10 days of cover. For context: the IEA minimum recommendation is 90 days. This gap means India has virtually no buffer &mdash; every disruption day translates directly to either price impact or physical shortage.</p>
+</div>
+<div class="card" id="card39">
+<p class="label">Action Framework</p><h3 class="card-title">Priority Matrix</h3>
+<div class="matrix">
+<div class="cell" style="background:rgba(255,59,59,.12);border:1px solid rgba(255,59,59,.3)"><h4 style="color:var(--red);font-size:11px">DO NOW</h4><p>Secure 90-day Russian crude terms<br>Lock diesel crack hedges<br>Activate all SPR releases<br>Emergency FX reserves drawdown plan</p></div>
+<div class="cell" style="background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber);font-size:11px">PLAN NOW</h4><p>Diversify to Guyana/Brazil crude<br>Accelerate ISPRL Phase II<br>OMC recapitalization framework<br>Demand management protocols</p></div>
+<div class="cell" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3)"><h4 style="color:var(--blue);font-size:11px">MONITOR</h4><p>Hezbollah second front<br>OPEC+ emergency session<br>US naval escort posture<br>Chinese SPR release signals</p></div>
+<div class="cell" style="background:rgba(80,80,80,.1);border:1px solid rgba(80,80,80,.5)"><h4 style="color:var(--muted);font-size:11px">DEPRIORITIZE</h4><p>Long-term refinery capex<br>New exploration bids<br>Non-critical pipeline projects<br>International asset acquisitions</p></div>
+</div>
+</div>
+<div class="card act-card" id="card40" style="background:radial-gradient(ellipse at 50% 50%,#1a1008,#0a0a0a)">
+<p class="act-title">Act 8</p><h2 class="card-title" style="font-size:36px">How This Ends</h2>
+<p class="card-sub" style="font-size:16px">Three scenarios, probability-weighted</p><div class="act-num">08</div>
+</div>
+<div class="card" id="card41">
+<div class="scenario-card" style="background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(52,211,153,.02));border:1px solid rgba(52,211,153,.2)">
+<div class="sc-prob" style="color:var(--green)">15%</div><div class="sc-title" style="color:var(--green)">Swift Resolution</div>
+<p style="font:400 12px/1.4 Inter;color:rgba(255,255,255,.6);margin-bottom:8px">Ceasefire within 6-8 weeks. Hormuz partially reopens. Requires both US de-escalation and Iranian leadership transition toward negotiation. Historical analogue: Abqaiq rapid normalization pattern.</p>
+<div class="w100"><canvas id="chart41" class="chart" style="max-height:160px"></canvas></div>
+<div class="sc-stats">
+<div class="sc-stat"><div class="ss-val" style="color:var(--green)">$85-90</div><div class="ss-lbl">Brent by Q3</div></div>
+<div class="sc-stat"><div class="ss-val" style="color:var(--green)">6-8 wks</div><div class="ss-lbl">Duration</div></div>
+<div class="sc-stat"><div class="ss-val" style="color:var(--green)">-0.2%</div><div class="ss-lbl">India GDP</div></div>
+</div></div>
+</div>
+<div class="card" id="card42">
+<div class="scenario-card" style="background:linear-gradient(135deg,rgba(255,176,32,.08),rgba(255,176,32,.02));border:1px solid rgba(255,176,32,.2)">
+<div class="sc-prob" style="color:var(--amber)">55%</div><div class="sc-title" style="color:var(--amber)">Prolonged Attrition</div>
+<p style="font:400 12px/1.4 Inter;color:rgba(255,255,255,.6);margin-bottom:8px">Partial Hormuz reopening with convoy escorts. Intermittent proxy attacks maintain risk premium. Iranian succession drags on. Historical analogue: Iran-Iraq War tanker war phase (1984-88).</p>
+<div class="w100"><canvas id="chart42" class="chart" style="max-height:160px"></canvas></div>
+<div class="sc-stats">
+<div class="sc-stat"><div class="ss-val" style="color:var(--amber)">$100-120</div><div class="ss-lbl">Brent Range</div></div>
+<div class="sc-stat"><div class="ss-val" style="color:var(--amber)">3-6 mo</div><div class="ss-lbl">Duration</div></div>
+<div class="sc-stat"><div class="ss-val" style="color:var(--amber)">-0.8%</div><div class="ss-lbl">India GDP</div></div>
+</div></div>
+</div>
+<div class="card" id="card43">
+<div class="scenario-card" style="background:linear-gradient(135deg,rgba(255,59,59,.08),rgba(255,59,59,.02));border:1px solid rgba(255,59,59,.2)">
+<div class="sc-prob" style="color:var(--red)">30%</div><div class="sc-title" style="color:var(--red)">Conflagration</div>
+<p style="font:400 12px/1.4 Inter;color:rgba(255,255,255,.6);margin-bottom:8px">Hezbollah opens northern front. IRGC hardliners consolidate. Full regional war across 4+ countries. Hormuz closed for 6-12 months. Historical analogue: 1973 oil embargo duration and impact, but with larger absolute volumes.</p>
+<div class="w100"><canvas id="chart43" class="chart" style="max-height:160px"></canvas></div>
+<div class="sc-stats">
+<div class="sc-stat"><div class="ss-val" style="color:var(--red)">$135+</div><div class="ss-lbl">Brent Ceiling?</div></div>
+<div class="sc-stat"><div class="ss-val" style="color:var(--red)">6-12 mo</div><div class="ss-lbl">Duration</div></div>
+<div class="sc-stat"><div class="ss-val" style="color:var(--red)">-1.5%</div><div class="ss-lbl">India GDP</div></div>
+</div></div>
+</div>
+<div class="card" id="card44">
+<p class="label">Signposts &amp; Decision Calendar</p><h3 class="card-title">What to Watch &mdash; and When to Act</h3>
+<div class="date-cards">
+<div class="date-card"><div class="dc-date">MAR 15</div><div class="dc-text"><strong>DECISION: Lock 90-day Russian term contracts</strong> &mdash; Urals discount narrows daily as competition for non-Gulf barrels intensifies. Act before March 15 or pay $5-8/bbl more.</div></div>
+<div class="date-card"><div class="dc-date">APR 4</div><div class="dc-text"><strong>Russian sanctions waiver expiry</strong> &mdash; If not renewed, India loses its primary alternative crude source. <em>Signpost for Conflagration:</em> US tightens sanctions to pressure Russia on Iran.</div></div>
+<div class="date-card"><div class="dc-date">APR 12</div><div class="dc-text"><strong>OPEC+ emergency session</strong> &mdash; <em>Signpost for Swift Resolution:</em> Saudi announces 1.5M+ bbl/day increase. <em>Signpost for Attrition:</em> Saudi offers only 0.5M, preserving leverage.</div></div>
+<div class="date-card"><div class="dc-date">APR-MAY</div><div class="dc-text"><strong>Iran succession outcome</strong> &mdash; <em>Signpost for Conflagration:</em> IRGC consolidates power, proxy attacks intensify. <em>Signpost for Swift Resolution:</em> Reformist faction opens back-channel.</div></div>
+<div class="date-card"><div class="dc-date">MAR-APR</div><div class="dc-text"><strong>US Hormuz naval escort decision</strong> &mdash; Convoy system reduces transit risk but does not eliminate it. <em>Signpost for Attrition:</em> US deploys escorts without broader engagement.</div></div>
+<div class="date-card"><div class="dc-date">ONGOING</div><div class="dc-text"><strong>Hezbollah escalation calculus</strong> &mdash; Full northern front = Conflagration scenario confirmed. Current calibrated response is consistent with Attrition baseline.</div></div>
+</div>
+</div>
+<!-- Precedent Analysis Card -->
+<div class="card" id="card44b">
+<p class="label">Historical Precedent</p><h3 class="card-title">How Similar Crises Resolved</h3>
+<div class="date-cards">
+<div class="date-card"><div class="dc-date" style="color:var(--muted)">1990</div><div class="dc-text"><strong>Gulf War (Iraq-Kuwait)</strong> &mdash; 4.3M bbl/day disrupted. Oil spiked from $21 to $41 (+95%). Resolution: 7-month military campaign. Price normalized within 3 months of ceasefire. <em>Lesson: military resolution restores supply quickly once achieved, but the timeline to get there is unpredictable.</em></div></div>
+<div class="date-card"><div class="dc-date" style="color:var(--muted)">2019</div><div class="dc-text"><strong>Abqaiq-Khurais attack</strong> &mdash; 5.7M bbl/day disrupted for &lt;48 hours. Oil spiked 15% intraday, reversed within 2 weeks. <em>Lesson: markets discount short disruptions rapidly. The question is always duration, not peak.</em></div></div>
+<div class="date-card"><div class="dc-date" style="color:var(--muted)">1979</div><div class="dc-text"><strong>Iranian Revolution</strong> &mdash; 3.4M bbl/day lost for 12+ months. Oil tripled from $14 to $40. Triggered global recession. <em>Lesson: prolonged disruption from Iran specifically reshapes global energy architecture. Japan and South Korea built their SPRs in response.</em></div></div>
+<div class="date-card"><div class="dc-date" style="color:var(--muted)">2022</div><div class="dc-text"><strong>Russia-Ukraine war</strong> &mdash; No physical disruption but sanctions-driven rerouting. India pivoted to Russian crude within weeks, becoming the largest buyer. <em>Lesson: India's rapid pivot capability exists and is now being stress-tested at scale.</em></div></div>
+</div>
+<p class="card-sub" style="margin-top:8px;font-size:11px">Pattern: every major disruption lasting &gt;3 months triggers permanent structural shifts in sourcing, storage, and policy. We are at Day 11.</p>
+</div>
+<!-- Stakeholder-Specific Actions Card -->
+<div class="card" id="card44c">
+<p class="label">Implications by Stakeholder</p><h3 class="card-title">What Each Decision-Maker Should Do</h3>
+<div class="checklist">
+<div class="check-item"><span class="check-icon" style="color:var(--red)">&#9632;</span><div class="check-text"><strong>Energy Ministry</strong> &mdash; Activate IEA coordinated release. Fast-track ISPRL Phase II funding. Prepare demand rationing framework (industrial allocation) if Attrition scenario extends past June.</div></div>
+<div class="check-item"><span class="check-icon" style="color:var(--amber)">&#9632;</span><div class="check-text"><strong>Refinery VP (IOC/BPCL/HPCL)</strong> &mdash; Maximize Russian Urals/ESPO liftings now while discount holds. Shift product slate toward diesel (highest crack spread). Build 15-day crude inventory vs normal 7-day. Hedge Q3 crack spreads immediately.</div></div>
+<div class="check-item"><span class="check-icon" style="color:var(--green)">&#9632;</span><div class="check-text"><strong>Refinery VP (RIL)</strong> &mdash; Run Jamnagar at maximum throughput. Lock Russian term contracts at current $25 discount before competition narrows it. Export diesel into Asian premium. Consider spot product exports to Europe while arbitrage holds.</div></div>
+<div class="check-item"><span class="check-icon" style="color:var(--blue)">&#9632;</span><div class="check-text"><strong>Trading Desk</strong> &mdash; Go long Brent-Urals spread (expect widening). Long Asian diesel crack vs European gasoil. Short Indian OMC equities vs long RIL as a pairs trade. Build optionality via Brent call spreads for Conflagration tail risk ($135+).</div></div>
+<div class="check-item"><span class="check-icon" style="color:var(--amber)">&#9632;</span><div class="check-text"><strong>RBI / Finance Ministry</strong> &mdash; Pre-position $15-20B in FX intervention capacity. Prepare Rs 5-8/litre excise cut for Cabinet approval. Model fiscal impact of 6-month price freeze (est. Rs 1.5-2 lakh crore).</div></div>
+</div>
+</div>
+<div class="card" id="card45">
+<p class="label">At a Glance</p><h3 class="card-title">10 Numbers That Matter</h3>
+<div class="kpi-grid">
+<div class="kpi" style="border-color:var(--red)"><div class="kpi-label">Brent (Current)</div><div class="kpi-val" style="color:var(--red)">$112</div><div class="kpi-delta" style="color:var(--red)">+67% from $67 pre-war</div></div>
+<div class="kpi" style="border-color:var(--red)"><div class="kpi-label">Hormuz Flow</div><div class="kpi-val">~7M</div><div class="kpi-delta" style="color:var(--red)">-65% from 20M</div></div>
+<div class="kpi" style="border-color:var(--amber)"><div class="kpi-label">USD/INR</div><div class="kpi-val" style="color:var(--amber)">89.2</div><div class="kpi-delta" style="color:var(--red)">Record low</div></div>
+<div class="kpi" style="border-color:var(--amber)"><div class="kpi-label">Diesel Crack</div><div class="kpi-val" style="color:var(--amber)">$42</div><div class="kpi-delta" style="color:var(--red)">+110%</div></div>
+<div class="kpi" style="border-color:var(--red)"><div class="kpi-label">India SPR</div><div class="kpi-val" style="color:var(--red)">9.5d</div><div class="kpi-delta" style="color:var(--red)">vs Japan 130d</div></div>
+<div class="kpi" style="border-color:var(--green)"><div class="kpi-label">RIL Utilization</div><div class="kpi-val" style="color:var(--green)">95%</div><div class="kpi-delta" style="color:var(--green)">Full capacity</div></div>
+<div class="kpi" style="border-color:var(--amber)"><div class="kpi-label">VLCC Rate</div><div class="kpi-val">$424K</div><div class="kpi-delta" style="color:var(--red)">+94% day 1</div></div>
+<div class="kpi" style="border-color:var(--red)"><div class="kpi-label">Iraq Output</div><div class="kpi-val" style="color:var(--red)">1.7M</div><div class="kpi-delta" style="color:var(--red)">-60%</div></div>
+<div class="kpi" style="border-color:var(--amber)"><div class="kpi-label">Gold</div><div class="kpi-val" style="color:var(--amber)">$3,120</div><div class="kpi-delta" style="color:var(--amber)">+8% safe haven</div></div>
+<div class="kpi" style="border-color:var(--amber)"><div class="kpi-label">Attrition Prob.</div><div class="kpi-val" style="color:var(--amber)">55%</div><div class="kpi-delta">Base case</div></div>
+</div>
+</div>
+<!-- LIVE MARKET CARD -->
+<div class="card" id="cardLive" style="justify-content:flex-start;padding-top:70px;padding-bottom:60px">
+<p class="label" style="color:var(--red)">&#9679; LIVE DATA</p>
+<h3 class="card-title">Live Market Pulse</h3>
+<p class="card-sub" style="margin-bottom:12px">Real-time prices via TradingView. Tap any chart to expand.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:520px">
+<!-- Brent Crude -->
+<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
+<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+{"symbol":"NYMEX:BZ1!","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+</script></div></div>
+<!-- Saudi Aramco -->
+<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
+<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+{"symbol":"TADAWUL:2222","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+</script></div></div>
+<!-- USD/INR -->
+<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
+<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+{"symbol":"FX_IDC:USDINR","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+</script></div></div>
+<!-- Gold -->
+<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
+<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+{"symbol":"TVC:GOLD","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+</script></div></div>
+<!-- WTI -->
+<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
+<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+{"symbol":"NYMEX:CL1!","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+</script></div></div>
+<!-- Nifty 50 -->
+<div style="border-radius:10px;overflow:hidden;border:1px solid #333;height:200px">
+<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+{"symbol":"NSE:NIFTY","width":"100%","height":"100%","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+</script></div></div>
+</div>
+</div>
+
+<div class="card" id="card46" style="justify-content:flex-start;padding-top:80px;padding-bottom:70px">
+<p class="label">Sources &amp; Methodology</p><h3 class="card-title">About This Briefing</h3>
+<p class="card-sub" style="margin-bottom:20px">This briefing synthesizes open-source intelligence, market data, and forward scenario modeling as of March 11, 2026. Price data sourced from EIA, ICE Futures, and exchange feeds. Scenario probabilities are derived from weighted indicator analysis across military posture, diplomatic signals, and market-implied volatility. GDP impact estimates use IMF oil price elasticity coefficients for India (0.15% GDP per $10/bbl sustained increase). All forward-looking estimates carry significant uncertainty.</p>
+<div class="sources">
+<a href="https://www.eia.gov">U.S. Energy Information Administration (EIA)</a>
+<a href="https://www.iea.org">International Energy Agency (IEA)</a>
+<a href="https://www.opec.org">OPEC Monthly Oil Market Report</a>
+<a href="https://www.reuters.com">Reuters Energy &amp; Commodities</a>
+<a href="https://www.ft.com">Financial Times</a>
+<a href="https://ppac.gov.in">PPAC India &mdash; Petroleum Statistics</a>
+<a href="https://www.lloydslist.com">Lloyd's List &mdash; Maritime Intelligence</a>
+</div>
+<div style="margin-top:32px;text-align:center">
+<p class="label">Last updated March 11, 2026</p>
+<p style="font:400 12px/1.5 Inter;color:var(--muted);margin-top:8px">Built for strategic decision-makers. Data refreshes every 6 hours.</p>
+</div>
+</div>
+<script>
+const cards=document.querySelectorAll('.card');
+const total=cards.length;
+const progress=document.getElementById('progress');
+const counter=document.getElementById('counter');
+
+function updateProgress(){
+const st=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+const pct=h>0?(st/h)*100:0;
+progress.style.width=pct+'%';
+let idx=0;
+cards.forEach((c,i)=>{if(c.getBoundingClientRect().top<window.innerHeight/2)idx=i});
+counter.textContent=(idx+1)+' / '+total;
+}
+window.addEventListener('scroll',updateProgress,{passive:true});
+
+document.addEventListener('click',function(e){
+if(e.target.closest('a,button,canvas,.map-container,.tradingview-widget-container,.leaflet-container'))return;
+const x=e.clientX/window.innerWidth;
+let cur=0;
+cards.forEach((c,i)=>{if(c.getBoundingClientRect().top<window.innerHeight/2)cur=i});
+if(x>.3&&cur<total-1)cards[cur+1].scrollIntoView({behavior:'smooth'});
+else if(x<=.3&&cur>0)cards[cur-1].scrollIntoView({behavior:'smooth'});
+});
+
+const observed=new Set();
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add('in-view');
+const id=e.target.id;
+if(!observed.has(id)){observed.add(id);initCard(id)}
+}});
+},{threshold:0.15,rootMargin:'0px 0px -10% 0px'});
+cards.forEach(c=>observer.observe(c));
+
+function initCard(id){
+switch(id){
+case'card2':initMapStrikes();break;
+case'card3':initMapRetaliation();break;
+case'card4':initMapHormuz();break;
+case'card6':initChart6();break;
+case'card9':initChart9();break;
+case'card11':initChart11();break;
+case'card13':initMapPipelines();break;
+case'card15':initMapRange();break;
+case'card17':initChart17();break;
+case'card19':animateRings();break;
+case'card21':animateDots();break;
+case'card22':initMapCables();break;
+case'card23':animateDominoes();break;
+case'card25':initMapIndia();break;
+case'card27':initChart27();break;
+case'card34':initChart34();break;
+case'card41':initChart41();break;
+case'card42':initChart42();break;
+case'card43':initChart43();break;
+case'card44b':break;
+case'card44c':break;
+}}
+
+const DARK_TILES='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
+function mkMap(id,center,zoom){
+var m=L.map(id,{zoomControl:false,attributionControl:false,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,touchZoom:false,boxZoom:false,keyboard:false,tap:false}).setView(center,zoom);
+L.tileLayer(DARK_TILES,{subdomains:'abcd',maxZoom:19}).addTo(m);
+setTimeout(function(){m.invalidateSize()},300);
+setTimeout(function(){m.invalidateSize()},600);
+return m;
+}
+function pulseIcon(color){
+return L.divIcon({className:'',html:'<div style="width:12px;height:12px;background:'+color+';border-radius:50%;box-shadow:0 0 10px '+color+';animation:mapPulse 2s infinite"></div>',iconSize:[12,12],iconAnchor:[6,6]});
+}
+function mapLabel(txt,cls,w,anchorX,anchorY){
+w=w||200;
+anchorX=anchorX||(-6);
+anchorY=anchorY||(-6);
+return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28],iconAnchor:[anchorX,anchorY]});
+}
+
+function initMapStrikes(){
+var m=mkMap('map-strikes',[32.4,53.7],5);
+var targets=[
+[35.69,51.39,'Tehran','Leadership decapitation',-0.5,0.8],
+[32.65,51.68,'Isfahan','Nuclear facility',0.3,0.8],
+[33.72,51.72,'Natanz','Enrichment plant',0.3,-1.2],
+[28.97,50.84,'Bushehr','Nuclear reactor',-0.3,0.8],
+[29.59,52.58,'Shiraz','Military base',0.3,0.8],
+[27.18,56.27,'Bandar Abbas','Naval base',0.3,0.8],
+[38.08,46.29,'Tabriz','Missile sites',0.3,0.6],
+[35.52,51.77,'Parchin','Weapons research',0.5,-0.8]
+];
+targets.forEach(function(t){
+L.marker([t[0],t[1]],{icon:pulseIcon('#ff3b3b')}).addTo(m).bindPopup('<b style="color:#ff3b3b">'+t[2]+'</b><br>'+t[3],{className:'dark-popup'});
+L.marker([t[0]+t[4],t[1]+t[5]],{icon:mapLabel(t[2],'map-label-red',120)}).addTo(m);
+});
+}
+
+function initMapRetaliation(){
+var m=mkMap('map-retaliation',[27,48],4);
+var iran=[32.4,53.7];
+L.circle(iran,{radius:200000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:2}).addTo(m);
+L.marker(iran,{icon:L.divIcon({className:'',html:'<div style="background:rgba(200,30,30,.85);border:2px solid #ff3b3b;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font:800 11px Inter;color:#fff;box-shadow:0 0 30px rgba(255,59,59,.4)">IRAN</div>',iconSize:[40,40],iconAnchor:[20,20]})}).addTo(m);
+/* Each target: [lat, lng, name, labelLat, labelLng] — labels placed manually to avoid overlap */
+var targets=[
+{c:[24.45,54.65],n:'UAE',       ll:[22.5,55.5]},
+{c:[24.71,46.67],n:'Saudi',     ll:[22.5,44]},
+{c:[25.29,51.53],n:'Qatar',     ll:[23.5,51.5]},
+{c:[29.38,47.99],n:'Kuwait',    ll:[30.5,46]},
+{c:[26.23,50.59],n:'Bahrain',   ll:[27.5,49]},
+{c:[33.31,44.37],n:'Iraq',      ll:[35,42]},
+{c:[23.59,58.54],n:'Oman',      ll:[21.5,59.5]},
+{c:[31.95,35.93],n:'Jordan',    ll:[33.5,34]},
+{c:[32.07,34.78],n:'Israel',    ll:[30.5,33]}
+];
+targets.forEach(function(t){
+L.polyline([iran,t.c],{color:'#ff3b3b',weight:1.5,dashArray:'8,6',opacity:0.5}).addTo(m);
+L.circleMarker(t.c,{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker(t.ll,{icon:mapLabel(t.n,'map-label-red',90)}).addTo(m);
+});
+}
+
+function initMapHormuz(){
+var m=mkMap('map-hormuz',[26.0,56.3],7);
+var dangerZone=[[27.2,55.6],[27.2,57.2],[25.6,57.2],[25.6,55.6]];
+L.polygon(dangerZone,{color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.1,weight:1.5,dashArray:'6,4'}).addTo(m);
+/* Hormuz label — top of map, no overlap */
+L.marker([27.6,56.0],{icon:L.divIcon({className:'map-label map-label-red',html:'STRAIT OF HORMUZ<br><span style="font:600 10px JetBrains Mono;opacity:.8">33 miles &bull; 20M bbl/day</span>',iconSize:[220,36],iconAnchor:[110,40]})}).addTo(m);
+/* Iran side */
+L.circleMarker([27.18,56.27],{radius:8,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([27.4,56.7],{icon:mapLabel("Bandar Abbas",'map-label-red',130,-6,-6)}).addTo(m);
+/* UAE side — push label down-left to avoid Hormuz label */
+L.circleMarker([25.12,56.33],{radius:6,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([24.6,55.8],{icon:mapLabel('Fujairah','map-label-amber',90,-6,-6)}).addTo(m);
+/* Muscat — far right, no overlap risk */
+L.circleMarker([23.59,58.54],{radius:4,color:'#888',fillColor:'#888',fillOpacity:0.4,weight:1}).addTo(m);
+L.marker([23.0,58.8],{icon:mapLabel('Muscat','',70,-6,-6)}).addTo(m);
+/* Tanker hit X markers */
+var tankerHits=[[26.4,56.3],[26.15,56.55],[26.65,56.15],[26.25,56.75],[26.5,56.45]];
+tankerHits.forEach(function(h){
+L.marker(h,{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:900 20px Inter;text-shadow:0 0 12px rgba(255,59,59,.8)">&times;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(m);
+});
+}
+
+function initMapPipelines(){
+var m=mkMap('map-pipelines',[24.5,48],5);
+L.circle([27.18,56.27],{radius:1500000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.04,weight:1,dashArray:'10,8'}).addTo(m);
+L.marker([31.5,55],{icon:L.divIcon({className:'map-label map-label-red',html:'IRAN',iconSize:[60,20],iconAnchor:[-4,-4]})}).addTo(m);
+var eastWest=[[25.94,49.67],[25.5,47.5],[25.0,45.0],[24.5,42.0],[24.09,38.06]];
+L.polyline(eastWest,{color:'#34d399',weight:5,opacity:0.85}).addTo(m);
+L.marker([26.8,44],{icon:L.divIcon({className:'map-label map-label-green',html:'East-West Pipeline<br><span style="font:600 10px JetBrains Mono">7M bbl/day capacity</span>',iconSize:[180,32],iconAnchor:[90,32]})}).addTo(m);
+var fujPipe=[[23.82,53.58],[24.5,55.0],[25.12,56.33]];
+L.polyline(fujPipe,{color:'#ffb020',weight:4,opacity:0.85}).addTo(m);
+L.marker([22.5,53.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'Fujairah Pipeline<br><span style="font:600 10px JetBrains Mono">1.8M bbl/day</span>',iconSize:[160,32],iconAnchor:[80,32]})}).addTo(m);
+L.circleMarker([24.09,38.06],{radius:9,color:'#34d399',fillColor:'#34d399',fillOpacity:0.4,weight:2}).addTo(m);
+L.marker([22.0,37.0],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; SAFE<br><span style="font:500 9px Inter;opacity:.7">2,100km from Iran</span>',iconSize:[160,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.circleMarker([25.12,56.33],{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([25.8,57.5],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; HIT<br><span style="font:500 9px Inter;opacity:.7">200km from Iran</span>',iconSize:[160,32],iconAnchor:[-4,20]})}).addTo(m);
+L.circleMarker([25.94,49.67],{radius:5,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.4,weight:2}).addTo(m);
+L.marker([27.5,49.8],{icon:mapLabel('Abqaiq','map-label-amber',80,-6,28)}).addTo(m);
+}
+
+function initMapRange(){
+var m=mkMap('map-range',[27,49],4);
+var origin=[27.18,56.27];
+L.circle(origin,{radius:200000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:2,dashArray:'6,4'}).addTo(m);
+L.marker([29.2,58.5],{icon:L.divIcon({className:'map-label map-label-red',html:'200km &mdash; Drone range',iconSize:[180,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.circle(origin,{radius:500000,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.06,weight:1.5,dashArray:'8,6'}).addTo(m);
+L.marker([31.5,60],{icon:L.divIcon({className:'map-label map-label-amber',html:'500km &mdash; Cruise missiles',iconSize:[200,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.circle(origin,{radius:1500000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.03,weight:1,dashArray:'10,8'}).addTo(m);
+L.marker([37,44],{icon:L.divIcon({className:'map-label map-label-red',html:'1,500km &mdash; Ballistic missiles',iconSize:[220,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.circleMarker(origin,{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.8,weight:2}).addTo(m);
+L.marker([28.2,55.0],{icon:mapLabel('Bandar Abbas','map-label-red',120,-6,28)}).addTo(m);
+L.circleMarker([25.12,56.33],{radius:9,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.6,weight:2}).addTo(m);
+L.marker([24.0,57.2],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; IN DRONE RANGE',iconSize:[220,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.circleMarker([24.09,38.06],{radius:9,color:'#34d399',fillColor:'#34d399',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([22.5,37.5],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; OUT OF RANGE',iconSize:[200,20],iconAnchor:[-4,-4]})}).addTo(m);
+/* Infrastructure with manually separated label positions */
+var infra=[
+  {pt:[26.77,50.1],n:'Ras Tanura',ll:[27.8,50.5]},
+  {pt:[25.94,49.67],n:'Abqaiq',ll:[25.0,49.0]},
+  {pt:[25.92,51.54],n:'Ras Laffan',ll:[25.0,52.5]},
+  {pt:[25.0,55.1],n:'Jebel Ali',ll:[23.5,54.5]}
+];
+infra.forEach(function(p){
+L.circleMarker(p.pt,{radius:5,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:1}).addTo(m);
+L.marker(p.ll,{icon:mapLabel(p.n,'map-label-amber',100,-6,-6)}).addTo(m);
+});
+}
+
+function initMapCables(){
+var m=mkMap('map-cables',[24,50],4);
+var hormuzCable=[[30,48],[28,52],[26.5,56],[25,58],[22,62],[18,68]];
+L.polyline(hormuzCable,{color:'#3b82f6',weight:4,dashArray:'8,4',opacity:0.7}).addTo(m);
+L.marker([26.5,56],{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:900 22px Inter;text-shadow:0 0 10px rgba(255,59,59,.7)">&times;</div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
+L.marker([27.5,57.5],{icon:L.divIcon({className:'map-label map-label-red',html:'CABLE ROUTE 1: DISRUPTED',iconSize:[220,20],iconAnchor:[-4,-4]})}).addTo(m);
+var redSeaCable=[[32,32],[28,36],[24,38],[21,40],[16,43],[12,45]];
+L.polyline(redSeaCable,{color:'#3b82f6',weight:3,dashArray:'8,4',opacity:0.4}).addTo(m);
+L.marker([21,40],{icon:L.divIcon({className:'',html:'<div style="color:#ffb020;font:900 18px Inter">&#9888;</div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(m);
+L.marker([20,41.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'CABLE ROUTE 2: AT RISK',iconSize:[200,20],iconAnchor:[-4,-4]})}).addTo(m);
+var landingPts=[
+  {pt:[25.2,55.3],n:'Dubai',ll:[26.0,55.8]},
+  {pt:[24.45,54.65],n:'Abu Dhabi',ll:[23.2,54.0]},
+  {pt:[23.6,58.5],n:'Muscat',ll:[22.8,59.2]},
+  {pt:[21.5,39.2],n:'Jeddah',ll:[20.5,39.8]}
+];
+landingPts.forEach(function(p){
+L.circleMarker(p.pt,{radius:5,color:'#3b82f6',fillColor:'#3b82f6',fillOpacity:0.4,weight:1}).addTo(m);
+L.marker(p.ll,{icon:mapLabel(p.n,'map-label-blue',80,-6,-6)}).addTo(m);
+});
+}
+
+function initMapIndia(){
+var m=mkMap('map-india',[20,60],4);
+var hormuzRoute=[[26.0,56.5],[24,60],[21,66],[19.07,72.88]];
+L.polyline(hormuzRoute,{color:'#ff3b3b',weight:4,dashArray:'10,6',opacity:0.8}).addTo(m);
+L.marker([23,61],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; DISRUPTED<br><span style="font:600 10px JetBrains Mono">40% of India\'s crude</span>',iconSize:[180,32],iconAnchor:[-4,-4]})}).addTo(m);
+var russiaRoute=[[42,132],[38,115],[32,95],[25,80],[19.07,72.88]];
+L.polyline(russiaRoute,{color:'#34d399',weight:3,opacity:0.7}).addTo(m);
+L.marker([32,90],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Russian crude lifeline<br><span style="font:600 10px JetBrains Mono">6M barrels secured</span>',iconSize:[200,32],iconAnchor:[-4,-4]})}).addTo(m);
+var altRoute=[[21.5,39.2],[16,42],[12,45],[10,52],[12,60],[15,67],[19.07,72.88]];
+L.polyline(altRoute,{color:'#ffb020',weight:2,dashArray:'6,4',opacity:0.5}).addTo(m);
+L.marker([10,50],{icon:L.divIcon({className:'map-label map-label-amber',html:'Alternative via Cape<br><span style="font:600 10px JetBrains Mono">+14 days transit</span>',iconSize:[180,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.circle([26.5,56.5],{radius:300000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:1.5}).addTo(m);
+L.marker([27.5,55],{icon:L.divIcon({className:'map-label map-label-red',html:'HORMUZ',iconSize:[80,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.circleMarker([22.47,70.07],{radius:12,color:'#34d399',fillColor:'#34d399',fillOpacity:0.3,weight:2}).addTo(m);
+L.marker([21.5,70.5],{icon:L.divIcon({className:'map-label map-label-green',html:"Jamnagar Refinery<br><span style='font:500 9px Inter;opacity:.7'>World's largest &mdash; 1.4M bbl/day</span>",iconSize:[200,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.circleMarker([19.07,72.88],{radius:7,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:2}).addTo(m);
+L.marker([18.2,73.2],{icon:mapLabel('Mumbai','map-label-amber',80)}).addTo(m);
+}
+
+function animateRings(){document.querySelectorAll('#card19 .ring').forEach(r=>r.classList.add('visible'))}
+function animateDots(){
+const dots=[...document.querySelectorAll('#dotgrid .dot')];
+const idx=[...Array(200).keys()];
+for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}
+idx.slice(0,120).forEach((x,i)=>{setTimeout(()=>dots[x].classList.add('off'),i*20)});
+}
+function animateDominoes(){
+document.querySelectorAll('#dominoes .domino').forEach((d,i)=>{setTimeout(()=>d.classList.add('fallen'),i*300)});
+}
+
+const cDef={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:true,backgroundColor:'#1a1a1a',titleColor:'#e5e5e5',bodyColor:'#ccc',borderColor:'#333',borderWidth:1,titleFont:{family:'Inter',size:12,weight:600},bodyFont:{family:'JetBrains Mono',size:11},padding:10,cornerRadius:6,displayColors:true,boxPadding:4}},
+scales:{x:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'Inter',size:10}}},
+y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:10}}}}};
+
+function initChart6(){
+new Chart(document.getElementById('chart6'),{type:'line',data:{
+labels:['Oct 25','Nov','Dec','Jan 26','Feb','Mar'],
+datasets:[
+{label:'Rial/USD (000s)',data:[420,440,510,530,580,720],borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.1)',fill:true,tension:.3,yAxisID:'y'},
+{label:'Protest Incidents',data:[120,180,350,280,420,680],borderColor:'#ffb020',borderDash:[5,3],backgroundColor:'transparent',tension:.3,yAxisID:'y1'}
+]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}}},
+scales:{...cDef.scales,y:{...cDef.scales.y,position:'left',title:{display:true,text:'Rial/USD (000s)',color:'#888',font:{family:'Inter',size:10}}},y1:{position:'right',grid:{display:false},ticks:{color:'#ffb020',font:{family:'JetBrains Mono',size:10}},title:{display:true,text:'Protest Incidents',color:'#ffb020',font:{family:'Inter',size:10}}}}}});
+}
+
+function initChart9(){
+new Chart(document.getElementById('chart9'),{type:'bar',data:{
+labels:['1 Month','3 Months','6 Months','12 Months'],
+datasets:[
+{label:'Oil',data:[80,280,620,1400],backgroundColor:'#ff3b3b'},
+{label:'Shipping',data:[15,55,120,280],backgroundColor:'#cc3333'},
+{label:'Aviation',data:[12,40,90,200],backgroundColor:'#ffb020'},
+{label:'Trade',data:[20,80,200,520],backgroundColor:'#3b82f6'},
+{label:'Insurance',data:[8,30,70,180],backgroundColor:'#888'}
+]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}}},
+scales:{...cDef.scales,x:{...cDef.scales.x,stacked:true},y:{...cDef.scales.y,stacked:true,title:{display:true,text:'Cost ($B)',color:'#888',font:{family:'Inter',size:10}}}}}});
+}
+
+function initChart11(){
+new Chart(document.getElementById('chart11'),{type:'line',data:{
+labels:['Feb 20','21','24','25','26','27','28','Mar 1','2','3','4','5','6','7','8','9','10','11'],
+datasets:[
+{label:'Brent 2026',data:[67,67.5,68,67.8,67.2,67,82,95,104,108,112,115,119,116,114,113,112,112],borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.08)',fill:true,borderWidth:3,tension:.2,pointRadius:0},
+{label:'1990 Gulf War (scaled)',data:[63,63,64.5,66,69,72,84,96,105,108,111,114,117,115.5,114,111,108,105],borderColor:'#555',borderDash:[4,4],borderWidth:1,tension:.2,pointRadius:0,fill:false},
+{label:'1979 Iran Rev (scaled)',data:[39,39,40.5,42,45,48,60,72,84,90,96,102,105,108,111,111,114,117],borderColor:'#444',borderDash:[4,4],borderWidth:1,tension:.2,pointRadius:0,fill:false}
+]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}}},scales:{...cDef.scales,y:{...cDef.scales.y,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:10}}}}}});
+}
+
+function initChart17(){
+new Chart(document.getElementById('chart17'),{type:'line',data:{
+labels:['Mar','Apr','May','Jun','Jul','Aug','Sep'],
+datasets:[
+{label:'Swift ($85)',data:[112,100,92,88,86,85,85],borderColor:'#34d399',backgroundColor:'rgba(52,211,153,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:0},
+{label:'Attrition ($100-120)',data:[112,108,105,110,115,112,108],borderColor:'#ffb020',backgroundColor:'rgba(255,176,32,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:0},
+{label:'Conflagration ($135+)',data:[112,118,125,130,135,140,145],borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:0}
+]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}}},scales:{...cDef.scales,y:{...cDef.scales.y,title:{display:true,text:'Brent $/bbl',color:'#888',font:{family:'Inter',size:10}}}}}});
+}
+
+function initChart27(){
+new Chart(document.getElementById('chart27'),{type:'line',data:{
+labels:['Jan 1','Jan 15','Feb 1','Feb 15','Feb 27','Feb 28','Mar 1','Mar 3','Mar 5','Mar 7','Mar 10','Mar 11'],
+datasets:[{label:'USD/INR',data:[84.8,85.1,85.4,85.2,85.5,86.8,87.5,88.2,88.6,88.9,89.1,89.2],
+borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.08)',fill:true,borderWidth:2,tension:.2,
+pointRadius:[0,0,0,0,0,6,0,6,0,6,0,0],
+pointBackgroundColor:['','','','','','#ff3b3b','','#3b82f6','','#3b82f6','',''],
+pointBorderColor:['','','','','','#ff3b3b','','#3b82f6','','#3b82f6','',''],
+pointBorderWidth:2
+}]
+},options:{...cDef,scales:{...cDef.scales,y:{...cDef.scales.y,title:{display:true,text:'USD/INR',color:'#888',font:{family:'Inter',size:10}}}},plugins:{...cDef.plugins,annotation:{annotations:{
+war:{type:'line',xMin:5,xMax:5,borderColor:'rgba(255,59,59,0.5)',borderWidth:1,borderDash:[4,4],label:{display:true,content:'WAR BEGINS',color:'#ff3b3b',font:{size:9,weight:'700',family:'Inter'},position:'start',backgroundColor:'rgba(10,10,10,0.8)',padding:4}},
+rbi1:{type:'line',xMin:7,xMax:7,borderColor:'rgba(59,130,246,0.4)',borderWidth:1,borderDash:[3,3],label:{display:true,content:'RBI intervenes',color:'#3b82f6',font:{size:8,family:'Inter'},position:'start',backgroundColor:'rgba(10,10,10,0.8)',padding:4}},
+rbi2:{type:'line',xMin:9,xMax:9,borderColor:'rgba(59,130,246,0.4)',borderWidth:1,borderDash:[3,3],label:{display:true,content:'RBI $3B sell',color:'#3b82f6',font:{size:8,family:'Inter'},position:'start',backgroundColor:'rgba(10,10,10,0.8)',padding:4}}
+}}}}});
+}
+
+function initChart34(){
+new Chart(document.getElementById('chart34'),{type:'line',data:{
+labels:['Feb 27','28','Mar 1','2','3','4','5','6','7','8','9','10','11'],
+datasets:[
+{label:'Fossil Energy',data:[100,112,118,120,122,119,116,115,114,113,112,111,110],borderColor:'#ff3b3b',borderWidth:2,tension:.2,pointRadius:0,fill:false},
+{label:'Renewables',data:[100,97,96,98,101,103,105,107,108,109,110,111,111],borderColor:'#34d399',borderWidth:2,tension:.2,pointRadius:0,fill:false},
+{label:'Nifty 50',data:[100,96,94,93,94,95,95,96,96,97,97,97,97],borderColor:'#3b82f6',borderWidth:2,borderDash:[4,3],tension:.2,pointRadius:0,fill:false}
+]},options:{...cDef,plugins:{...cDef.plugins,legend:{display:true,labels:{color:'#888',font:{family:'Inter',size:10},boxWidth:10,padding:12}}},scales:{...cDef.scales,y:{...cDef.scales.y,title:{display:true,text:'Indexed (Feb 27 = 100)',color:'#888',font:{family:'Inter',size:10}}}}}});
+}
+
+function initChart41(){
+new Chart(document.getElementById('chart41'),{type:'line',data:{
+labels:['Mar','Apr','May','Jun','Jul','Aug'],
+datasets:[{data:[112,100,92,88,86,85],borderColor:'#34d399',backgroundColor:'rgba(52,211,153,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]
+},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:70,max:120,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
+}
+
+function initChart42(){
+new Chart(document.getElementById('chart42'),{type:'line',data:{
+labels:['Mar','Apr','May','Jun','Jul','Aug'],
+datasets:[{data:[112,108,115,105,118,110],borderColor:'#ffb020',backgroundColor:'rgba(255,176,32,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]
+},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:90,max:130,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
+}
+
+function initChart43(){
+new Chart(document.getElementById('chart43'),{type:'line',data:{
+labels:['Mar','Apr','May','Jun','Jul','Aug'],
+datasets:[{data:[112,120,128,135,142,150],borderColor:'#ff3b3b',backgroundColor:'rgba(255,59,59,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]
+},options:{...cDef,scales:{x:{display:true,grid:{display:false},ticks:{color:'#888',font:{family:'Inter',size:9}}},y:{display:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{family:'JetBrains Mono',size:9}},min:100,max:160,title:{display:true,text:'$/bbl',color:'#888',font:{family:'Inter',size:9}}}}}});
+}
+
+updateProgress();
+</script>
+
+<!-- Live Ticker Strip -->
+<div style="position:fixed;bottom:0;left:0;right:0;z-index:999;height:46px;border-top:1px solid #333;background:#0a0a0a">
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+{
+  "symbols": [
+    {"proName":"NYMEX:BZ1!","title":"Brent Crude"},
+    {"proName":"FX:USOIL","title":"WTI"},
+    {"proName":"TADAWUL:2222","title":"Saudi Aramco"},
+    {"proName":"NSE:ONGC","title":"ONGC"},
+    {"proName":"NSE:IOC","title":"IOC"},
+    {"proName":"FX_IDC:USDINR","title":"USD/INR"},
+    {"proName":"TVC:GOLD","title":"Gold"},
+    {"proName":"NSE:NIFTY","title":"Nifty 50"},
+    {"proName":"NSE:HAL","title":"HAL Defence"},
+    {"proName":"NSE:TATAPOWER","title":"Tata Power"}
+  ],
+  "showSymbolLogo": false,
+  "isTransparent": true,
+  "displayMode": "regular",
+  "colorTheme": "dark",
+  "locale": "en"
+}
+</script>
+</div>
+</div>
+
+</body>
+</html>
