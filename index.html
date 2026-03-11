@@ -848,17 +848,17 @@ var m=mkMap('map-retaliation',[27,48],4);
 var iran=[32.4,53.7];
 L.circle(iran,{radius:200000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:2}).addTo(m);
 L.marker(iran,{icon:L.divIcon({className:'',html:'<div style="background:rgba(200,30,30,.85);border:2px solid #ff3b3b;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font:800 11px Inter;color:#fff;box-shadow:0 0 30px rgba(255,59,59,.4)">IRAN</div>',iconSize:[40,40],iconAnchor:[20,20]})}).addTo(m);
-/* Each target: [lat, lng, name, labelLat, labelLng] — labels placed manually to avoid overlap */
+/* Each target: labels placed manually to avoid overlap. At zoom 4, 1deg≈11px */
 var targets=[
-{c:[24.45,54.65],n:'UAE',       ll:[22.5,55.5]},
-{c:[24.71,46.67],n:'Saudi',     ll:[22.5,44]},
-{c:[25.29,51.53],n:'Qatar',     ll:[23.5,51.5]},
+{c:[24.45,54.65],n:'UAE',       ll:[22.0,55.5]},
+{c:[24.71,46.67],n:'Saudi',     ll:[22.0,43]},
+{c:[25.29,51.53],n:'Qatar',     ll:[25.5,52.5]},
 {c:[29.38,47.99],n:'Kuwait',    ll:[30.5,46]},
 {c:[26.23,50.59],n:'Bahrain',   ll:[27.5,49]},
 {c:[33.31,44.37],n:'Iraq',      ll:[35,42]},
-{c:[23.59,58.54],n:'Oman',      ll:[21.5,59.5]},
-{c:[31.95,35.93],n:'Jordan',    ll:[33.5,34]},
-{c:[32.07,34.78],n:'Israel',    ll:[30.5,33]}
+{c:[23.59,58.54],n:'Oman',      ll:[20.0,58.0]},
+{c:[31.95,35.93],n:'Jordan',    ll:[34.0,34]},
+{c:[32.07,34.78],n:'Israel',    ll:[31.0,32]}
 ];
 targets.forEach(function(t){
 L.polyline([iran,t.c],{color:'#ff3b3b',weight:1.5,dashArray:'8,6',opacity:0.5}).addTo(m);
@@ -868,20 +868,20 @@ L.marker(t.ll,{icon:mapLabel(t.n,'map-label-red',90)}).addTo(m);
 }
 
 function initMapHormuz(){
-var m=mkMap('map-hormuz',[26.0,56.3],7);
+var m=mkMap('map-hormuz',[25.8,56.5],6);
 var dangerZone=[[27.2,55.6],[27.2,57.2],[25.6,57.2],[25.6,55.6]];
 L.polygon(dangerZone,{color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.1,weight:1.5,dashArray:'6,4'}).addTo(m);
-/* Hormuz label — top of map, no overlap */
-L.marker([27.6,56.0],{icon:L.divIcon({className:'map-label map-label-red',html:'STRAIT OF HORMUZ<br><span style="font:600 10px JetBrains Mono;opacity:.8">33 miles &bull; 20M bbl/day</span>',iconSize:[220,36],iconAnchor:[110,40]})}).addTo(m);
+/* Hormuz label — top of map, centered above danger zone */
+L.marker([28.0,56.3],{icon:L.divIcon({className:'map-label map-label-red',html:'STRAIT OF HORMUZ &mdash; 33 mi &bull; 20M bbl/day',iconSize:[0,0],iconAnchor:[160,28]})}).addTo(m);
 /* Iran side */
 L.circleMarker([27.18,56.27],{radius:8,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([27.4,56.7],{icon:mapLabel("Bandar Abbas",'map-label-red',130,-6,-6)}).addTo(m);
-/* UAE side — push label down-left to avoid Hormuz label */
+L.marker([27.18,56.27],{icon:L.divIcon({className:'map-label map-label-red',html:'Bandar Abbas',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+/* UAE side */
 L.circleMarker([25.12,56.33],{radius:6,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([24.6,55.8],{icon:mapLabel('Fujairah','map-label-amber',90,-6,-6)}).addTo(m);
-/* Muscat — far right, no overlap risk */
+L.marker([25.12,56.33],{icon:L.divIcon({className:'map-label map-label-amber',html:'Fujairah',iconSize:[0,0],iconAnchor:[80,6]})}).addTo(m);
+/* Muscat */
 L.circleMarker([23.59,58.54],{radius:4,color:'#888',fillColor:'#888',fillOpacity:0.4,weight:1}).addTo(m);
-L.marker([23.0,58.8],{icon:mapLabel('Muscat','',70,-6,-6)}).addTo(m);
+L.marker([23.59,58.54],{icon:L.divIcon({className:'map-label',html:'Muscat',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
 /* Tanker hit X markers */
 var tankerHits=[[26.4,56.3],[26.15,56.55],[26.65,56.15],[26.25,56.75],[26.5,56.45]];
 tankerHits.forEach(function(h){
@@ -892,46 +892,46 @@ L.marker(h,{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:90
 function initMapPipelines(){
 var m=mkMap('map-pipelines',[24.5,48],5);
 L.circle([27.18,56.27],{radius:1500000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.04,weight:1,dashArray:'10,8'}).addTo(m);
-L.marker([31.5,55],{icon:L.divIcon({className:'map-label map-label-red',html:'IRAN',iconSize:[60,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([31.5,55],{icon:L.divIcon({className:'map-label map-label-red',html:'IRAN',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 var eastWest=[[25.94,49.67],[25.5,47.5],[25.0,45.0],[24.5,42.0],[24.09,38.06]];
 L.polyline(eastWest,{color:'#34d399',weight:5,opacity:0.85}).addTo(m);
-L.marker([26.8,44],{icon:L.divIcon({className:'map-label map-label-green',html:'East-West Pipeline<br><span style="font:600 10px JetBrains Mono">7M bbl/day capacity</span>',iconSize:[180,32],iconAnchor:[90,32]})}).addTo(m);
+L.marker([26.8,44],{icon:L.divIcon({className:'map-label map-label-green',html:'East-West Pipeline &mdash; 7M bbl/day',iconSize:[0,0],iconAnchor:[110,24]})}).addTo(m);
 var fujPipe=[[23.82,53.58],[24.5,55.0],[25.12,56.33]];
 L.polyline(fujPipe,{color:'#ffb020',weight:4,opacity:0.85}).addTo(m);
-L.marker([22.5,53.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'Fujairah Pipeline<br><span style="font:600 10px JetBrains Mono">1.8M bbl/day</span>',iconSize:[160,32],iconAnchor:[80,32]})}).addTo(m);
+L.marker([22.5,53.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'Fujairah Pipeline &mdash; 1.8M bbl/day',iconSize:[0,0],iconAnchor:[110,24]})}).addTo(m);
 L.circleMarker([24.09,38.06],{radius:9,color:'#34d399',fillColor:'#34d399',fillOpacity:0.4,weight:2}).addTo(m);
-L.marker([22.0,37.0],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; SAFE<br><span style="font:500 9px Inter;opacity:.7">2,100km from Iran</span>',iconSize:[160,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([24.09,38.06],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; SAFE (2,100km from Iran)',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
 L.circleMarker([25.12,56.33],{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([25.8,57.5],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; HIT<br><span style="font:500 9px Inter;opacity:.7">200km from Iran</span>',iconSize:[160,32],iconAnchor:[-4,20]})}).addTo(m);
+L.marker([25.12,56.33],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; HIT (200km)',iconSize:[0,0],iconAnchor:[170,6]})}).addTo(m);
 L.circleMarker([25.94,49.67],{radius:5,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.4,weight:2}).addTo(m);
-L.marker([27.5,49.8],{icon:mapLabel('Abqaiq','map-label-amber',80,-6,28)}).addTo(m);
+L.marker([25.94,49.67],{icon:L.divIcon({className:'map-label map-label-amber',html:'Abqaiq',iconSize:[0,0],iconAnchor:[-16,20]})}).addTo(m);
 }
 
 function initMapRange(){
 var m=mkMap('map-range',[27,49],4);
 var origin=[27.18,56.27];
 L.circle(origin,{radius:200000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:2,dashArray:'6,4'}).addTo(m);
-L.marker([29.2,58.5],{icon:L.divIcon({className:'map-label map-label-red',html:'200km &mdash; Drone range',iconSize:[180,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([25.5,54.5],{icon:L.divIcon({className:'map-label map-label-red',html:'200km &mdash; Drone range',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circle(origin,{radius:500000,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.06,weight:1.5,dashArray:'8,6'}).addTo(m);
-L.marker([31.5,60],{icon:L.divIcon({className:'map-label map-label-amber',html:'500km &mdash; Cruise missiles',iconSize:[200,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([20.0,53.0],{icon:L.divIcon({className:'map-label map-label-amber',html:'500km &mdash; Cruise missiles',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circle(origin,{radius:1500000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.03,weight:1,dashArray:'10,8'}).addTo(m);
-L.marker([37,44],{icon:L.divIcon({className:'map-label map-label-red',html:'1,500km &mdash; Ballistic missiles',iconSize:[220,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([37,44],{icon:L.divIcon({className:'map-label map-label-red',html:'1,500km &mdash; Ballistic missiles',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circleMarker(origin,{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.8,weight:2}).addTo(m);
-L.marker([28.2,55.0],{icon:mapLabel('Bandar Abbas','map-label-red',120,-6,28)}).addTo(m);
+L.marker([28.5,55.0],{icon:L.divIcon({className:'map-label map-label-red',html:'Bandar Abbas',iconSize:[0,0],iconAnchor:[110,6]})}).addTo(m);
 L.circleMarker([25.12,56.33],{radius:9,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.6,weight:2}).addTo(m);
-L.marker([24.0,57.2],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; IN DRONE RANGE',iconSize:[220,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([23.0,57.0],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; IN DRONE RANGE',iconSize:[0,0],iconAnchor:[230,6]})}).addTo(m);
 L.circleMarker([24.09,38.06],{radius:9,color:'#34d399',fillColor:'#34d399',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([22.5,37.5],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; OUT OF RANGE',iconSize:[200,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([22.5,37.5],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; OUT OF RANGE',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 /* Infrastructure with manually separated label positions */
 var infra=[
-  {pt:[26.77,50.1],n:'Ras Tanura',ll:[27.8,50.5]},
-  {pt:[25.94,49.67],n:'Abqaiq',ll:[25.0,49.0]},
-  {pt:[25.92,51.54],n:'Ras Laffan',ll:[25.0,52.5]},
-  {pt:[25.0,55.1],n:'Jebel Ali',ll:[23.5,54.5]}
+  {pt:[26.77,50.1],n:'Ras Tanura',ax:90,ay:6},
+  {pt:[25.94,49.67],n:'Abqaiq',ax:80,ay:-14},
+  {pt:[25.92,51.54],n:'Ras Laffan',ax:-6,ay:-14},
+  {pt:[25.0,55.1],n:'Jebel Ali',ax:80,ay:6}
 ];
 infra.forEach(function(p){
 L.circleMarker(p.pt,{radius:5,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:1}).addTo(m);
-L.marker(p.ll,{icon:mapLabel(p.n,'map-label-amber',100,-6,-6)}).addTo(m);
+L.marker(p.pt,{icon:mapLabel(p.n,'map-label-amber',100,p.ax,p.ay)}).addTo(m);
 });
 }
 
@@ -940,16 +940,16 @@ var m=mkMap('map-cables',[24,50],4);
 var hormuzCable=[[30,48],[28,52],[26.5,56],[25,58],[22,62],[18,68]];
 L.polyline(hormuzCable,{color:'#3b82f6',weight:4,dashArray:'8,4',opacity:0.7}).addTo(m);
 L.marker([26.5,56],{icon:L.divIcon({className:'',html:'<div style="color:#ff3b3b;font:900 22px Inter;text-shadow:0 0 10px rgba(255,59,59,.7)">&times;</div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
-L.marker([27.5,57.5],{icon:L.divIcon({className:'map-label map-label-red',html:'CABLE ROUTE 1: DISRUPTED',iconSize:[220,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([28.5,54.0],{icon:L.divIcon({className:'map-label map-label-red',html:'ROUTE 1: DISRUPTED',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 var redSeaCable=[[32,32],[28,36],[24,38],[21,40],[16,43],[12,45]];
 L.polyline(redSeaCable,{color:'#3b82f6',weight:3,dashArray:'8,4',opacity:0.4}).addTo(m);
 L.marker([21,40],{icon:L.divIcon({className:'',html:'<div style="color:#ffb020;font:900 18px Inter">&#9888;</div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(m);
-L.marker([20,41.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'CABLE ROUTE 2: AT RISK',iconSize:[200,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([19.5,41.5],{icon:L.divIcon({className:'map-label map-label-amber',html:'ROUTE 2: AT RISK',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 var landingPts=[
-  {pt:[25.2,55.3],n:'Dubai',ll:[26.0,55.8]},
-  {pt:[24.45,54.65],n:'Abu Dhabi',ll:[23.2,54.0]},
-  {pt:[23.6,58.5],n:'Muscat',ll:[22.8,59.2]},
-  {pt:[21.5,39.2],n:'Jeddah',ll:[20.5,39.8]}
+  {pt:[25.2,55.3],n:'Dubai',ll:[26.5,55.5]},
+  {pt:[24.45,54.65],n:'Abu Dhabi',ll:[23.0,53.0]},
+  {pt:[23.6,58.5],n:'Muscat',ll:[20.0,58.0]},
+  {pt:[21.5,39.2],n:'Jeddah',ll:[20.0,39.8]}
 ];
 landingPts.forEach(function(p){
 L.circleMarker(p.pt,{radius:5,color:'#3b82f6',fillColor:'#3b82f6',fillOpacity:0.4,weight:1}).addTo(m);
@@ -958,22 +958,22 @@ L.marker(p.ll,{icon:mapLabel(p.n,'map-label-blue',80,-6,-6)}).addTo(m);
 }
 
 function initMapIndia(){
-var m=mkMap('map-india',[20,60],4);
+var m=mkMap('map-india',[20,62],4);
 var hormuzRoute=[[26.0,56.5],[24,60],[21,66],[19.07,72.88]];
 L.polyline(hormuzRoute,{color:'#ff3b3b',weight:4,dashArray:'10,6',opacity:0.8}).addTo(m);
-L.marker([23,61],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; DISRUPTED<br><span style="font:600 10px JetBrains Mono">40% of India\'s crude</span>',iconSize:[180,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([23,61],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; DISRUPTED &mdash; 40% of India\'s crude',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 var russiaRoute=[[42,132],[38,115],[32,95],[25,80],[19.07,72.88]];
 L.polyline(russiaRoute,{color:'#34d399',weight:3,opacity:0.7}).addTo(m);
-L.marker([32,90],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Russian crude lifeline<br><span style="font:600 10px JetBrains Mono">6M barrels secured</span>',iconSize:[200,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([28,78],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Russian crude &mdash; 6M bbl secured',iconSize:[0,0],iconAnchor:[250,6]})}).addTo(m);
 var altRoute=[[21.5,39.2],[16,42],[12,45],[10,52],[12,60],[15,67],[19.07,72.88]];
 L.polyline(altRoute,{color:'#ffb020',weight:2,dashArray:'6,4',opacity:0.5}).addTo(m);
-L.marker([10,50],{icon:L.divIcon({className:'map-label map-label-amber',html:'Alternative via Cape<br><span style="font:600 10px JetBrains Mono">+14 days transit</span>',iconSize:[180,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([10,52],{icon:L.divIcon({className:'map-label map-label-amber',html:'Alternative via Cape &mdash; +14 days',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circle([26.5,56.5],{radius:300000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:1.5}).addTo(m);
-L.marker([27.5,55],{icon:L.divIcon({className:'map-label map-label-red',html:'HORMUZ',iconSize:[80,20],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([27.5,55],{icon:L.divIcon({className:'map-label map-label-red',html:'HORMUZ',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circleMarker([22.47,70.07],{radius:12,color:'#34d399',fillColor:'#34d399',fillOpacity:0.3,weight:2}).addTo(m);
-L.marker([21.5,70.5],{icon:L.divIcon({className:'map-label map-label-green',html:"Jamnagar Refinery<br><span style='font:500 9px Inter;opacity:.7'>World's largest &mdash; 1.4M bbl/day</span>",iconSize:[200,32],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([22.47,70.07],{icon:L.divIcon({className:'map-label map-label-green',html:'Jamnagar &mdash; 1.4M bbl/day',iconSize:[0,0],iconAnchor:[180,-20]})}).addTo(m);
 L.circleMarker([19.07,72.88],{radius:7,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([18.2,73.2],{icon:mapLabel('Mumbai','map-label-amber',80)}).addTo(m);
+L.marker([19.07,72.88],{icon:L.divIcon({className:'map-label map-label-amber',html:'Mumbai',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
 }
 
 function animateRings(){document.querySelectorAll('#card19 .ring').forEach(r=>r.classList.add('visible'))}
