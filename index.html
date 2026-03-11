@@ -825,16 +825,16 @@ return L.divIcon({className:'map-label'+(cls?' '+cls:''),html:txt,iconSize:[w,28
 }
 
 function initMapStrikes(){
-var m=mkMap('map-strikes',[32.5,53],6);
+var m=mkMap('map-strikes',[33,52],5);
 var targets=[
-  {c:[38.08,46.29],n:'Tabriz',t:'Resupply cut'},
-  {c:[35.69,51.39],n:'Tehran',t:'Command severed'},
-  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased',ax:16,ay:-30},
-  {c:[33.72,51.72],n:'Natanz',t:'Centrifuges buried'},
-  {c:[32.65,51.68],n:'Isfahan',t:'Enrichment destroyed'},
-  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk',ax:80,ay:6},
-  {c:[29.59,52.58],n:'Shiraz',t:'IRGC gone'},
-  {c:[27.18,56.27],n:'Bandar Abbas',t:'Hormuz hit'}
+  {c:[38.08,46.29],n:'Tabriz',t:'Resupply cut',ax:-16,ay:6},
+  {c:[35.69,51.39],n:'Tehran',t:'Command severed',ax:-16,ay:6},
+  {c:[35.52,51.77],n:'Parchin',t:'Weapons erased',ax:-16,ay:-30},
+  {c:[33.72,51.72],n:'Natanz',t:'Centrifuges buried',ax:-16,ay:6},
+  {c:[32.65,51.68],n:'Isfahan',t:'Enrichment destroyed',ax:-16,ay:6},
+  {c:[28.97,50.84],n:'Bushehr',t:'Radiation risk',ax:90,ay:6},
+  {c:[29.59,52.58],n:'Shiraz',t:'IRGC gone',ax:-16,ay:6},
+  {c:[27.18,56.27],n:'Bandar Abbas',t:'Hormuz hit',ax:-16,ay:-20}
 ];
 targets.forEach(function(t){
 L.marker(t.c,{icon:pulseIcon('#ff3b3b')}).addTo(m);
@@ -908,30 +908,27 @@ L.marker([25.94,49.67],{icon:L.divIcon({className:'map-label map-label-amber',ht
 }
 
 function initMapRange(){
-var m=mkMap('map-range',[27,49],4);
+var m=mkMap('map-range',[28,50],4);
 var origin=[27.18,56.27];
+/* Range rings */
 L.circle(origin,{radius:200000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:2,dashArray:'6,4'}).addTo(m);
-L.marker([25.5,54.5],{icon:L.divIcon({className:'map-label map-label-red',html:'200km &mdash; Drone range',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circle(origin,{radius:500000,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.06,weight:1.5,dashArray:'8,6'}).addTo(m);
-L.marker([20.0,53.0],{icon:L.divIcon({className:'map-label map-label-amber',html:'500km &mdash; Cruise missiles',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circle(origin,{radius:1500000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.03,weight:1,dashArray:'10,8'}).addTo(m);
-L.marker([37,44],{icon:L.divIcon({className:'map-label map-label-red',html:'1,500km &mdash; Ballistic missiles',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
 L.circleMarker(origin,{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.8,weight:2}).addTo(m);
-L.marker([28.5,55.0],{icon:L.divIcon({className:'map-label map-label-red',html:'Bandar Abbas',iconSize:[0,0],iconAnchor:[110,6]})}).addTo(m);
+/* Range labels — placed along ring edges, well separated */
+L.marker([28.8,58.0],{icon:L.divIcon({className:'map-label map-label-red',html:'200km — Drones',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([31.5,60.0],{icon:L.divIcon({className:'map-label map-label-amber',html:'500km — Cruise missiles',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
+L.marker([38,47],{icon:L.divIcon({className:'map-label map-label-red',html:'1,500km — Ballistic missiles',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
+/* Key locations */
+L.marker(origin,{icon:L.divIcon({className:'map-label map-label-red',html:'Bandar Abbas',iconSize:[0,0],iconAnchor:[110,-16]})}).addTo(m);
 L.circleMarker([25.12,56.33],{radius:9,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.6,weight:2}).addTo(m);
-L.marker([23.0,57.0],{icon:L.divIcon({className:'map-label map-label-red',html:'&#10060; Fujairah &mdash; IN DRONE RANGE',iconSize:[0,0],iconAnchor:[230,6]})}).addTo(m);
+L.marker([25.12,56.33],{icon:L.divIcon({className:'map-label map-label-red',html:'Fujairah — IN RANGE',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
 L.circleMarker([24.09,38.06],{radius:9,color:'#34d399',fillColor:'#34d399',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker([22.5,37.5],{icon:L.divIcon({className:'map-label map-label-green',html:'&#9989; Yanbu &mdash; OUT OF RANGE',iconSize:[0,0],iconAnchor:[-4,-4]})}).addTo(m);
-/* Infrastructure with manually separated label positions */
-var infra=[
-  {pt:[26.77,50.1],n:'Ras Tanura',ax:90,ay:6},
-  {pt:[25.94,49.67],n:'Abqaiq',ax:80,ay:-14},
-  {pt:[25.92,51.54],n:'Ras Laffan',ax:-6,ay:-14},
-  {pt:[25.0,55.1],n:'Jebel Ali',ax:80,ay:6}
-];
+L.marker([24.09,38.06],{icon:L.divIcon({className:'map-label map-label-green',html:'Yanbu — SAFE',iconSize:[0,0],iconAnchor:[-16,6]})}).addTo(m);
+/* Infrastructure — dots only, no labels (too clustered at this zoom) */
+var infra=[[26.77,50.1],[25.94,49.67],[25.92,51.54],[25.0,55.1]];
 infra.forEach(function(p){
-L.circleMarker(p.pt,{radius:5,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:1}).addTo(m);
-L.marker(p.pt,{icon:mapLabel(p.n,'map-label-amber',100,p.ax,p.ay)}).addTo(m);
+L.circleMarker(p,{radius:4,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,weight:1}).addTo(m);
 });
 }
 
