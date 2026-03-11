@@ -294,10 +294,10 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="card" id="card8">
 <p class="label">Scenario Analysis</p><h3 class="card-title">Four Futures for Iran</h3>
 <div class="matrix">
-<div class="cell" style="background:rgba(255,59,59,.15);border:1px solid rgba(255,59,59,.3)"><h4 style="color:var(--red)">IRGC Takeover</h4><p>Military junta, maximum hostility. Guerrilla campaign in Iraq.</p><div class="price" style="color:var(--red)">Oil $130+</div></div>
-<div class="cell" style="background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber)">Managed Transition</h4><p>Clerical council holds. Gradual negotiation. Slow de-escalation.</p><div class="price" style="color:var(--amber)">Oil $95-110</div></div>
-<div class="cell" style="background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber)">Fragmentation</h4><p>Regional breakaway. Kurdish/Baloch autonomy. Multi-year instability.</p><div class="price" style="color:var(--amber)">Oil $100-120</div></div>
-<div class="cell" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3)"><h4 style="color:var(--green)">Reformist Window</h4><p>Opposition seizes moment. International engagement. Sanctions relief.</p><div class="price" style="color:var(--green)">Oil $75-85</div></div>
+<div class="cell" style="background:rgba(255,59,59,.15);border:1px solid rgba(255,59,59,.3)"><h4 style="color:var(--red)">IRGC Takeover</h4><p>Military junta, maximum hostility. Guerrilla campaign in Iraq.</p><div class="price" style="color:var(--red)">Oil $130+</div><p style="font-size:9px;color:var(--muted);font-style:italic;margin-top:6px">Trigger: IRGC consolidates within 30 days, purges reformists</p></div>
+<div class="cell" style="background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber)">Managed Transition</h4><p>Clerical council holds. Gradual negotiation. Slow de-escalation.</p><div class="price" style="color:var(--amber)">Oil $95-110</div><p style="font-size:9px;color:var(--muted);font-style:italic;margin-top:6px">Trigger: Clerical council convenes, back-channel with US opens</p></div>
+<div class="cell" style="background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.3)"><h4 style="color:var(--amber)">Fragmentation</h4><p>Regional breakaway. Kurdish/Baloch autonomy. Multi-year instability.</p><div class="price" style="color:var(--amber)">Oil $100-120</div><p style="font-size:9px;color:var(--muted);font-style:italic;margin-top:6px">Trigger: Kurdish/Baloch regions declare autonomy, central command collapses</p></div>
+<div class="cell" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3)"><h4 style="color:var(--green)">Reformist Window</h4><p>Opposition seizes moment. International engagement. Sanctions relief.</p><div class="price" style="color:var(--green)">Oil $75-85</div><p style="font-size:9px;color:var(--muted);font-style:italic;margin-top:6px">Trigger: Mass protests force IRGC stand-down, Western engagement</p></div>
 </div>
 <p class="card-sub" style="margin-top:8px;font-size:11px">Axes: Centralized &harr; Fragmented (horizontal) &middot; Hardline &harr; Moderate (vertical)</p>
 </div>
@@ -424,17 +424,21 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <p class="card-sub">How an oil shock ripples into everything else</p><div class="act-num">04</div>
 </div>
 <div class="card" id="card19">
-<p class="label">Ripple Effects</p><h3 class="card-title">One Strait, Seven Industries</h3>
-<div class="rings-container">
-<div class="ring" style="width:40px;height:40px;border-color:var(--red);background:rgba(255,59,59,.2)"><span style="color:var(--red);margin-top:10px;font-size:7px">HORMUZ</span></div>
-<div class="ring" style="width:90px;height:90px;border-color:var(--red);animation-delay:.2s"><span style="color:var(--red)">Oil &amp; Gas</span></div>
-<div class="ring" style="width:130px;height:130px;border-color:#cc3333;animation-delay:.4s"><span style="color:#cc3333">Shipping</span></div>
-<div class="ring" style="width:170px;height:170px;border-color:var(--amber);animation-delay:.6s"><span style="color:var(--amber)">Aviation</span></div>
-<div class="ring" style="width:210px;height:210px;border-color:var(--amber);animation-delay:.8s"><span style="color:var(--amber)">Insurance</span></div>
-<div class="ring" style="width:250px;height:250px;border-color:#cc8800;animation-delay:1s"><span style="color:#cc8800">Food &amp; Fertilizer</span></div>
-<div class="ring" style="width:285px;height:285px;border-color:var(--blue);animation-delay:1.2s"><span style="color:var(--blue)">Data &amp; Telecom</span></div>
-<div class="ring" style="width:315px;height:315px;border-color:#2563eb;animation-delay:1.4s"><span style="color:#2563eb">Global Trade</span></div>
+<p class="label">Ripple Effects</p><h3 class="card-title">One Strait, Six Dominoes</h3>
+<div style="display:flex;align-items:flex-end;justify-content:center;gap:6px;flex-wrap:wrap;max-width:680px;margin:0 auto;padding:0 8px">
+<div style="background:rgba(255,59,59,.15);border:1px solid rgba(255,59,59,.4);border-radius:6px;padding:12px 10px;width:92px;text-align:center;transform:rotate(-2deg);transition:transform .5s .0s"><div style="font:800 13px/1 'JetBrains Mono';color:var(--red)">OIL</div><div style="font:400 9px/1.3 Inter;color:var(--muted);margin-top:6px">Brent +67%</div><div style="font:500 10px/1 'JetBrains Mono';color:var(--red);margin-top:4px">$67&rarr;$112</div></div>
+<div style="color:var(--red);font-size:16px;align-self:center;margin-bottom:20px">&rarr;</div>
+<div style="background:rgba(255,59,59,.12);border:1px solid rgba(255,59,59,.3);border-radius:6px;padding:12px 10px;width:92px;text-align:center;transform:rotate(-4deg);transition:transform .5s .15s"><div style="font:800 13px/1 'JetBrains Mono';color:var(--red)">SHIPPING</div><div style="font:400 9px/1.3 Inter;color:var(--muted);margin-top:6px">Freight +94%</div><div style="font:500 10px/1 'JetBrains Mono';color:var(--red);margin-top:4px">Suez &minus;40%</div></div>
+<div style="color:var(--amber);font-size:16px;align-self:center;margin-bottom:20px">&rarr;</div>
+<div style="background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.3);border-radius:6px;padding:12px 10px;width:92px;text-align:center;transform:rotate(-6deg);transition:transform .5s .3s"><div style="font:800 13px/1 'JetBrains Mono';color:var(--amber)">CHEMICALS</div><div style="font:400 9px/1.3 Inter;color:var(--muted);margin-top:6px">Ethylene +45%</div><div style="font:500 10px/1 'JetBrains Mono';color:var(--amber);margin-top:4px">Margins crushed</div></div>
+<div style="color:var(--amber);font-size:16px;align-self:center;margin-bottom:20px">&rarr;</div>
+<div style="background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.3);border-radius:6px;padding:12px 10px;width:92px;text-align:center;transform:rotate(-8deg);transition:transform .5s .45s"><div style="font:800 13px/1 'JetBrains Mono';color:var(--amber)">AVIATION</div><div style="font:400 9px/1.3 Inter;color:var(--muted);margin-top:6px">ATF +58%</div><div style="font:500 10px/1 'JetBrains Mono';color:var(--amber);margin-top:4px">Routes cut</div></div>
+<div style="color:var(--amber);font-size:16px;align-self:center;margin-bottom:20px">&rarr;</div>
+<div style="background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.25);border-radius:6px;padding:12px 10px;width:92px;text-align:center;transform:rotate(-10deg);transition:transform .5s .6s"><div style="font:800 13px/1 'JetBrains Mono';color:var(--amber)">FOOD</div><div style="font:400 9px/1.3 Inter;color:var(--muted);margin-top:6px">Wheat +22%</div><div style="font:500 10px/1 'JetBrains Mono';color:var(--amber);margin-top:4px">Fertilizer short</div></div>
+<div style="color:var(--muted);font-size:16px;align-self:center;margin-bottom:20px">&rarr;</div>
+<div style="background:rgba(255,59,59,.1);border:1px solid rgba(255,59,59,.3);border-radius:6px;padding:12px 10px;width:92px;text-align:center;transform:rotate(-12deg);transition:transform .5s .75s"><div style="font:800 13px/1 'JetBrains Mono';color:var(--red)">INFLATION</div><div style="font:400 9px/1.3 Inter;color:var(--muted);margin-top:6px">India CPI</div><div style="font:500 10px/1 'JetBrains Mono';color:var(--red);margin-top:4px">Heading 7.5%+</div></div>
 </div>
+<p class="card-sub" style="margin-top:16px">Each domino tips the next within 4-8 weeks. By the time it reaches food and inflation, the damage is baked in.</p>
 </div>
 <div class="card" id="card20">
 <p class="label">Maritime Shock</p><h3 class="card-title">Shipping: +94% in One Day</h3>
@@ -456,9 +460,24 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 </div>
 </div>
 <div class="card" id="card22">
-<p class="label">Digital Infrastructure</p><h3 class="card-title">Submarine Cable Exposure</h3>
-<div class="map-container" id="map-cables"></div>
-<p class="card-sub" style="margin-top:12px">15+ submarine cables cross the Gulf, carrying banking data, cloud traffic, and communications for the entire Middle East. A single cable cut could disrupt SWIFT payments and commodity trading for days.</p>
+<p class="label">Aviation Impact</p><h3 class="card-title">Airline-by-Airline Damage</h3>
+<div style="width:100%;max-width:560px;margin:0 auto;overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font:400 12px/1.4 Inter;color:var(--text)">
+<thead><tr style="border-bottom:1px solid var(--dim)">
+<th style="text-align:left;padding:8px 10px;font-weight:600;font-size:11px;color:var(--muted)">Airline</th>
+<th style="text-align:left;padding:8px 10px;font-weight:600;font-size:11px;color:var(--muted)">Impact</th>
+<th style="text-align:center;padding:8px 10px;font-weight:600;font-size:11px;color:var(--muted)">Risk</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid rgba(51,51,51,.5)"><td style="padding:8px 10px;font-weight:600">IndiGo</td><td style="padding:8px 10px;font-size:11px;color:rgba(255,255,255,.7)">ATF is 40% of costs, no hedging program, ~&#8377;800Cr quarterly hit</td><td style="padding:8px 10px;text-align:center"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red)"></span></td></tr>
+<tr style="border-bottom:1px solid rgba(51,51,51,.5)"><td style="padding:8px 10px;font-weight:600">Air India</td><td style="padding:8px 10px;font-size:11px;color:rgba(255,255,255,.7)">Tata absorbs losses, Gulf route diversions add +3hrs per flight</td><td style="padding:8px 10px;text-align:center"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--amber)"></span></td></tr>
+<tr style="border-bottom:1px solid rgba(51,51,51,.5)"><td style="padding:8px 10px;font-weight:600">SpiceJet</td><td style="padding:8px 10px;font-size:11px;color:rgba(255,255,255,.7)">Already loss-making, survival risk at $120 crude</td><td style="padding:8px 10px;text-align:center"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red)"></span></td></tr>
+<tr style="border-bottom:1px solid rgba(51,51,51,.5)"><td style="padding:8px 10px;font-weight:600">Emirates / Etihad</td><td style="padding:8px 10px;font-size:11px;color:rgba(255,255,255,.7)">Hub operations disrupted, 60% of routes affected</td><td style="padding:8px 10px;text-align:center"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red)"></span></td></tr>
+<tr><td style="padding:8px 10px;font-weight:600">Lufthansa / BA</td><td style="padding:8px 10px;font-size:11px;color:rgba(255,255,255,.7)">Avoiding Gulf airspace, +2hr diversions on Asia routes</td><td style="padding:8px 10px;text-align:center"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--amber)"></span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="card-sub" style="margin-top:12px">ATF prices jumped 58% in 11 days. Indian carriers have no fuel hedging. Every airline flying over or near the Gulf is paying more, flying longer, or cancelling routes entirely.</p>
 </div>
 <div class="card" id="card23">
 <p class="label">The Chain Reaction</p><h3 class="card-title">Energy &rarr; Food: 4-8 Weeks</h3>
@@ -532,19 +551,26 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 </div>
 <div class="card" id="card31">
 <p class="label">Market Impact</p><h3 class="card-title">Diverging Fortunes</h3>
-<p class="card-sub" style="margin-bottom:12px;font-size:11px">Expensive oil crushes companies stuck with price caps (OMCs, airlines) while boosting those who can pass costs on or sell at market rates.</p>
-<div class="divbar-container">
-<div style="display:flex;margin-bottom:8px"><div style="width:90px"></div><div style="flex:1;display:flex;justify-content:space-between;font:500 9px/1 Inter;color:var(--muted)"><span>&larr; Losers</span><span>Winners &rarr;</span></div></div>
-<div class="divbar"><div class="db-label">SpiceJet</div><div class="db-bar" style="width:100px;background:var(--red);flex-direction:row-reverse;margin-right:0">-20%</div><div class="db-center"></div><div style="width:100px"></div></div>
-<div class="divbar"><div class="db-label">Gulf RE</div><div class="db-bar" style="width:90px;background:var(--red);flex-direction:row-reverse;margin-right:0">-18%</div><div class="db-center"></div><div style="width:90px"></div></div>
-<div class="divbar"><div class="db-label">HPCL</div><div class="db-bar" style="width:75px;background:var(--red);flex-direction:row-reverse;margin-right:0">-15%</div><div class="db-center"></div><div style="width:75px"></div></div>
-<div class="divbar"><div class="db-label">BPCL</div><div class="db-bar" style="width:70px;background:var(--red);flex-direction:row-reverse;margin-right:0">-14%</div><div class="db-center"></div><div style="width:70px"></div></div>
-<div class="divbar"><div class="db-label">IOC</div><div class="db-bar" style="width:60px;background:var(--red);flex-direction:row-reverse;margin-right:0">-12%</div><div class="db-center"></div><div style="width:60px"></div></div>
-<div style="height:8px"></div>
-<div class="divbar"><div class="db-label">RIL</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:30px;background:var(--green)">+5%</div></div>
-<div class="divbar"><div class="db-label">Tata Power</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:36px;background:var(--green)">+6%</div></div>
-<div class="divbar"><div class="db-label">Gold</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:48px;background:var(--amber)">+8%</div></div>
-<div class="divbar"><div class="db-label">HAL / BEL</div><div style="width:60px"></div><div class="db-center"></div><div class="db-bar" style="width:72px;background:var(--green)">+12%</div></div>
+<p class="card-sub" style="margin-bottom:16px;font-size:11px">Same crisis, opposite outcomes. Price caps and fuel exposure separate the winners from the losers.</p>
+<div style="display:flex;gap:16px;max-width:600px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+<!-- Winners -->
+<div style="flex:1;min-width:250px;border:1px solid rgba(52,211,153,.3);border-radius:8px;padding:16px;background:rgba(52,211,153,.05)">
+<div style="font:700 13px/1 Inter;color:var(--green);margin-bottom:12px;text-align:center">WINNERS &uarr;</div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--green)">RIL (Reliance)</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Complex refinery, Russian crude locked in, crack spreads exploding. No price caps.</div></div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--green)">Saudi Aramco</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Market share grab as Iran/Iraq barrels disappear. Red Sea pipeline bypass working.</div></div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--green)">Defence (HAL, BEL)</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">War = defence budgets up. Orders accelerate across the board.</div></div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--amber)">Gold</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Classic safe haven. $3,120 and climbing as uncertainty persists.</div></div>
+<div><div style="font:600 12px/1 Inter;color:var(--green)">Renewables (Tata Power, Adani Green)</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Every oil crisis reminds investors that solar and wind don't depend on straits.</div></div>
+</div>
+<!-- Losers -->
+<div style="flex:1;min-width:250px;border:1px solid rgba(255,59,59,.3);border-radius:8px;padding:16px;background:rgba(255,59,59,.05)">
+<div style="font:700 13px/1 Inter;color:var(--red);margin-bottom:12px;text-align:center">LOSERS &darr;</div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--red)">OMCs (HPCL / BPCL / IOC)</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Buy crude at market price, sell fuel at government-fixed price. Bleeding Rs 800-1,000 Cr/day.</div></div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--red)">Airlines (SpiceJet, IndiGo)</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">ATF +58%, no hedging, can't pass full cost to passengers. SpiceJet survival at risk.</div></div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--red)">India Auto Sector</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Higher fuel prices cut demand. Consumer sentiment tanks when petrol hits Rs 120+.</div></div>
+<div style="margin-bottom:10px"><div style="font:600 12px/1 Inter;color:var(--red)">Shipping Insurers</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Lloyd's suspended Gulf war-risk policies. Claims exposure is uncapped.</div></div>
+<div><div style="font:600 12px/1 Inter;color:var(--red)">Gulf Real Estate</div><div style="font:400 10px/1.3 Inter;color:var(--muted);margin-top:3px">Dubai/Abu Dhabi property markets freeze. Expat flight risk if conflict widens.</div></div>
+</div>
 </div>
 </div>
 <div class="card" id="card32">
@@ -572,13 +598,45 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <p class="card-sub" style="margin-top:12px">Government-owned refiners buy crude at market price but sell fuel at government-fixed prices. At $110 crude, they lose Rs 10-15 on every litre sold. Combined daily loss: Rs 800-1,000 crore ($95-120M/day). RIL sells at market rates &mdash; the gap widens with every dollar crude goes up.</p>
 </div>
 <div class="card" id="card34">
-<p class="label">Investment Shift</p><h3 class="card-title">Money Moves From Oil Stocks to Renewables</h3>
+<p class="label">Fossil vs Clean Energy Stocks Since the Crisis Began</p><h3 class="card-title">Renewables Rising, Oil Falling</h3>
+<p class="card-sub" style="margin-bottom:8px;font-size:11px">This chart tracks how renewable energy stocks (solar, wind) are rising while oil &amp; gas stocks are falling since Feb 27. Investors are rotating money out of volatile fossil fuel exposure into stable clean energy.</p>
 <div class="w100"><canvas id="chart34" class="chart"></canvas></div>
 <p class="card-sub" style="margin-top:12px">Renewable stocks dipped 3% on Day 1 (panic selling), then rallied 11% over the next week. Same pattern as 2022 after Russia-Ukraine. Every oil crisis reminds investors that solar and wind costs don't spike when a strait closes. Money follows that logic.</p>
 </div>
-<div class="card act-card" id="card35">
-<p class="act-title">Act 7</p><h2 class="card-title" style="font-size:36px">Smart Money</h2>
-<p class="card-sub">Who was ready &mdash; and who wasn't</p><div class="act-num">07</div>
+<div class="card" id="card35" style="padding-top:40px;padding-bottom:60px">
+<p class="label">Decision Framework</p><h3 class="card-title">What Should Indian Refineries Do?</h3>
+<p class="card-sub" style="margin-bottom:16px;font-size:11px">Three price scenarios, three types of refiner. Color code: <span style="color:var(--green)">opportunity</span> / <span style="color:var(--amber)">caution</span> / <span style="color:var(--red)">threat</span></p>
+<div style="width:100%;max-width:680px;margin:0 auto;overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font:400 11px/1.4 Inter;color:var(--text)">
+<thead><tr style="border-bottom:2px solid var(--dim)">
+<th style="text-align:left;padding:10px 8px;font-weight:700;font-size:11px;color:var(--muted);width:25%">Scenario</th>
+<th style="text-align:left;padding:10px 8px;font-weight:700;font-size:11px;color:var(--muted);width:25%">RIL (Jamnagar)</th>
+<th style="text-align:left;padding:10px 8px;font-weight:700;font-size:11px;color:var(--muted);width:25%">BPCL / HPCL / IOC</th>
+<th style="text-align:left;padding:10px 8px;font-weight:700;font-size:11px;color:var(--muted);width:25%">Private (Nayara/MRPL)</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid rgba(51,51,51,.5)">
+<td style="padding:10px 8px;vertical-align:top"><div style="font:700 11px/1.2 Inter;color:var(--amber)">Brent $100-120</div><div style="font:400 9px/1.2 'JetBrains Mono';color:var(--muted);margin-top:4px">Base case &middot; 55%</div></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(52,211,153,.05)"><span style="color:var(--green)">Run Jamnagar at 100%, maximize diesel cracks, lock Russian crude contracts</span></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(255,59,59,.05)"><span style="color:var(--red)">Absorb losses, lobby for price hike, draw down SPR</span></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(255,176,32,.05)"><span style="color:var(--amber)">Follow RIL playbook, hedge Q3 exposure</span></td>
+</tr>
+<tr style="border-bottom:1px solid rgba(51,51,51,.5)">
+<td style="padding:10px 8px;vertical-align:top"><div style="font:700 11px/1.2 Inter;color:var(--red)">Brent $130+</div><div style="font:400 9px/1.2 'JetBrains Mono';color:var(--muted);margin-top:4px">Escalation &middot; 25%</div></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(52,211,153,.05)"><span style="color:var(--green)">Pivot to petrochemicals feedstock arbitrage, export diesel to Europe</span></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(255,59,59,.05)"><span style="color:var(--red)">Emergency price revision unavoidable, Rs 5-8/L hike</span></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(255,176,32,.05)"><span style="color:var(--amber)">Reduce throughput if margins go negative</span></td>
+</tr>
+<tr>
+<td style="padding:10px 8px;vertical-align:top"><div style="font:700 11px/1.2 Inter;color:var(--green)">Brent falls to $85</div><div style="font:400 9px/1.2 'JetBrains Mono';color:var(--muted);margin-top:4px">Ceasefire &middot; 20%</div></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(52,211,153,.05)"><span style="color:var(--green)">Lock in term contracts at lower prices, rebuild inventory</span></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(52,211,153,.05)"><span style="color:var(--green)">Recover losses over 2-3 quarters, resume capex</span></td>
+<td style="padding:10px 8px;vertical-align:top;background:rgba(52,211,153,.05)"><span style="color:var(--green)">Opportunistic spot buying</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="card-sub" style="margin-top:12px">RIL wins in every scenario because it has no price caps, buys discounted Russian crude, and runs the world's largest complex refinery. OMCs lose in every scenario except ceasefire &mdash; and even then, it takes quarters to recover.</p>
 </div>
 <div class="card" id="card36">
 <p class="label">Reliance Industries (NSE: RELIANCE)</p><h3 class="card-title">6 Million Barrels in 72 Hours</h3>
@@ -691,7 +749,7 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="date-card"><div class="dc-date" style="color:var(--muted)">1979</div><div class="dc-text"><strong>Iranian Revolution</strong> &mdash; 3.4M bbl/day lost for 12+ months. Oil tripled from $14 to $40. Triggered global recession. <em>Lesson: prolonged disruption from Iran specifically reshapes global energy architecture. Japan and South Korea built their SPRs in response.</em></div></div>
 <div class="date-card"><div class="dc-date" style="color:var(--muted)">2022</div><div class="dc-text"><strong>Russia-Ukraine war</strong> &mdash; No physical disruption but sanctions-driven rerouting. India pivoted to Russian crude within weeks, becoming the largest buyer. <em>Lesson: India's rapid pivot capability exists and is now being stress-tested at scale.</em></div></div>
 </div>
-<p class="card-sub" style="margin-top:8px;font-size:11px">Pattern: every major disruption lasting &gt;3 months triggers permanent structural shifts in sourcing, storage, and policy. We are at Day 11.</p>
+<p class="card-sub" style="margin-top:8px;font-size:11px">Pattern: every major disruption lasting &gt;3 months triggers permanent changes in where countries buy oil, how much they store, and what policies they adopt. We are at Day 11.</p>
 </div>
 <!-- Stakeholder-Specific Actions Card -->
 <div class="card" id="card44c">
@@ -979,6 +1037,7 @@ L.circleMarker(p,{radius:4,color:'#ffb020',fillColor:'#ffb020',fillOpacity:0.5,w
 }
 
 function initMapCables(){
+if(!document.getElementById('map-cables'))return;
 var m=mkMap('map-cables',[24,50],4);
 var hormuzCable=[[30,48],[28,52],[26.5,56],[25,58],[22,62],[18,68]];
 L.polyline(hormuzCable,{color:'#3b82f6',weight:4,dashArray:'8,4',opacity:0.7}).addTo(m);
