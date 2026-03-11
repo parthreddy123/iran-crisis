@@ -174,6 +174,7 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 .map-label-amber{color:#8a5a00!important;border-left:2px solid rgba(255,176,32,0.6)!important;background:rgba(255,255,255,0.15)!important}
 .map-label-blue{color:#2050aa!important;border-left:2px solid rgba(59,130,246,0.6)!important;background:rgba(255,255,255,0.15)!important}
 .leaflet-div-icon{background:none!important;border:none!important}
+.retal-key{min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 10px/1 'JetBrains Mono';color:#fff;flex-shrink:0}
 .leaflet-popup-content-wrapper{background:#1a1a1a;color:#e5e5e5;border-radius:6px;border:1px solid #333;font-family:'Inter',sans-serif;font-size:12px;box-shadow:0 4px 16px rgba(0,0,0,0.6)}
 .leaflet-popup-tip{background:#1a1a1a;border:1px solid #333;border-top:none;border-left:none}
 .leaflet-popup-close-button{color:#888!important;font-size:16px!important}
@@ -214,14 +215,27 @@ canvas.chart{width:100%!important;max-width:560px;height:240px;max-height:280px}
 <div class="map-container" id="map-strikes"></div>
 <p class="card-sub" style="margin-top:12px">Simultaneous strikes on nuclear, military, and leadership targets across Iran. The breadth signals regime change intent, not limited deterrence &mdash; which shapes Iran's calculus toward maximum retaliation.</p>
 </div>
-<div class="card" id="card3">
+<div class="card" id="card3" style="padding:40px 16px 56px">
 <p class="label">Retaliation Map</p>
-<h3 class="card-title">Iran Hits Back: 9 Nations</h3>
-<div class="map-container" id="map-retaliation"></div>
-<div class="stat-row" style="margin-top:12px">
-<div class="stat"><div class="val mono" style="font-size:28px;color:var(--red)">8</div><div class="lbl">Countries Hit</div></div>
-<div class="stat"><div class="val mono" style="font-size:28px;color:var(--red)">5</div><div class="lbl">Tankers Struck</div></div>
-<div class="stat"><div class="val mono" style="font-size:28px;color:var(--amber)">150+</div><div class="lbl">Ships Stranded</div></div>
+<h3 class="card-title" style="font-size:24px;margin-bottom:10px">Iran Hits Back: 9 Nations</h3>
+<div style="display:flex;gap:12px;width:100%;max-width:640px;align-items:flex-start">
+<div class="map-container" id="map-retaliation" style="flex:1;min-width:0;height:50vh"></div>
+<div class="retal-legend" style="width:155px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;font:400 10px/1.3 Inter;color:var(--text)">
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">A</span><span><b>Saudi</b> — Aramco pipelines, Ras Tanura terminal</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">B</span><span><b>UAE</b> — Jebel Ali port, Al Dhafra airbase</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">C</span><span><b>Qatar</b> — Al Udeid US airbase</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">D</span><span><b>Bahrain</b> — US 5th Fleet HQ</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">E</span><span><b>Kuwait</b> — Camp Arifjan, oil fields</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">F</span><span><b>Iraq</b> — Ain al-Asad, Green Zone</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">G</span><span><b>Israel</b> — Tel Aviv, Dimona reactor</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:#ff3b3b">H</span><span><b>Jordan</b> — US logistics bases</span></div>
+<div style="display:flex;gap:6px;align-items:flex-start"><span class="retal-key" style="background:var(--amber)">I</span><span><b>Oman</b> — Hormuz shipping lanes mined</span></div>
+</div>
+</div>
+<div class="stat-row" style="margin-top:10px">
+<div class="stat"><div class="val mono" style="font-size:24px;color:var(--red)">8</div><div class="lbl">Countries Hit</div></div>
+<div class="stat"><div class="val mono" style="font-size:24px;color:var(--red)">5</div><div class="lbl">Tankers Struck</div></div>
+<div class="stat"><div class="val mono" style="font-size:24px;color:var(--amber)">150+</div><div class="lbl">Ships Stranded</div></div>
 </div>
 </div>
 <div class="card" id="card4">
@@ -844,26 +858,18 @@ L.marker(t.c,{icon:L.divIcon({className:'map-label map-label-red',html:'<b>'+t.n
 }
 
 function initMapRetaliation(){
-var m=mkMap('map-retaliation',[27,48],4);
+var m=mkMap('map-retaliation',[28,46],4);
 var iran=[32.4,53.7];
 L.circle(iran,{radius:200000,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.15,weight:2}).addTo(m);
-L.marker(iran,{icon:L.divIcon({className:'',html:'<div style="background:rgba(200,30,30,.85);border:2px solid #ff3b3b;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font:800 11px Inter;color:#fff;box-shadow:0 0 30px rgba(255,59,59,.4)">IRAN</div>',iconSize:[40,40],iconAnchor:[20,20]})}).addTo(m);
-/* Each target: labels placed manually to avoid overlap. At zoom 4, 1deg≈11px */
+L.marker(iran,{icon:L.divIcon({className:'',html:'<div style="background:rgba(200,30,30,.85);border:2px solid #ff3b3b;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font:800 10px Inter;color:#fff;box-shadow:0 0 30px rgba(255,59,59,.4)">IRAN</div>',iconSize:[36,36],iconAnchor:[18,18]})}).addTo(m);
 var targets=[
-{c:[24.45,54.65],n:'UAE',       ll:[22.0,55.5]},
-{c:[24.71,46.67],n:'Saudi',     ll:[22.0,43]},
-{c:[25.29,51.53],n:'Qatar',     ll:[25.5,52.5]},
-{c:[29.38,47.99],n:'Kuwait',    ll:[30.5,46]},
-{c:[26.23,50.59],n:'Bahrain',   ll:[27.5,49]},
-{c:[33.31,44.37],n:'Iraq',      ll:[35,42]},
-{c:[23.59,58.54],n:'Oman',      ll:[20.0,58.0]},
-{c:[31.95,35.93],n:'Jordan',    ll:[34.0,34]},
-{c:[32.07,34.78],n:'Israel',    ll:[31.0,32]}
+{c:[24.71,46.67],k:'A'},{c:[24.45,54.65],k:'B'},{c:[25.29,51.53],k:'C'},
+{c:[26.23,50.59],k:'D'},{c:[29.38,47.99],k:'E'},{c:[33.31,44.37],k:'F'},
+{c:[32.07,34.78],k:'G'},{c:[31.95,35.93],k:'H'},{c:[23.59,58.54],k:'I'}
 ];
 targets.forEach(function(t){
-L.polyline([iran,t.c],{color:'#ff3b3b',weight:1.5,dashArray:'8,6',opacity:0.5}).addTo(m);
-L.circleMarker(t.c,{radius:7,color:'#ff3b3b',fillColor:'#ff3b3b',fillOpacity:0.5,weight:2}).addTo(m);
-L.marker(t.ll,{icon:mapLabel(t.n,'map-label-red',90)}).addTo(m);
+L.polyline([iran,t.c],{color:'#ff3b3b',weight:1,dashArray:'6,5',opacity:0.4}).addTo(m);
+L.marker(t.c,{icon:L.divIcon({className:'',html:'<div style="background:#ff3b3b;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 11px JetBrains Mono;color:#fff;box-shadow:0 0 10px rgba(255,59,59,.5)">'+t.k+'</div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
 });
 }
 
