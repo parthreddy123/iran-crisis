@@ -823,26 +823,6 @@ canvas.chart{height:180px;max-height:200px}
 <p class="card-sub" style="margin-top:12px"><span data-live="brent-today">Brent today: $86 (pre-crisis Feb 27: $72)</span>. Five scenarios diverge from here based on escalation path and resolution timeline.</p>
 <p style="font:400 9px/1.3 Inter;color:var(--dim);margin-top:4px;text-align:center;max-width:500px">Source: Scenario engine using IEA, EIA, bank/analyst consensus. Prices: 1m/3m/6m horizons.</p>
 </div>
-<div class="card" id="card6">
-<p class="label">Macro Collapse</p><h3 class="card-title">Iran's Economy Was Already Collapsing</h3>
-<div class="w100"><canvas id="chart6" class="chart" data-left-axis="Rial/USD Exchange Rate (thousands)" data-right-axis="Protest Incidents (count)"></canvas></div>
-<p class="card-sub" style="margin-top:12px"><strong>Rial &minus;40% in 3 months. Protests exceeded Mahsa Amini peak.</strong> The regime was breaking before the first strike landed.</p>
-<p style="font:400 9px/1.3 Inter;color:var(--dim);margin-top:6px">Axes scaled independently. Left: exchange rate (thousands); Right: incident count. Sources: Central Bank Iran / Bloomberg; open-source protest reporting. Oct 2021–Mar 2022.</p>
-</div>
-<div class="card" id="card7">
-<p class="label">Iran: Succession Scenario</p><h3 class="card-title">Iran's Power Vacuum: Five Factions, No Successor</h3>
-<div class="treemap" style="position:relative">
-<div class="block" style="background:rgba(255,59,59,.25);border:1px solid var(--red)"><div class="bname">IRGC Hardliners</div><div class="bpct" style="color:var(--red)">25%</div></div>
-<div class="block" style="background:rgba(255,176,32,.2);border:1px solid var(--amber)"><div class="bname">Clerical Council</div><div class="bpct" style="color:var(--amber)">18%</div></div>
-<div class="block" style="background:rgba(136,136,136,.2);border:1px solid var(--muted)"><div class="bname">Unaligned Military</div><div class="bpct" style="color:var(--muted)">20%</div></div>
-<div class="block" style="background:rgba(180,40,40,.2);border:1px solid #b42828"><div class="bname">IRGC Moderates</div><div class="bpct" style="color:#e05555">15%</div></div>
-<div class="block" style="background:rgba(52,211,153,.15);border:1px solid var(--green)"><div class="bname">Reformists</div><div class="bpct" style="color:var(--green)">12%</div></div>
-<div class="block" style="background:rgba(59,130,246,.15);border:1px solid var(--blue)"><div class="bname">Separatists</div><div class="bpct" style="color:var(--blue)">10%</div></div>
-<div class="crack-line"></div>
-</div>
-
-<p class="card-sub">Six factions. No clear successor. The IRGC holds the guns, but the clerics hold the legitimacy. That deadlock is what makes the next 90 days so dangerous.</p>
-</div>
 <div class="card" id="card8">
 <p class="label">Scenario Analysis</p><h3 class="card-title">Four Ways Iran Looks in 6 Months</h3>
 <div class="matrix">
@@ -986,7 +966,6 @@ switch(id){
 case'card2':initMapStrikes();break;
 case'card3':initMapRetaliation();break;
 case'card4':initMapHormuz();break;
-case'card6':initChart6();break;
 case'card17':initChart17();break;
 case'card13':initMapPipelines();break;
 case'card16':initMapIraq();break;
